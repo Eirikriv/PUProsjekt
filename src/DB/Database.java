@@ -24,22 +24,43 @@ public class Database {
 		try {
 			// Sletter alle tidligere tabeller
 			makeStatement("DROP TABLE koie");
-
 			
-			// Oppretter tabellene
-			makeStatement("CREATE TABLE koie"
-						+ "(id SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY, "
-						+ "name VARCHAR(255) NOT NULL, "
-						+ "num_beds SMALLINT NOT NULL, "
-						+ "num_seats SMALLINT, "
-						+ "year SMALLINT, "
-						+ "coordinates VARCHAR(255), "
-						+ "terreng VARCHAR(255), "
-						+ "sykkel VARCHAR(255), " 
-						+ "topptur VARCHAR(255), "
-						+ "jakt_og_fiske VARCHAR(255), "
-						+ "spesialiteter VARCHAR(255))");
+			// Oppretter Person-tabellen
+			makeStatement("CREATE TABLE PERSON"
+						+ "(PERSONID INT NOT NULL, "
+						+ "NAME VARCHAR(20) NOT NULL, "
+						+ "USERNAME VARCHAR(20)	NOT NULL, "
+						+ "PASSWORD	VARCHAR(20)	NOT NULL"
+						+ "PRIMARY KEY (PERSONID))");
+			
+			//Oppretter PersonGroup-tabellen		
+			makeStatement("CREATE TABLE PersonGroup"
+						+ "(PERSONID INT NOT NULL"
+						+ "GRUOPID INT NOT NULL"
+						+ "PRIMARY KEY (PERSONID, GROUPID)"
+						+ "FOREIGN KEY (PERSONID) REFERENCES PERSON(PERSONID)"
+						+ "ON UPDATE CASCADE ON DELETE CASCADE,"
+						+ "FOREIGN KEY (GROUPID) REFERENCES GROUP(GROUPID)"
+						+ "ON UPDATE CASCADE ON DELETE CASCADE))");
+			
+			//Oppretter Group-tabellen		
+			makeStatement("CREATE TABLE Group"
+						+ "(GROUPID INT	NOT NULL,"
+						+ "NAME VARCHAR(20)	NOT NULL,"
+						+ "PRIMARY KEY (GROUPID));");
+			
+			//Oppretter Event-tabellen		
+			makeStatement("CREATE TABLE Event"
+						+ "(EVENTID INT NOT NULL"
+						+ "NAME VARCHAR(20) NOT NULL"
+						+ "START		CHAR(14)		NOT NULL,"
+						+ "END			CHAR(14)		NOT NULL,"
+						+"DESCRIPTION	VARCHAR(100),"
+						+"ROOMID		INT,"
+						+"PRIMARY KEY (EVENTID),"
+						+"FOREIGN KEY (ROOMID) REFERENCES ROOM(ROOMID) ON UPDATE CASCADE))");
 
+			makeStatement("CREATE TABLE Event"
 			
 	
 			return true;
