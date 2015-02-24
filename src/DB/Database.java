@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 public class Database {
 	public static boolean DEBUG = false;
 	private static String url = "jdbc:mysql://mysql.stud.ntnu.no/";
-	private static String dbName = "alekh_prosjekt1";
+	private static String dbName = "alekh_PU_DB";
 	private static String driver = "com.mysql.jdbc.Driver";
 	private static String userName = "alekh_PU";
 	private static String password = "abcd1234";
