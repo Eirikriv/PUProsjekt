@@ -18,13 +18,18 @@ public class Database {
 	public static boolean initializeDatabase() {
 		try {
 			// Sletter alle tidligere tabeller 
-//			makeStatement("DROP TABLE PersonInGroup");
-//			makeStatement("DROP TABLE PartOfEvent");
-//			makeStatement("DROP TABLE Person;");
-//			makeStatement("DROP TABLE Group0");
-//			makeStatement("DROP TABLE Event");
-//			makeStatement("DROP TABLE Room");
-
+			if (makeQuery("SELECT *\nFROM PersonInGroup") != null)
+				makeStatement("DROP TABLE PersonInGroup");	
+			if (makeQuery("SELECT *\nFROM PartOfEvent") != null)
+				makeStatement("DROP TABLE PartOfEvent");
+			if (makeQuery("SELECT *\nFROM Person") != null)
+				makeStatement("DROP TABLE Person;");
+			if (makeQuery("SELECT *\nFROM Group0") != null)
+				makeStatement("DROP TABLE Group0");
+			if (makeQuery("SELECT *\nFROM Event") != null)
+				makeStatement("DROP TABLE Event");
+			if (makeQuery("SELECT *\nFROM Room") != null)
+				makeStatement("DROP TABLE Room");
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
