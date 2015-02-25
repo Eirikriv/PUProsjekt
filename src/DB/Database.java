@@ -18,12 +18,13 @@ public class Database {
 	public static boolean initializeDatabase() {
 		try {
 			// Sletter alle tidligere tabeller 
-			makeStatement("DROP TABLE PersonInGroup");
-			makeStatement("DROP TABLE Person;");
-			makeStatement("DROP TABLE Group0");
-			makeStatement("DROP TABLE Room");
+//			makeStatement("DROP TABLE PersonInGroup");
 //			makeStatement("DROP TABLE PartOfEvent");
+//			makeStatement("DROP TABLE Person;");
+//			makeStatement("DROP TABLE Group0");
 //			makeStatement("DROP TABLE Event");
+//			makeStatement("DROP TABLE Room");
+
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
@@ -65,7 +66,7 @@ public class Database {
 					+ "Description VARCHAR(100),"
 					+ "RoomID INT,"
 					+ "PRIMARY KEY (EventID),"
-					+ "FOREIGN KEY (RoomID) REFERENCES ROOM(RoomID) "
+					+ "FOREIGN KEY (RoomID) REFERENCES Room(RoomID) "
 					+ "ON UPDATE CASCADE);");
 			
 			//Oppretter PartOfEvent-tabellen
@@ -81,8 +82,8 @@ public class Database {
 			makeStatement("INSERT INTO Person\n"
 					+ "VALUES('1', 'Cecilie Teisberg', 'cecilite', 'passord');");
 			makeStatement("INSERT INTO Person\n"
-					+ "VALUES('2', 'Anders Rønold', 'anron', 'passord1');");
-			makeStatement("INSERT INTO Group0(id, name)"
+					+ "VALUES('2', 'Anders Rønold', 'andronol', 'passord1');");
+			makeStatement("INSERT INTO Group0\n"
 					+ "VALUES('3', 'PU');");
 			makeStatement("INSERT INTO PersonInGroup\n"
 					+ "VALUES('1', '3');");
