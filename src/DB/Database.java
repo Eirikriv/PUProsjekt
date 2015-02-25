@@ -20,8 +20,10 @@ public class Database {
 			// Sletter alle tidligere tabeller 
 			if (makeQuery("SELECT *\nFROM PersonInGroup") != null)
 				makeStatement("DROP TABLE PersonInGroup");	
-			if (makeQuery("SELECT *\nFROM PartOfEvent") != null)
+			if (makeQuery("SELECT *\nFROM PersonEvent") != null)
 				makeStatement("DROP TABLE PartOfEvent");
+			if (makeQuery("SELECT *\nFROM GroupEvent") != null)
+				makeStatement("DROP TABLE GroupEvent");
 			if (makeQuery("SELECT *\nFROM Person") != null)
 				makeStatement("DROP TABLE Person;");
 			if (makeQuery("SELECT *\nFROM Group0") != null)
@@ -30,6 +32,7 @@ public class Database {
 				makeStatement("DROP TABLE Event");
 			if (makeQuery("SELECT *\nFROM Room") != null)
 				makeStatement("DROP TABLE Room");
+			
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
@@ -75,11 +78,20 @@ public class Database {
 					+ "ON UPDATE CASCADE);");
 			
 			//Oppretter PartOfEvent-tabellen
-			makeStatement("CREATE TABLE PartOfEvent"
+			makeStatement("CREATE TABLE PersonEvent"
 					+ "(ObjectID INT NOT NULL,"
 					+ "EventID INT NOT NULL,"
-					+ "PRIMARY KEY (ObjectID, EventID),"
-					+ "FOREIGN KEY (ObjectID) REFERENCES Person(PersonID) "
+					+ "PRIMARY KEY (PersonID, EventID),"
+					+ "FOREIGN KEY (PersonID) REFERENCES Person(PersonID) "
+					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
+					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
+					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
+			
+			makeStatement("CREATE TABLE GroupEvent"
+					+ "(GroupID INT NOT NULL,"
+					+ "EventID INT NOT NULL,"
+					+ "PRIMARY KEY (GroupID, EventID),"
+					+ "FOREIGN KEY (GroupID) REFERENCES Group0(GroupID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
