@@ -1,18 +1,20 @@
 package Core;
+import java.sql.ResultSet;
+import java.util.Date;
 
+import DB.DatabaseHandler;
 public class Event {
 	private String name;
 	private String desc;
-	private String start;
-	private String end;
+	private Date start;
+	private Date end;
 	
-	Event(String Name,String Desc,String Start,String end){
-		this.name=Name;
-		this.desc=Desc;
-		this.start = Start;
+	Event(String name, Date start, Date end, String desc){
+		this.name = name;
+		this.start= start;
 		this.end = end;
+		this.desc = desc;
 	}
-
 	public String getName() {
 		return name;
 	}
