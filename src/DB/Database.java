@@ -18,21 +18,13 @@ public class Database {
 	public static boolean initializeDatabase() {
 		try {
 			// Sletter alle tidligere tabeller 
-			if (makeQuery("SELECT *\nFROM PersonInGroup") != null)
-				makeStatement("DROP TABLE PersonInGroup");	
-			if (makeQuery("SELECT *\nFROM PersonEvent") != null)
-				makeStatement("DROP TABLE PartOfEvent");
-			if (makeQuery("SELECT *\nFROM GroupEvent") != null)
-				makeStatement("DROP TABLE GroupEvent");
-			if (makeQuery("SELECT *\nFROM Person") != null)
-				makeStatement("DROP TABLE Person;");
-			if (makeQuery("SELECT *\nFROM Group0") != null)
-				makeStatement("DROP TABLE Group0");
-			if (makeQuery("SELECT *\nFROM Event") != null)
-				makeStatement("DROP TABLE Event");
-			if (makeQuery("SELECT *\nFROM Room") != null)
-				makeStatement("DROP TABLE Room");
-			
+			makeStatement("DROP TABLE IF EXISTS PersonInGroup");
+			makeStatement("DROP TABLE IF EXISTS PersonEvent");
+			makeStatement("DROP TABLE IF EXISTS GroupEvent");
+			makeStatement("DROP TABLE IF EXISTS Event");
+			makeStatement("DROP TABLE IF EXISTS Room");
+			makeStatement("DROP TABLE IF EXISTS Person;");
+			makeStatement("DROP TABLE IF EXISTS Groups");
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
@@ -43,24 +35,24 @@ public class Database {
 					+ "PRIMARY KEY (PersonID));");
 			
 			//Oppretter Group-tabellen		
-			makeStatement("CREATE TABLE Group0"
-					+ "(GroupID INT NOT NULL,"
+			makeStatement("CREATE TABLE Groups"
+					+ "(GroupID INT NOT NULL AUTO_INCREMENT,"
 					+ "Name VARCHAR(20) NOT NULL,"
 					+ "PRIMARY KEY (GroupID));");
 			
-			//Oppretter PersonGroup-tabellen		
+			//Oppretter PersonInGroup-tabellen		
 			makeStatement("CREATE TABLE PersonInGroup"
 					+ "(PersonID INT NOT NULL,"
 					+ "GroupID INT NOT NULL,"
 					+ "PRIMARY KEY (PersonID, GroupID),"
 					+ "FOREIGN KEY (PersonID) REFERENCES Person(PersonID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE,"
-					+ "FOREIGN KEY (GroupID) REFERENCES Group0(GroupID) "
+					+ "FOREIGN KEY (GroupID) REFERENCES Groups(GroupID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
 			
 			//Oppretter Room-tabellen
 			makeStatement("CREATE TABLE Room"
-					+ "(RoomID INT NOT NULL AUTO_INCREMENT,"
+					+ "(RoomID VARCHAR(20) NOT NULL,"
 					+ "Capacity INT NOT NULL,"
 					+ "Description VARCHAR(100),"
 					+ "PRIMARY KEY (RoomID));");
@@ -69,17 +61,17 @@ public class Database {
 			makeStatement("CREATE TABLE Event"
 					+ "(EventID INT NOT NULL AUTO_INCREMENT,"
 					+ "Name VARCHAR(20) NOT NULL,"
-					+ "Start CHAR(14) NOT NULL,"
-					+ "End CHAR(14) NOT NULL,"
+					+ "Start CHAR(16) NOT NULL,"
+					+ "End CHAR(16) NOT NULL,"
 					+ "Description VARCHAR(100),"
-					+ "RoomID INT,"
+					+ "RoomID VARCHAR(20),"
 					+ "PRIMARY KEY (EventID),"
 					+ "FOREIGN KEY (RoomID) REFERENCES Room(RoomID) "
-					+ "ON UPDATE CASCADE);");
+					+ "ON UPDATE CASCADE ON DELETE NO ACTION);");
 			
-			//Oppretter PartOfEvent-tabellen
+			//Oppretter PersonEvent-tabellen
 			makeStatement("CREATE TABLE PersonEvent"
-					+ "(ObjectID INT NOT NULL,"
+					+ "(PersonID INT NOT NULL,"
 					+ "EventID INT NOT NULL,"
 					+ "PRIMARY KEY (PersonID, EventID),"
 					+ "FOREIGN KEY (PersonID) REFERENCES Person(PersonID) "
@@ -87,26 +79,36 @@ public class Database {
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
 			
+			//Oppretter GroupEvent-tabellen
 			makeStatement("CREATE TABLE GroupEvent"
 					+ "(GroupID INT NOT NULL,"
 					+ "EventID INT NOT NULL,"
 					+ "PRIMARY KEY (GroupID, EventID),"
-					+ "FOREIGN KEY (GroupID) REFERENCES Group0(GroupID) "
+					+ "FOREIGN KEY (GroupID) REFERENCES Groups(GroupID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
 			
-			makeStatement("INSERT INTO Person\n"
-					+ "VALUES('1', 'Cecilie Teisberg', 'cecilite', 'passord');");
-			makeStatement("INSERT INTO Person\n"
-					+ "VALUES('2', 'Anders Rønold', 'andronol', 'passord1');");
-			makeStatement("INSERT INTO Group0\n"
-					+ "VALUES('3', 'PU');");
+			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
+			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
+			makeStatement("INSERT INTO Groups(Name)\n"
+					+ "VALUES('PU');");
 			makeStatement("INSERT INTO PersonInGroup\n"
-					+ "VALUES('1', '3');");
+					+ "VALUES('1', '1');");
 			makeStatement("INSERT INTO PersonInGroup\n"
-					+ "VALUES('2', '3');");
-			//makeStatement("INSERT INTO")
+					+ "VALUES('2', '1');");
+			makeStatement("INSERT INTO Room\n"
+					+ "VALUES('R1', '300', 'Forelesningssal')");
+			makeStatement("INSERT INTO Event(Name, Start, End, RoomID)\n"
+					+ "VALUES('Fysikkforelesning', '2015-02-26 08:15', '2015-02-26 10:00', 'R1')");
+			makeStatement("INSERT INTO GroupEvent\n"
+					+ "VALUES('1', '1')");
+			makeStatement("INSERT INTO PersonEvent\n"
+					+ "VALUES('1', '1')");
+			makeStatement("INSERT INTO PersonEvent\n"
+					+ "VALUES('2', '1')");
 			return true;
 
 		} catch (Exception e) {
@@ -145,7 +147,7 @@ public class Database {
 		try {
 			Connection conn = getConnection();
 			Statement st = conn.createStatement();
-			int res = st.executeUpdate(statement); //trenger denne å lagres??
+			st.executeUpdate(statement);
 			//conn.close();
 			return true;
 		} catch (Exception e) {
