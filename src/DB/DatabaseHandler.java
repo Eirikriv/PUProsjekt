@@ -53,6 +53,7 @@ public class DatabaseHandler {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
+	}
 	
 	
 	
