@@ -93,5 +93,18 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public static 
+	public static ResultSet getGroupMembers(int ID) {
+		try {
+			String query = "SELECT Person.Name\n"
+						+  "FROM Person, Group, PersonGroup\n"
+						+  "WHERE Person.PersonID = PersonGroup.PersonID\n"
+						+  "AND "+Integer.toString(ID)+" = PersonGroup.GroupID\n"
+						+  "ORDER BY Person.Name";
+			ResultSet rs = Database.makeQuery(query);
+			return rs;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("This name does not exist.");
+		}
+	}
 }
