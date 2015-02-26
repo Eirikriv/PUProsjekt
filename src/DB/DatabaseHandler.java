@@ -1,17 +1,36 @@
 package DB;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DatabaseHandler {
 	
-	public static ResultSet getPersonEvents(String name) {
+	public static ArrayList<String> getPersonInformation(String name) {
+		try {
+			String query = "SELECT * FROM Person WHERE Person.Name = '"+name+"'";
+			ResultSet rs = Database.makeQuery(query);
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(rs.getString(1));
+			list.add(rs.getString(2));
+			list.add(rs.getString(3));
+			list.add(rs.getString(4));
+			return list;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("This name does not exist.");
+		}
+	}
+
+	
+	public static ResultSet getPersonEvents(int id) {
 		Database.initializeDatabase();
 		try {
 			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
 						+  "FROM Person, Event, PersonEvent\n"
 						+  "WHERE Person.PersonID = PersonEvent.PersonID\n"
 						+  "AND Event.EventID = PersonEvent.EventID\n"
-						+  "AND Person.Name = '" + name + "'\n"
+						+  "AND Person.PersonID = '" + Integer.toString(id) + "'\n"
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			return rs;
@@ -21,17 +40,37 @@ public class DatabaseHandler {
 		}
 	}
 
+	public static int addPerson(String name, String username, String pw ) {
+		Database.makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('"+ name+"', '"+username+"', '"+pw+"');");
 	
-	public ResultSet getGroupEvents(String id) {
+		String query = "SELECT Person.PersonID"
+				+  "FROM Person\n"
+				+  "WHERE Person.Name = '"+name+"'\n";
+			
+		ResultSet rs = Database.makeQuery(query);
 		try {
-			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
+			return Integer.parseInt(rs.getString(1));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		throw new IllegalArgumentException("Cant get the PersonID number back from database");
+	}
+		
+	public static ResultSet getGroupEvents(String id) {
+		try {
+			String q = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
 					+  "FROM Group, Event, GroupEvent\n"
 					+  "WHERE Group.ID = GroupEvent.GroupID\n"
 					+  "AND EventID = GroupEvent.EventID\n"
 					+  "AND Group.ID = " + id
 					+  "\nORDER BY Event.Start";
-			ResultSet rs = Database.makeQuery(query);
-			return rs;
+			ResultSet reset = Database.makeQuery(q);
+			return reset;
 			
 		}
 		catch(Exception e) {
@@ -39,7 +78,7 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public ResultSet getRoomInformation(int ID) {
+	public static ResultSet getRoomInformation(int ID) {
 		try {
 			String query = "Room.Description\n"
 					+  "FROM Room\n"
@@ -53,8 +92,6 @@ public class DatabaseHandler {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
-	}
 	
-	
-	
+	public static 
 }

@@ -143,7 +143,7 @@ public class Database {
 	 * @param statement Statement som skal utføres
 	 * @return returnerer om statementen ble fullført
 	 */
-	private static boolean makeStatement(String statement) {
+	public static boolean makeStatement(String statement) {
 		try {
 			Connection conn = getConnection();
 			Statement st = conn.createStatement();
