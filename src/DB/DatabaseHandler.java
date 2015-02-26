@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class DatabaseHandler {
 	
-	
-	public void getPersonEvents(String name) {
+	public ResultSet getPersonEvents(String name) {
 		try {
 			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End \n"
 						+  "FROM Person, Event, PersonEvent"
@@ -15,25 +14,47 @@ public class DatabaseHandler {
 						+  "AND Person.Name =" + name
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
+			return rs;
+		}
 			
-			ArrayList<String> EventName = new ArrayList<String>();
-			ArrayList<String> EventDesc = new ArrayList<String>();
-			ArrayList<String> EventStart = new ArrayList<String>();
-			ArrayList<String> EventEnd = new ArrayList<String>();
+		catch(Exception e) {
+			throw new IllegalArgumentException("This name does not exist.");
+		}
+	}
+
+	
+	public ResultSet getGroupEvents(String id) {
+		try {
+			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End \n"
+					+  "FROM Group, Event, GroupEvent"
+					+  "WHERE Group.ID = GroupEvent.GroupID "
+					+  "AND EventID = GroupEvent.EventID"
+					+  "AND Group.ID = " + id
+					+  "ORDER BY Event.Start";
+			ResultSet rs = Database.makeQuery(query);
+			return rs;
 			
-			while(rs.next()) {
-				EventName.add(rs.getString(1));
-				EventDesc.add(rs.getString(2));
-				EventStart.add(rs.getString(3));
-				EventEnd.add(rs.getString(4));
-			}
-			
-			for (int i=0; i<EventName.size(); i++) {
-				
-			}
 		}
 		catch(Exception e) {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
+	
+	public ResultSet getRoomInformation(int ID) {
+		try {
+			String query = "Room.Description \n"
+					+  "FROM Room"
+					+  "WHERE Room.RoomID = " + ""+ID";
+					
+			ResultSet rs = Database.makeQuery(query);
+			return rs;
+			
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("This name does not exist.");
+		}
+	}
+	
+	
+	
 }
