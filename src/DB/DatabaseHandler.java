@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Core.Person;
+
 public class DatabaseHandler {
 	
 	public static ArrayList<String> getPersonInformation(String name) {
@@ -61,6 +63,11 @@ public class DatabaseHandler {
 		throw new IllegalArgumentException("Cant get the PersonID number back from database");
 	}
 		
+	public static void addPersonToGroup(Person person) {
+		Database.makeStatement("INSERT INTO Group(Name, Username, Password)\n"
+				+ "VALUES('"+ person.getName()+"');");
+	}
+	
 	public static ResultSet getGroupEvents(String id) {
 		try {
 			String q = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
