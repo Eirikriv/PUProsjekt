@@ -1,22 +1,21 @@
 package DB;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 public class DatabaseHandler {
 	
-	public ResultSet getPersonEvents(String name) {
+	public static ResultSet getPersonEvents(String name) {
+		Database.initializeDatabase();
 		try {
-			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End \n"
-						+  "FROM Person, Event, PersonEvent"
-						+  "WHERE Person.ID = PersonEvent.PersonID "
-						+  "AND EventID = PersonEvent.EventID"
-						+  "AND Person.Name =" + name
+			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
+						+  "FROM Person, Event, PersonEvent\n"
+						+  "WHERE Person.PersonID = PersonEvent.PersonID\n"
+						+  "AND Event.EventID = PersonEvent.EventID\n"
+						+  "AND Person.Name = '" + name + "'\n"
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			return rs;
 		}
-			
 		catch(Exception e) {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
@@ -25,12 +24,12 @@ public class DatabaseHandler {
 	
 	public ResultSet getGroupEvents(String id) {
 		try {
-			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End \n"
-					+  "FROM Group, Event, GroupEvent"
-					+  "WHERE Group.ID = GroupEvent.GroupID "
-					+  "AND EventID = GroupEvent.EventID"
+			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
+					+  "FROM Group, Event, GroupEvent\n"
+					+  "WHERE Group.ID = GroupEvent.GroupID\n"
+					+  "AND EventID = GroupEvent.EventID\n"
 					+  "AND Group.ID = " + id
-					+  "ORDER BY Event.Start";
+					+  "\nORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			return rs;
 			
@@ -42,9 +41,9 @@ public class DatabaseHandler {
 	
 	public ResultSet getRoomInformation(int ID) {
 		try {
-			String query = "Room.Description \n"
-					+  "FROM Room"
-					+  "WHERE Room.RoomID = " + ""+ID";
+			String query = "Room.Description\n"
+					+  "FROM Room\n"
+					+  "WHERE Room.RoomID = " + ID;
 					
 			ResultSet rs = Database.makeQuery(query);
 			return rs;
