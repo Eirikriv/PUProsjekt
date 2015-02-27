@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane prefHeight="327.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController">
+   <tabs>
+      <Tab text="Calender">
+         <content>
+            <AnchorPane fx:id="calPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="calBox" layoutX="81.0" layoutY="-27.0" prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </content></Tab>
+      <Tab text="Groups">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="236.0" prefWidth="245.0">
+               <children>
+                  <HBox prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox fx:id="leftContainer" prefHeight="298.0" prefWidth="158.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search Group" wrappingWidth="156.13671875">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Button fx:id="createGroupButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Create new group">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="50.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="rightContainer" prefHeight="298.0" prefWidth="142.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
