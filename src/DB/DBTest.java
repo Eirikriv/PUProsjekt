@@ -1,29 +1,59 @@
 package DB;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class DBTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		Database.initializeDatabase();
 		String query = "SELECT Person.Name, Event.Name, Start, End, Description\n"
-				+ "FROM Person, HasEvent, Event\n"
-				+ "WHERE Person.ID = HasEvent.OwnerID AND Event.EventID = HasEvent.EventID\n"
+				+ "FROM Person, PersonEvent, Event\n"
+				+ "WHERE Person.PersonID = PersonEvent.PersonID AND Event.EventID = PersonEvent.EventID\n"
 				+ "GROUP BY	Person.Name;";
-		System.out.println(Database.doQuery(query));
-		query = "SELECT	Group.Name, Person.Name\n"
-				+ "FROM Group, PersonInGroup, Person\n"
-				+ "WHERE Group.GroupID = PersonInGroup.GroupID AND\n"
+		ResultSet rs = Database.makeQuery(query);
+		while (rs.next()){
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(3));
+			System.out.println(rs.getString(4));
+			System.out.println(rs.getString(5));
+			System.out.println();
+		}
+		query = "SELECT	Groups.Name, Person.Name\n"
+				+ "FROM Groups, PersonInGroup, Person\n"
+				+ "WHERE Groups.GroupID = PersonInGroup.GroupID AND\n"
 				+ "Person.PersonID = PersonInGroup.PersonID\n"
-				+ "GROUP BY	Group.Name;";
-		System.out.println(Database.doQuery(query));
+				+ "GROUP BY	Groups.Name;";
+		rs = Database.makeQuery(query);
+		while (rs.next()){
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+		}
 		query = "SELECT	Person.Name, Event.Name, Start, End, Description\n"
-				+ "FROM Group, OwnerEvent, Event, PersonInGroup, Person\n"
-				+ "WHERE Group.OwnerID = OwnerEvent.OwnerID AND\n"
-				+ "Event.EventID = OwnerEvent.EventID AND\n"
-				+ "Person.ID = PersonGroup.ID AND Group.ID = PersonGroup.ID\n"
+				+ "FROM Groups, GroupEvent, Event, PersonInGroup, Person\n"
+				+ "WHERE Groups.GroupID = GroupEvent.GroupID AND\n"
+				+ "Event.EventID = GroupEvent.EventID AND\n"
+				+ "Person.PersonID = PersonInGroup.PersonID AND Groups.GroupID = PersonInGroup.GroupID\n"
 				+ "GROUP BY	Person.Name;";
-		System.out.println(Database.doQuery(query));
-		query = "SELECT	Event.Name, RoomID, Capacity, Room.Descritpiton\n"
+		rs = Database.makeQuery(query);
+		while (rs.next()) {
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(3));
+			System.out.println(rs.getString(4));
+			System.out.println(rs.getString(5));
+			System.out.println();
+		}
+		query = "SELECT	Event.Name, Event.RoomID, Capacity, Room.Description\n"
 				+ "FROM Event, Room\n"
 				+ "WHERE Event.RoomID = Room.RoomID;";
-		System.out.println(Database.doQuery(query));
+		rs = Database.makeQuery(query);
+		while (rs.next()){
+			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(3));
+			System.out.println(rs.getString(4));
+			System.out.println();;
+		}
 	}
 }
