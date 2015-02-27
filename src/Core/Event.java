@@ -1,23 +1,20 @@
 package Core;
-import java.sql.ResultSet;
-import java.util.Date;
 
-import DB.Database;
 import DB.DatabaseHandler;
 public class Event {
 	private String name;
 	private String desc;
-	private Date start;
-	private Date end;
-	private int roomID;
+	private String start;
+	private String end;
+	private String roomID;
 	
-	Event(String name, Date start, Date end, String desc){
-		ResultSet rs = DatabaseHandler.createEvent(name, start, end, desc, roomID);
+	Event(String name, String start, String end, String desc, String roomid){
+		DatabaseHandler.addEvent(name, start, end, desc, roomid);
 		this.name = name;
 		this.start= start;
 		this.end = end;
 		this.desc = desc;
-		this.roomID = roomID;
+		this.roomID = roomid;
 		
 	}
 	public String getName() {
@@ -26,7 +23,7 @@ public class Event {
 
 	public void setName(String name) {
 		this.name = name;
-		DatabaseHandler.updateEvent(name);		
+		DatabaseHandler.updateEvent(name, this.start, this.end, this.desc,this.roomID);		
 	}
 
 	public String getDesc() {
@@ -35,7 +32,7 @@ public class Event {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
-		DatabaseHandler.updateEvent(desc);
+		DatabaseHandler.updateEvent(this.name, this.start, this.end, desc,this.roomID);
 	}
 
 	public String getStart() {
@@ -44,7 +41,7 @@ public class Event {
 
 	public void setStart(String start) {
 		this.start = start;
-		DatabaseHandler.updateEvent(start);
+		DatabaseHandler.updateEvent(this.name, start, this.end, desc,this.roomID);
 	}
 
 	public String getEnd() {
@@ -53,7 +50,7 @@ public class Event {
 
 	public void setEnd(String end) {
 		this.end = end;
-		DatabaseHandler.updateEvent(end);
+		DatabaseHandler.updateEvent(this.name, this.start, end, this.desc,this.roomID);
 	}
 	
 	

@@ -1,6 +1,7 @@
 package Core;
 
-import java.sql.ResultSet;
+
+import java.util.ArrayList;
 
 import DB.DatabaseHandler;
 
@@ -20,13 +21,21 @@ public class Person {
 		DatabaseHandler.addPerson(name, username, password);
 	}
 	
+	public Person(String name) {
+		this.cal = new Calendar(this.name);
+		ArrayList<String> list = DatabaseHandler.getPersonInformation(name);
+		this.name = name;
+		this.username = list.get(1);
+		this.password = list.get(2);
+	}
+	
 	public void updatePassword(String password) {
-		DatabaseHandler.updatePerson(password);
+		DatabaseHandler.updatePerson(this.name, this.username, password);
 		this.password = password;
 	}
 	
 	public void setName(String name) {
-		DatabaseHandler.updatePerson(name);
+		DatabaseHandler.updatePerson(name, this.username, this.password);
 		this.name = name;
 	}
 	public String getName() {

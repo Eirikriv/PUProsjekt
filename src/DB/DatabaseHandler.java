@@ -129,7 +129,7 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public ArrayList<String> login(String username, String password) {
+	public static ArrayList<String> login(String username, String password) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
 			String query = "SELECT *\n"
@@ -153,12 +153,31 @@ public class DatabaseHandler {
 		}
 	}
 	
-	public boolean addEvent(String name, String start, String end, String desc) {
-		
+	public static boolean addEvent(String name, String start, String end, String desc, String ID) {
+		try {
+			Database.makeStatement("INSERT INTO Event\n"
+						+ "VALUES( '"+name+"', '"+ start+"', '"+end+"', '"+ start+"', '"+ ID+"');");
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 	
-	public boolean updateEvent(String name, String start, String end, String desc) {
+	public static boolean updateEvent(String name, String start, String end, String desc, String ID) {
 		
+	try {
+		Database.makeStatement("INSERT INTO Event\n"
+					+ "VALUES( '"+name+"', '"+ start+"', '"+end+"', '"+ start+"', '"+ ID+"');");
+		return true;
+	}
+	catch (Exception e){
+		return false;
+	}
 	}
 	
+	public static boolean updatePerson (String name, String username, String password) {
+		
+		return true;
+	}
 }
