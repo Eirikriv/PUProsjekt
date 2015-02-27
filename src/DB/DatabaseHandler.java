@@ -7,16 +7,14 @@ public class DatabaseHandler {
 	
 	//Henter ut all info om person med PersonID id
 	//Returnerer en liste på formen [[name, username, password],...]
-	public static ArrayList<ArrayList<String>> getPersonInformation(String username) {
-		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+	public static ArrayList<String> getPersonInformation(String username) {
+		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT * FROM Person WHERE Person.Username = " + username + "";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				ArrayList<String> temp = new ArrayList<String>();
 				for (int i = 2; i <= 4; i++)
-					temp.add(rs.getString(i));
-				list.add(temp);
+					list.add(rs.getString(i));
 			}
 			return list;
 		}
@@ -65,14 +63,14 @@ public class DatabaseHandler {
 		
 	//Henter alle events til en gruppe
 	//Returnerer en liste på formen [[name, description, start, end], ...]
-	public static ArrayList<ArrayList<String>> getGroupEvents(String id) {
+	public static ArrayList<ArrayList<String>> getGroupEvents(String groupID) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
 			String q = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
 					+  "FROM Group, Event, GroupEvent\n"
 					+  "WHERE Group.GroupID = GroupEvent.GroupID\n"
 					+  "AND EventID = GroupEvent.EventID\n"
-					+  "AND Group.GroupID = " + id
+					+  "AND Group.GroupID = " + groupID
 					+  "\nORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(q);
 			while (rs.next()) {
@@ -85,42 +83,40 @@ public class DatabaseHandler {
 			
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("GroupID " + id + " does not exist");
+			throw new IllegalArgumentException("GroupID " + groupID + " does not exist");
 		}
 	}
 	
 	//Henter ut info om rom med RomID id
 	//Returnerer en liste på formen [[RoomId, capacity, description], ...]
-	public static ArrayList<ArrayList<String>> getRoomInformation(int id) {
-		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+	public static ArrayList<String> getRoomInformation(int roomID) {
+		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT *\n"
 					+  "FROM Room\n"
-					+  "WHERE Room.RoomID = " + id;
+					+  "WHERE Room.RoomID = " + roomID;
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				ArrayList<String> temp = new ArrayList<String>();
 				for (int i = 1; i <= 3; i++)
-					temp.add(rs.getString(i));
-				list.add(temp);
+					list.add(rs.getString(i));
 			}
 			return list;
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("RoomID " + id + " does not exist");
+			throw new IllegalArgumentException("RoomID " + roomID + " does not exist");
 		}
 	}
 	
 	
 	//Henter ut alle gruppemedlemer av en gruppe
 	//Returnerer en liste på [[], ...]
-	public static ArrayList<String> getGroupMembers(int ID) {
+	public static ArrayList<String> getGroupMembers(int groupID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT Person.Username\n"
 						+  "FROM Person, Groups, PersonGroup\n"
 						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
-						+  "AND Groups.GroupID = PersonGroup.GroupID AND GroupID = " + ID + "\n"
+						+  "AND Groups.GroupID = PersonGroup.GroupID AND GroupID = " + groupID + "\n"
 						+  "GROUP BY Groups.GroupID";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
