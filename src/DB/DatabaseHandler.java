@@ -149,4 +149,37 @@ public class DatabaseHandler {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
+	
+	public ArrayList<String> login(String username, String password) {
+		ArrayList<String> personInfo = new ArrayList<String>();
+		try {
+			String query = "SELECT *\n"
+					+ "FROM Person\n"
+					+ "WHERE Username = '" + username + "'\n"
+						+ "AND Password = '" + password + "'";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				for (int i = 0; i <= 3; i++) {
+					personInfo.add(rs.getString(i));
+				}
+			}
+			if (personInfo.size() == 0)
+				throw new IllegalStateException("User not found in database");
+			if (personInfo.size() > 3)
+				throw new IllegalStateException("More than one user found...");
+			return personInfo;
+		}
+		catch (Exception e) {
+			throw new IllegalArgumentException("Something went wrong");
+		}
+	}
+	
+	public boolean addEvent(String name, String start, String end, String desc) {
+		
+	}
+	
+	public boolean updateEvent(String name, String start, String end, String desc) {
+		
+	}
+	
 }
