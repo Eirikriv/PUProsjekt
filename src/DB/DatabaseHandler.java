@@ -121,19 +121,27 @@ public class DatabaseHandler {
 	}
 	
 	
-	//HEnter ut alle gruppemedlemer av en gruppe
+	//Henter ut alle gruppemedlemer av en gruppe
 	//Returnerer en liste på [[], ...]
 	public static ArrayList<ArrayList<String>> getGroupMembers(int ID) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
-			String query = "SELECT Person.Name\n"
+			String query = "SELECT Person.Name, GroupID\n"
 						+  "FROM Person, Groups, PersonGroup\n"
 						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
 						+  "AND Groups.GroupID = PersonGroup.GroupID AND GroupID = " + ID + "\n"
 						+  "GROUP BY Groups.GroupID";
 			ResultSet rs = Database.makeQuery(query);
+			int groupID = rs.getInt(2);
+			ArrayList<String> temp = new ArrayList<String>();
 			while (rs.next()) {
-				ArrayList<String> temp = new ArrayList<String>();
+				while (rs.getInt(2) == groupID){
+					temp.add(groupID, rs.getString(1));
+					rs.next();
+				}
+				temp = new ArrayList<String>();
+				groupID = rs.getInt(2);
+				temp.add(rs.getString(1));
 			}
 			return list;
 		}
