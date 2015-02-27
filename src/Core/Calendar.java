@@ -6,10 +6,22 @@ import java.util.ArrayList;
 
 //import java.sql.ResultSetMetaData;
 
+import java.util.Date;
+
 import DB.DatabaseHandler;
 
 public class Calendar {
-	String name = "Cecilie Teisberg";
+	private String name;
+	ArrayList<Event> calendar = new ArrayList<Event>();
+	
+	public Calendar(String name) {
+		this.name = name;
+	}
+	
+	public void addEvent(String name, Date start, Date end, String desc) {
+		Event e = new Event(name, start, end, desc);
+		this.calendar.add(e);
+	}
 	
 	public ArrayList<ArrayList<String>> outputPersonEvents() throws SQLException {
 		ResultSet rs = DatabaseHandler.getPersonEvents(name);
