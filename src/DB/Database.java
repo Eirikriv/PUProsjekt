@@ -28,11 +28,10 @@ public class Database {
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
-					+ "(PersonID INT NOT NULL AUTO_INCREMENT,"
+					+ "(Username VARCHAR(20)	NOT NULL,"
 					+ "Name VARCHAR(20) NOT NULL,"
-					+ "Username VARCHAR(20)	NOT NULL,"
 					+ "Password	VARCHAR(20)	NOT NULL,"
-					+ "PRIMARY KEY (PersonID));");
+					+ "PRIMARY KEY (Username));");
 			
 			//Oppretter Group-tabellen		
 			makeStatement("CREATE TABLE Groups"
@@ -42,10 +41,10 @@ public class Database {
 			
 			//Oppretter PersonInGroup-tabellen		
 			makeStatement("CREATE TABLE PersonInGroup"
-					+ "(PersonID INT NOT NULL,"
+					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "GroupID INT NOT NULL,"
-					+ "PRIMARY KEY (PersonID, GroupID),"
-					+ "FOREIGN KEY (PersonID) REFERENCES Person(PersonID) "
+					+ "PRIMARY KEY (Username, GroupID),"
+					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE,"
 					+ "FOREIGN KEY (GroupID) REFERENCES Groups(GroupID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
@@ -71,10 +70,10 @@ public class Database {
 			
 			//Oppretter PersonEvent-tabellen
 			makeStatement("CREATE TABLE PersonEvent"
-					+ "(PersonID INT NOT NULL,"
+					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "EventID INT NOT NULL,"
-					+ "PRIMARY KEY (PersonID, EventID),"
-					+ "FOREIGN KEY (PersonID) REFERENCES Person(PersonID) "
+					+ "PRIMARY KEY (Username, EventID),"
+					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
@@ -89,26 +88,26 @@ public class Database {
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
 			
-			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
-			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
-			makeStatement("INSERT INTO Groups(Name)\n"
-					+ "VALUES('PU');");
-			makeStatement("INSERT INTO PersonInGroup\n"
-					+ "VALUES('1', '1');");
-			makeStatement("INSERT INTO PersonInGroup\n"
-					+ "VALUES('2', '1');");
-			makeStatement("INSERT INTO Room\n"
-					+ "VALUES('R1', '300', 'Forelesningssal')");
-			makeStatement("INSERT INTO Event(Name, Start, End, RoomID)\n"
-					+ "VALUES('Fysikkforelesning', '2015-02-26 08:15', '2015-02-26 10:00', 'R1')");
-			makeStatement("INSERT INTO GroupEvent\n"
-					+ "VALUES('1', '1')");
-			makeStatement("INSERT INTO PersonEvent\n"
-					+ "VALUES('1', '1')");
-			makeStatement("INSERT INTO PersonEvent\n"
-					+ "VALUES('2', '1')");
+//			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+//					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
+//			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+//					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
+//			makeStatement("INSERT INTO Groups(Name)\n"
+//					+ "VALUES('PU');");
+//			makeStatement("INSERT INTO PersonInGroup\n"
+//					+ "VALUES('1', '1');");
+//			makeStatement("INSERT INTO PersonInGroup\n"
+//					+ "VALUES('2', '1');");
+//			makeStatement("INSERT INTO Room\n"
+//					+ "VALUES('R1', '300', 'Forelesningssal')");
+//			makeStatement("INSERT INTO Event(Name, Start, End, RoomID)\n"
+//					+ "VALUES('Fysikkforelesning', '2015-02-26 08:15', '2015-02-26 10:00', 'R1')");
+//			makeStatement("INSERT INTO GroupEvent\n"
+//					+ "VALUES('1', '1')");
+//			makeStatement("INSERT INTO PersonEvent\n"
+//					+ "VALUES('1', '1')");
+//			makeStatement("INSERT INTO PersonEvent\n"
+//					+ "VALUES('2', '1')");
 			return true;
 
 		} catch (Exception e) {

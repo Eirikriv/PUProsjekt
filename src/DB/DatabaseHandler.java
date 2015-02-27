@@ -7,10 +7,10 @@ public class DatabaseHandler {
 	
 	//Henter ut all info om person med PersonID id
 	//Returnerer en liste på formen [[name, username, password],...]
-	public static ArrayList<ArrayList<String>> getPersonInformation(int id) {
+	public static ArrayList<ArrayList<String>> getPersonInformation(String username) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
-			String query = "SELECT * FROM Person WHERE Person.PersonID = " + id + "";
+			String query = "SELECT * FROM Person WHERE Person.Username = " + username + "";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				ArrayList<String> temp = new ArrayList<String>();
@@ -21,20 +21,20 @@ public class DatabaseHandler {
 			return list;
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("PersonID " + id + " does not exist.");
+			throw new IllegalArgumentException("Username " + username + " does not exist.");
 		}
 	}
 
 	//Henter ut alle hendelser for person med PersonID id
 	//Returnerer en liste på formen [[name, description, start, end], ...] 
-	public static ArrayList<ArrayList<String>> getPersonEvents(int id) {
+	public static ArrayList<ArrayList<String>> getPersonEvents(String username) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
 			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
 						+  "FROM Person, Event, PersonEvent\n"
 						+  "WHERE Person.PersonID = PersonEvent.PersonID\n"
 						+  "AND Event.EventID = PersonEvent.EventID\n"
-						+  "AND Person.PersonID = '" + Integer.toString(id) + "'\n"
+						+  "AND Person.Username = '" + username + "'\n"
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
@@ -46,29 +46,20 @@ public class DatabaseHandler {
 			return list;
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("PersonID " + id + " does not exist.");
+			throw new IllegalArgumentException("User " + username + " does not exist.");
 		}
 	}
 	
 	//Legger til person med name, username og pw
 	//Returnerer PersonID til personen eller -1 hvis den ikke finnes (altså ikke ble lagt til)
-	public static int addPerson(String name, String username, String pw ) {
+	public static boolean addPerson(String name, String username, String pw ) {
 		try {
-			Database.makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-						+ "VALUES('"+ name+"', '"+username+"', '"+pw+"');");
-			
-			String query = "SELECT *"
-					+  "FROM Person\n"
-					+  "WHERE Person.Name = '"+name+"'\n";		
-			ResultSet rs = Database.makeQuery(query);
-			while (rs.next()) {
-				if (rs.getString(3).equals(username) && rs.getString(4).equals(pw))
-					return rs.getInt(1);
-			}
-			return -1;
+			Database.makeStatement("INSERT INTO Person\n"
+						+ "VALUES( '"+username+"', '"+ name+"', '"+pw+"');");
+			return true;
 		}
 		catch (Exception e){
-			throw new IllegalArgumentException("Cannot get the PersonID number back from database");
+			return false;
 		}
 	}
 		
@@ -123,25 +114,17 @@ public class DatabaseHandler {
 	
 	//Henter ut alle gruppemedlemer av en gruppe
 	//Returnerer en liste på [[], ...]
-	public static ArrayList<ArrayList<String>> getGroupMembers(int ID) {
-		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+	public static ArrayList<String> getGroupMembers(int ID) {
+		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Person.Name, GroupID\n"
+			String query = "SELECT Person.Username\n"
 						+  "FROM Person, Groups, PersonGroup\n"
 						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
 						+  "AND Groups.GroupID = PersonGroup.GroupID AND GroupID = " + ID + "\n"
 						+  "GROUP BY Groups.GroupID";
 			ResultSet rs = Database.makeQuery(query);
-			int groupID = rs.getInt(2);
-			ArrayList<String> temp = new ArrayList<String>();
 			while (rs.next()) {
-				while (rs.getInt(2) == groupID){
-					temp.add(groupID, rs.getString(1));
-					rs.next();
-				}
-				temp = new ArrayList<String>();
-				groupID = rs.getInt(2);
-				temp.add(rs.getString(1));
+				list.add(rs.getString(1));
 			}
 			return list;
 		}
@@ -149,4 +132,37 @@ public class DatabaseHandler {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
+	
+	public ArrayList<String> login(String username, String password) {
+		ArrayList<String> personInfo = new ArrayList<String>();
+		try {
+			String query = "SELECT *\n"
+					+ "FROM Person\n"
+					+ "WHERE Username = '" + username + "'\n"
+						+ "AND Password = '" + password + "'";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				for (int i = 0; i <= 3; i++) {
+					personInfo.add(rs.getString(i));
+				}
+			}
+			if (personInfo.size() == 0)
+				throw new IllegalStateException("User not found in database");
+			if (personInfo.size() > 3)
+				throw new IllegalStateException("More than one user found...");
+			return personInfo;
+		}
+		catch (Exception e) {
+			throw new IllegalArgumentException("Something went wrong");
+		}
+	}
+	
+	public boolean addEvent(String name, String start, String end, String desc) {
+		
+	}
+	
+	public boolean updateEvent(String name, String start, String end, String desc) {
+		
+	}
+	
 }
