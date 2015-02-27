@@ -7,10 +7,10 @@ public class DatabaseHandler {
 	
 	//Henter ut all info om person med PersonID id
 	//Returnerer en liste på formen [[name, username, password],...]
-	public static ArrayList<ArrayList<String>> getPersonInformation(int id) {
+	public static ArrayList<ArrayList<String>> getPersonInformation(String username) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
-			String query = "SELECT * FROM Person WHERE Person.PersonID = " + id + "";
+			String query = "SELECT * FROM Person WHERE Person.Username = " + username + "";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				ArrayList<String> temp = new ArrayList<String>();
@@ -21,7 +21,7 @@ public class DatabaseHandler {
 			return list;
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("PersonID " + id + " does not exist.");
+			throw new IllegalArgumentException("Username " + username + " does not exist.");
 		}
 	}
 
