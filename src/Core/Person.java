@@ -20,8 +20,14 @@ public class Person {
 		DatabaseHandler.addPerson(name, username, password);
 	}
 	
-	public void setName() {
-		DatabaseHandler.
+	public void updatePassword(String password) {
+		DatabaseHandler.updatePerson(password);
+		this.password = password;
+	}
+	
+	public void setName(String name) {
+		DatabaseHandler.updatePerson(name);
+		this.name = name;
 	}
 	public String getName() {
 		return this.name;
