@@ -17,12 +17,12 @@ public class Person {
 		this.name = name;
 		this.username = username;
 		this.password = password;
-		this.cal = new Calendar(this.name);
+		this.cal = new Calendar(this);
 		DatabaseHandler.addPerson(name, username, password);
 	}
 	
 	public Person(String name) {
-		this.cal = new Calendar(this.name);
+		this.cal = new Calendar(this);
 		ArrayList<String> list = DatabaseHandler.getPersonInformation(name);
 		this.name = name;
 		this.username = list.get(1);
@@ -42,6 +42,8 @@ public class Person {
 		return this.name;
 	}
 	
-	
+	public Calendar getCalendar() {
+		return cal;
+	}
 	
 }
