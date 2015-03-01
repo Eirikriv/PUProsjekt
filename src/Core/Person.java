@@ -3,10 +3,10 @@ package Core;
 
 import java.util.ArrayList;
 
-import DB.DatabaseHandler;
+import DB.PersonDatabaseHandler;
 
 public class Person {
-	
+	PersonDatabaseHandler pdbh;
 	private Calendar cal;
 	private String name;
 	private String username;
@@ -18,24 +18,24 @@ public class Person {
 		this.username = username;
 		this.password = password;
 		this.cal = new Calendar(this);
-		DatabaseHandler.addPerson(name, username, password);
+		pdbh.add(new String[]{name, username, password});
 	}
 	
 	public Person(String name) {
 		this.cal = new Calendar(this);
-		ArrayList<String> list = DatabaseHandler.getPersonInformation(name);
+		ArrayList<String> list = pdbh.get(name);
 		this.name = name;
 		this.username = list.get(1);
 		this.password = list.get(2);
 	}
 	
 	public void updatePassword(String password) {
-		DatabaseHandler.updatePerson(this.name, this.username, password);
+		pdbh.update(new String[]{this.name, this.username, password});
 		this.password = password;
 	}
 	
 	public void setName(String name) {
-		DatabaseHandler.updatePerson(name, this.username, this.password);
+		pdbh.update(new String[]{name, this.username, this.password});
 		this.name = name;
 	}
 	public String getName() {
