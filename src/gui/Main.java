@@ -2,7 +2,6 @@ package gui;
 	
 import java.io.IOException;
 
-import DB.DatabaseHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
