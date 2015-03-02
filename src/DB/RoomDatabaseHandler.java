@@ -28,7 +28,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	@Override
 	public boolean add(String[] info) {
 		try {
-			Database.makeStatement("INSERT INTO Event\n"
+			Database.makeStatement("INSERT INTO Room\n"
 						+ "VALUES( '"+info[0]+"', '"+ info[1] +"');");
 			return true;
 		}
