@@ -22,10 +22,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
@@ -37,8 +40,10 @@ public class ViewController implements Initializable {
 	
 	public String username;
 	public Stage stage;
-	public GridPane gp;
-	public Label monthText;
+	public GridPane gp = new GridPane();
+	public Label monthText = new Label();
+	
+	public Calendar cal = Calendar.getInstance();
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -115,6 +120,12 @@ public class ViewController implements Initializable {
 		for (int x = 1; x<7; x++) {
 			for (int y = 0; y<7; y++) {
 				StackPane z = new StackPane();
+				if (calStart.before(cal) || (calStart.after(cal))) {
+					//z.setStyle("-fx-background-color:red");
+				} else {
+					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null), null));
+				}
+				z.setStyle("-fx-background-color:Green");
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);
 				z.getChildren().add(l);
@@ -124,13 +135,10 @@ public class ViewController implements Initializable {
 				calStart.add(Calendar.DATE, 1);
 			}
 		}
-		gp.setGridLinesVisible(true);
 	}
 
 	public void fillCalendar(VBox box) {
-		Calendar cal = Calendar.getInstance();
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
-		String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
 		Button bLeft = new Button("<-");
 		Button bRight = new Button("->");
 		bLeft.setOnAction(new EventHandler<ActionEvent>() {
@@ -147,73 +155,30 @@ public class ViewController implements Initializable {
 				event.consume();
 			}
 		});
-		Label monthText = new Label(month);
 		Label username = new Label("user: " + this.username);
 		Label showCal = new Label("show calendar\nfor : ");
 		StackPane sp = new StackPane();
 		StackPane calsp = new StackPane();
-		sp.getChildren().add(username);
-		sp.getChildren().add(showCal);
+		sp.getChildren().addAll(username, showCal);
 		HBox titleBox = new HBox();
-		titleBox.getChildren().add(bLeft);
-		titleBox.getChildren().add(monthText);
-		titleBox.getChildren().add(bRight);
+		titleBox.getChildren().addAll(bLeft, monthText, bRight);
 		calsp.getChildren().add(titleBox);
+		
 		StackPane.setAlignment(titleBox, Pos.CENTER);
 		StackPane.setAlignment(username, Pos.TOP_LEFT);
 		StackPane.setAlignment(showCal, Pos.TOP_RIGHT);
 		StackPane.setMargin(username, new Insets((double)5));
 		StackPane.setMargin(showCal, new Insets((double)5));
-		box.getChildren().add(sp);
-		box.getChildren().add(calsp);
-		titleBox.setAlignment(Pos.CENTER);
 		
-		GridPane gp = new GridPane();
-		//gp.setHgap((double)10);
-		//gp.setVgap((double)12);
+		box.getChildren().addAll(sp, calsp);
+
+		titleBox.setAlignment(Pos.CENTER);
 		gp.setGridLinesVisible(true);
 		gp.setAlignment(Pos.CENTER);
 		
-		String[] daystext = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		for (int x=0; x<7; x++) {
-			StackPane dayContainer = new StackPane();
-			dayContainer.getChildren().add(new Label(daystext[x]));
-			dayContainer.setMinSize(80, 30);
-			gp.add(dayContainer, x, 0);
-		}
-		
-		
-		cal.set(Calendar.DAY_OF_MONTH, 1);
-		int day = cal.get(Calendar.DAY_OF_WEEK);
-		
-		if (day == 1) {
-			cal.add(Calendar.DATE, -6);
-		} else {
-			cal.add(Calendar.DATE, -(7-day));
-		}
-		
-		
-		for (int x = 1; x<7; x++) {
-			for (int y = 0; y<7; y++) {
-				StackPane z = new StackPane();
-				Label l = new Label(Integer.toString(cal.get(Calendar.DATE)));
-				StackPane.setAlignment(l, Pos.TOP_LEFT);
-				z.getChildren().add(l);
-				z.setMinSize(80, 50);
-				gp.add(z, y, x);
-				cal.add(Calendar.DATE, 1);
-			}
-		}
-		
-		cal.add(Calendar.MONTH, -1);
-		
-		
-		StackPane days = new StackPane();
-		days.getChildren().add(gp);
+		setCalendarInfo(cal);
 		calsp.setPadding(new Insets(15, 0, 0, 0));
-		box.getChildren().add(days);
-		this.gp = gp;
-		this.monthText = monthText;
+		box.getChildren().add(gp);
 		
 	}
 	
