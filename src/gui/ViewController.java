@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -15,13 +16,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
 	
@@ -29,6 +34,11 @@ public class ViewController implements Initializable {
 	@FXML private VBox leftContainer;
 	@FXML private VBox rightContainer;
 	@FXML private VBox calBox;
+	
+	public String username;
+	public Stage stage;
+	public GridPane gp;
+	public Label monthText;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -37,7 +47,7 @@ public class ViewController implements Initializable {
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		
 		
-		
+		this.username = "Martin";
 		fillCalendar(calBox);
 		
 		ObservableList<String> groupItems = FXCollections.observableArrayList("Martin", "Alexander", "Anders");
@@ -69,14 +79,141 @@ public class ViewController implements Initializable {
 		});
 		
 	}
+	
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	
+	public void setCalendarGridPane(GridPane gp) {
+		this.gp = gp;
+	}
+	
+	public void setCalendarInfo(Calendar cal) {
+		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		gp.getChildren().clear();
+		
+		String[] daystext = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		for (int x=0; x<7; x++) {
+			StackPane dayContainer = new StackPane();
+			dayContainer.getChildren().add(new Label(daystext[x]));
+			dayContainer.setMinSize(80, 30);
+			gp.add(dayContainer, x, 0);
+		}
+		Calendar calStart = Calendar.getInstance();
+		calStart.setTime(cal.getTime());
+		
+		if (day == 1) {
+			calStart.add(Calendar.DATE, -6);
+		} else if (day == 2) {
+			calStart.add(Calendar.DATE, -7);
+		} else {
+			calStart.add(Calendar.DATE, -day+2);
+		}
+
+		for (int x = 1; x<7; x++) {
+			for (int y = 0; y<7; y++) {
+				StackPane z = new StackPane();
+				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
+				StackPane.setAlignment(l, Pos.TOP_LEFT);
+				z.getChildren().add(l);
+				z.setMinSize(80, 50);
+				gp.add(z, y, x);
+				
+				calStart.add(Calendar.DATE, 1);
+			}
+		}
+		gp.setGridLinesVisible(true);
+	}
 
 	public void fillCalendar(VBox box) {
 		Calendar cal = Calendar.getInstance();
+		cal.setFirstDayOfWeek(Calendar.MONDAY);
 		String month = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+		Button bLeft = new Button("<-");
+		Button bRight = new Button("->");
+		bLeft.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				cal.add(Calendar.MONTH, -1);
+				setCalendarInfo(cal);
+				event.consume();
+			}
+		});
+		bRight.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				cal.add(Calendar.MONTH, 1);
+				setCalendarInfo(cal);
+				event.consume();
+			}
+		});
 		Label monthText = new Label(month);
-		box.getChildren().add(monthText);
-		VBox.setMargin(monthText, new Insets((double)15));
+		Label username = new Label("user: " + this.username);
+		Label showCal = new Label("show calendar\nfor : ");
+		StackPane sp = new StackPane();
+		StackPane calsp = new StackPane();
+		sp.getChildren().add(username);
+		sp.getChildren().add(showCal);
+		HBox titleBox = new HBox();
+		titleBox.getChildren().add(bLeft);
+		titleBox.getChildren().add(monthText);
+		titleBox.getChildren().add(bRight);
+		calsp.getChildren().add(titleBox);
+		StackPane.setAlignment(titleBox, Pos.CENTER);
+		StackPane.setAlignment(username, Pos.TOP_LEFT);
+		StackPane.setAlignment(showCal, Pos.TOP_RIGHT);
+		StackPane.setMargin(username, new Insets((double)5));
+		StackPane.setMargin(showCal, new Insets((double)5));
+		box.getChildren().add(sp);
+		box.getChildren().add(calsp);
+		titleBox.setAlignment(Pos.CENTER);
 		
+		GridPane gp = new GridPane();
+		//gp.setHgap((double)10);
+		//gp.setVgap((double)12);
+		gp.setGridLinesVisible(true);
+		gp.setAlignment(Pos.CENTER);
+		
+		String[] daystext = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		for (int x=0; x<7; x++) {
+			StackPane dayContainer = new StackPane();
+			dayContainer.getChildren().add(new Label(daystext[x]));
+			dayContainer.setMinSize(80, 30);
+			gp.add(dayContainer, x, 0);
+		}
+		
+		
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		
+		if (day == 1) {
+			cal.add(Calendar.DATE, -6);
+		} else {
+			cal.add(Calendar.DATE, -(7-day));
+		}
+		
+		
+		for (int x = 1; x<7; x++) {
+			for (int y = 0; y<7; y++) {
+				StackPane z = new StackPane();
+				Label l = new Label(Integer.toString(cal.get(Calendar.DATE)));
+				StackPane.setAlignment(l, Pos.TOP_LEFT);
+				z.getChildren().add(l);
+				z.setMinSize(80, 50);
+				gp.add(z, y, x);
+				cal.add(Calendar.DATE, 1);
+			}
+		}
+		
+		cal.add(Calendar.MONTH, -1);
+		
+		
+		StackPane days = new StackPane();
+		days.getChildren().add(gp);
+		calsp.setPadding(new Insets(15, 0, 0, 0));
+		box.getChildren().add(days);
+		this.gp = gp;
+		this.monthText = monthText;
 		
 	}
 	

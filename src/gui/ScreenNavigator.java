@@ -3,17 +3,15 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
  
-/**
- * Utility class for controlling navigation between vistas.
- *
- * All methods on the navigator are static to facilitate
- * simple access from anywhere in the application.
- */
 public class ScreenNavigator {
 
     public static final String MAIN    = "main.fxml";
     public static final String SCREEN_LOGIN = "LoginScreen.fxml";
     public static final String SCREEN_CALENDAR = "CalendarScreen.fxml";
+    public static final double SCREEN_CALENDAR_HEIGHT = 600;
+    public static final double SCREEN_CALENDAR_WIDTH = 600;
+    public static final double SCREEN_LOGIN_HEIGHT = 350;
+    public static final double SCREEN_LOGIN_WIDTH = 250;
 
     private static MainController mainController;
  
@@ -23,7 +21,18 @@ public class ScreenNavigator {
 
     public static void loadVista(String fxml) {
         try {
-            mainController.setVista(FXMLLoader.load(ScreenNavigator.class.getResource(fxml)));
+        	double height, width;
+        	if (fxml.compareTo(SCREEN_CALENDAR) == 0) {
+        		height = SCREEN_CALENDAR_HEIGHT;
+        		width = SCREEN_CALENDAR_WIDTH;
+        	} else if (fxml.compareTo(SCREEN_LOGIN) == 0) {
+        		height = SCREEN_LOGIN_HEIGHT;
+        		width = SCREEN_LOGIN_WIDTH;
+        	} else {
+        		height = 290;
+        		width = 224;
+        	}
+            mainController.setVista(FXMLLoader.load(ScreenNavigator.class.getResource(fxml)), height, width);
         } catch (IOException e) {
             e.printStackTrace();
         }

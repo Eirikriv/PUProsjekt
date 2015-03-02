@@ -32,6 +32,7 @@ public class LoginController implements Initializable {
         		System.out.println("password: " + passwordText.getText());
         		
         		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+        		
         	}
         });
         
