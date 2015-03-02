@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import DB.PersonDatabaseHandler;
 
-public class Person {
+public class Person implements CalendarOwner{
 	PersonDatabaseHandler pdbh;
 	private Calendar cal;
 	private String name;
@@ -38,12 +38,17 @@ public class Person {
 		pdbh.update(new String[]{name, this.username, this.password});
 		this.name = name;
 	}
+	
 	public String getName() {
 		return this.name;
 	}
 	
 	public Calendar getCalendar() {
 		return cal;
+	}
+	
+	public String getPrimaryKey() {
+		return username;
 	}
 	
 }
