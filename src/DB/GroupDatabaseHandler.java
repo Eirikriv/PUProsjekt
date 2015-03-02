@@ -11,7 +11,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 			String query = "SELECT * FROM Group WHERE Groups.GroupID = '" + GroupID + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 2; i <= 4; i++)
+				for (int i = 1; i <= 2; i++)
 					groupList.add(rs.getString(i));
 			}
 			return groupList;

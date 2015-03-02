@@ -37,12 +37,12 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 	
 	@Override
-	//Tar inn en liste på formen [name, username, password]
+	//Tar inn en liste på formen [username, name, password]
 	public boolean update(String[] info) {
 		try {
 			Database.makeStatement("UPDATE Person\n"
-								 + "SET name = '"+ info[0]+", username = '"+ info[1] + "', password = '"+info[2]+"'\n"
-								 + "WHERE name = '"+info[0]+"';");
+								 + "SET name = '"+ info[1]+", username = '"+ info[0] + "', password = '"+info[2]+"'\n"
+								 + "WHERE username = '"+info[0]+"';");
 		return true;
 		}
 		catch (Exception e){
