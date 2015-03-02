@@ -37,9 +37,17 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 	
 	@Override
+	//Tar inn en liste på formen [name, username, password]
 	public boolean update(String[] info) {
-		// TODO Auto-generated method stub
+		try {
+			Database.makeStatement("UPDATE Event\n"
+								 + "SET name = '"+ info[0]+", start = '"+ info[1] + "', end = '"+info[2]+"'\n"
+								 + "WHERE name = '"+info[0]+"';");
+		return true;
+		}
+		catch (Exception e){
 		return false;
+		}
 	}
 
 	@Override

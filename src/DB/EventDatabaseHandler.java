@@ -6,7 +6,6 @@ public class EventDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public ArrayList<String> get(String primaryKey) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -25,7 +24,9 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	//Tar inn en liste på formen [name, start, end, desc, roomID]
 	public boolean update(String[] eventInfo) {
 		try {
-		Database.makeStatement("");
+			Database.makeStatement("UPDATE Event\n"
+								 + "SET name = '"+ eventInfo[0]+", start = '"+ eventInfo[1] + "', end = '"+eventInfo[2] +"', desc = '"+ eventInfo[3]+ "', roomID = '"+eventInfo[4]+"\n"
+								 + "WHERE name = '"+eventInfo[0]+"';");
 		return true;
 		}
 		catch (Exception e){
@@ -35,8 +36,14 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	
 	@Override
 	public boolean remove(String primaryKey) {
-		// TODO Auto-generated method stub
+		try {
+			Database.makeStatement("DELETE FROM Event"
+								+  "WHERE EventID = '"+primaryKey+"';");
+		return true;
+		}
+		catch (Exception e){
 		return false;
+		}
 	}
 
 }
