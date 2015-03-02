@@ -15,7 +15,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 					+  "WHERE Room.RoomID = " + roomID;
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 1; i <= 3; i++)
+				for (int i = 2; i <= 3; i++)
 					list.add(rs.getString(i));
 			}
 			return list;
