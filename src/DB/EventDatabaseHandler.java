@@ -33,7 +33,6 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		return false;
 		}
 	}
-	
 	@Override
 	public boolean remove(String primaryKey) {
 		try {

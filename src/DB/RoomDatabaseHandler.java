@@ -27,20 +27,39 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public boolean add(String[] info) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Database.makeStatement("INSERT INTO Event\n"
+						+ "VALUES( '"+info[0]+"', '"+ info[1] +"');");
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 
 	@Override
 	public boolean update(String[] info) {
-		// TODO Auto-generated method stub
+		try {
+			Database.makeStatement("UPDATE Room\n"
+								 + "SET RoomId = '"+ info[0]+", Capacity = '"+ info[1] +"'\n"
+								 + "WHERE RoomId = '"+info[0]+"';");
+		return true;
+		}
+		catch (Exception e){
 		return false;
+		}
 	}
 
 	@Override
 	public boolean remove(String primaryKey) {
-		// TODO Auto-generated method stub
+		try {
+			Database.makeStatement("DELETE FROM Room\n"
+								+  "WHERE roomID = '"+primaryKey+"';");
+		return true;
+		}
+		catch (Exception e){
 		return false;
+		}
 	}
 
 }

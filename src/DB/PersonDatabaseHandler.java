@@ -40,8 +40,8 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	//Tar inn en liste på formen [name, username, password]
 	public boolean update(String[] info) {
 		try {
-			Database.makeStatement("UPDATE Event\n"
-								 + "SET name = '"+ info[0]+", start = '"+ info[1] + "', end = '"+info[2]+"'\n"
+			Database.makeStatement("UPDATE Person\n"
+								 + "SET name = '"+ info[0]+", username = '"+ info[1] + "', password = '"+info[2]+"'\n"
 								 + "WHERE name = '"+info[0]+"';");
 		return true;
 		}
@@ -52,8 +52,14 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public boolean remove(String primaryKey) {
-		// TODO Auto-generated method stub
+		try {
+			Database.makeStatement("DELETE FROM Person\n"
+								+  "WHERE name = '"+primaryKey+"';");
+		return true;
+		}
+		catch (Exception e){
 		return false;
+		}
 	}
 
 	//Henter ut alle hendelser for person med PersonID id
