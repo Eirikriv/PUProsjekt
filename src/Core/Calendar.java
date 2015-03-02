@@ -5,16 +5,17 @@ import java.util.ArrayList;
 
 import DB.GroupDatabaseHandler;
 import DB.PersonDatabaseHandler;
+//import DB.RoomDatabaseHandler;
 
 public class Calendar {
 	private PersonDatabaseHandler pdbh;
-	@SuppressWarnings("unused")
 	private GroupDatabaseHandler gdbh;
+//	private RoomDatabaseHandler rdbh;
 	private ArrayList<Event> calendar = new ArrayList<Event>();
 	
-	public Calendar(Person owner) {
+	public Calendar(CalendarOwner owner) {
 		//make the calendar
-		ArrayList<ArrayList<String>> list = pdbh.getPersonEvents(owner.getName());
+		ArrayList<ArrayList<String>> list = pdbh.getPersonEvents(owner.getPrimaryKey());
 		ArrayList<Event> result = new ArrayList<Event>();
 		for (int i=0; i<list.size() ; i++) {
 			String name = list.get(i).get(0);
@@ -39,8 +40,16 @@ public class Calendar {
 		return calendar;
 	}
 	
-	public void updateCalendar(Person owner) {
-		ArrayList<ArrayList<String>> list = pdbh.getPersonEvents(owner.getName());
+	public void updateCalendar(CalendarOwner owner) {
+		ArrayList<ArrayList<String>> list = null;
+		if (Person.class.isInstance(owner))
+			list = pdbh.getPersonEvents(owner.getPrimaryKey());
+		else if (Group.class.isInstance(owner))
+			list = gdbh.getGroupEvents(owner.getPrimaryKey());
+//		else if (Room.class.isInstance(owner))
+//			list = rdbh.getRoomEvents(owner.getPrimaryKey();
+		else
+			throw new IllegalArgumentException("Invalid CalendarOwner object");
 		ArrayList<Event> result = new ArrayList<Event>();
 		for (int i=0; i<list.size() ; i++) {
 			String name = list.get(i).get(0);
