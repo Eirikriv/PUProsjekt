@@ -67,7 +67,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	
 	//Henter ut alle gruppemedlemer av en gruppe
 	//Returnerer en liste på [[], ...]
-	public static ArrayList<String> getGroupMembers(int groupID) {
+	public ArrayList<String> getGroupMembers(int groupID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT Person.Username\n"
