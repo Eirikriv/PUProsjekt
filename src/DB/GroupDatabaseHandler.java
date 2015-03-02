@@ -5,9 +5,20 @@ import java.util.ArrayList;
 
 public class GroupDatabaseHandler implements DatabaseHandler {
 	@Override
-	public ArrayList<String> get(String primaryKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> get(String GroupID) {
+		ArrayList<String> groupList = new ArrayList<String>();
+		try {
+			String query = "SELECT * FROM Group WHERE Groups.GroupID = '" + GroupID + "';";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				for (int i = 2; i <= 4; i++)
+					groupList.add(rs.getString(i));
+			}
+			return groupList;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("Group: " + GroupID + " does not exist.");
+		}
 	}
 
 	@Override
@@ -23,14 +34,14 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	}
 
 	@Override
-	public boolean remove(String primaryKey) {
+	public boolean remove(String GroupID) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
 	//Henter alle events til en gruppe
 	//Returnerer en liste på formen [[name, description, start, end], ...]
-	public static ArrayList<ArrayList<String>> getGroupEvents(String groupID) {
+	public ArrayList<ArrayList<String>> getGroupEvents(String groupID) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
 			String q = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
@@ -38,7 +49,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 					+  "WHERE Group.GroupID = GroupEvent.GroupID\n"
 					+  "AND EventID = GroupEvent.EventID\n"
 					+  "AND Group.GroupID = " + groupID
-					+  "\nORDER BY Event.Start";
+					+  "\nORDER BY Event.Start;";
 			ResultSet rs = Database.makeQuery(q);
 			while (rs.next()) {
 				ArrayList<String> temp = new ArrayList<String>();
@@ -63,7 +74,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 						+  "FROM Person, Groups, PersonGroup\n"
 						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
 						+  "AND Groups.GroupID = PersonGroup.GroupID AND GroupID = " + groupID + "\n"
-						+  "GROUP BY Groups.GroupID";
+						+  "GROUP BY Groups.GroupID;";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				list.add(rs.getString(1));
