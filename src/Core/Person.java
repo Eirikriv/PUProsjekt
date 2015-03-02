@@ -14,6 +14,7 @@ public class Person implements CalendarOwner{
 	
 	
 	public Person(String name, String username, String password) {
+		pdbh = new PersonDatabaseHandler();
 		this.name = name;
 		this.username = username;
 		this.password = password;

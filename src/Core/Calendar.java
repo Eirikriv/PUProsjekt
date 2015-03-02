@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import DB.GroupDatabaseHandler;
 import DB.PersonDatabaseHandler;
-//import DB.RoomDatabaseHandler;
+import DB.RoomDatabaseHandler;
 
 public class Calendar {
 	private PersonDatabaseHandler pdbh;
 	private GroupDatabaseHandler gdbh;
-//	private RoomDatabaseHandler rdbh;
+	private RoomDatabaseHandler rdbh;
 	private ArrayList<Event> calendar = new ArrayList<Event>();
 	
 	public Calendar(CalendarOwner owner) {
@@ -46,8 +46,8 @@ public class Calendar {
 			list = pdbh.getPersonEvents(owner.getPrimaryKey());
 		else if (Group.class.isInstance(owner))
 			list = gdbh.getGroupEvents(owner.getPrimaryKey());
-//		else if (Room.class.isInstance(owner))
-//			list = rdbh.getRoomEvents(owner.getPrimaryKey();
+		else if (Room.class.isInstance(owner))
+			list = rdbh.getRoomEvents(owner.getPrimaryKey());
 		else
 			throw new IllegalArgumentException("Invalid CalendarOwner object");
 		ArrayList<Event> result = new ArrayList<Event>();
