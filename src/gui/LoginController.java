@@ -28,9 +28,7 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		System.out.println("Clicked login button");
-        		
         		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-        		
         	}
         });
         

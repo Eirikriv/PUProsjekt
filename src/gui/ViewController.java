@@ -129,11 +129,13 @@ public class ViewController implements Initializable {
 				z.getChildren().add(l);
 				z.setMinSize(80, 50);
 				gp.add(z, y, x);
-				gp.setGridLinesVisible(true);
 				
 				calStart.add(Calendar.DATE, 1);
 			}
 		}
+		
+		gp.setHgap(2);
+		gp.setVgap(2);
 	}
 
 	public void fillCalendar(VBox box) {
@@ -209,10 +211,7 @@ public class ViewController implements Initializable {
 			}
 		});
 		
-		hbox.getChildren().add(cb);
-		hbox.getChildren().add(new Label(name));
-		hbox.getChildren().add(b);
-		
+		hbox.getChildren().addAll(cb, new Label(name), b);
 		rightContainer.getChildren().add(hbox);
 		
 	}
