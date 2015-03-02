@@ -28,8 +28,6 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		System.out.println("Clicked login button");
-        		System.out.println("username: " + usernameText.getText());
-        		System.out.println("password: " + passwordText.getText());
         		
         		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
         		
