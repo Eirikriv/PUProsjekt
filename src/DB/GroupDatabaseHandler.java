@@ -23,20 +23,39 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public boolean add(String[] info) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Database.makeStatement("INSERT INTO Groups (name)"
+						+ "VALUES('" + info[1] + "');");
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 
 	@Override
 	public boolean update(String[] info) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Database.makeStatement("UPDATE Groups "
+								 + "SET name = '"+ info[1]+ "''"
+								 + "WHERE GroupID = '" + info[0] + "';");
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 
 	@Override
 	public boolean remove(String GroupID) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Database.makeStatement("DELETE FROM Groups "
+								+  "WHERE GroupID = '" + GroupID + "';");
+			return true;
+		}
+		catch (Exception e){
+			return false;
+		}
 	}
 	
 	//Henter alle events til en gruppe

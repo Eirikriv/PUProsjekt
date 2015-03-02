@@ -58,7 +58,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		return true;
 		}
 		catch (Exception e){
-		return false;
+			return false;
 		}
 	}
 
