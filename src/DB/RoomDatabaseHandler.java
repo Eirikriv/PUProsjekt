@@ -41,7 +41,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public boolean update(String[] info) {
 		try {
 			Database.makeStatement("UPDATE Room\n"
-								 + "SET RoomId = '"+ info[0]+", Capacity = '"+ info[1] +"'\n"
+								 + "SET RoomId = '"+ info[0]+"', Capacity = '"+ info[1] +"'\n"
 								 + "WHERE RoomId = '"+info[0]+"';");
 		return true;
 		}
