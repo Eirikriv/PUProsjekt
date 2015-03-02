@@ -89,7 +89,7 @@ public class ViewController implements Initializable {
 	}
 	
 	public void setCalendarInfo() {
-		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + cal.get(Calendar.YEAR));
 		System.out.println(monthText.getWidth());
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		int day = cal.get(Calendar.DAY_OF_WEEK);
@@ -123,7 +123,6 @@ public class ViewController implements Initializable {
 					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("red"), null, null), null));
 				} else {
 					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("green"), null, null), null));
-					z.setStyle("-fx-border: 2px solid black");
 				}
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);
@@ -139,7 +138,7 @@ public class ViewController implements Initializable {
 
 	public void fillCalendar(VBox box) {
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
-		monthText.setMinWidth(60);
+		monthText.setMinWidth(90);
 		monthText.setAlignment(Pos.CENTER);
 		Button bLeft = new Button("<-");
 		Button bRight = new Button("->");
