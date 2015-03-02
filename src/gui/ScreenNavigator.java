@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;

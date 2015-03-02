@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.net.URL;
 import java.util.Calendar;
