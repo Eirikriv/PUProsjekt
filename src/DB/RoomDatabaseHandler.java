@@ -43,4 +43,9 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 		return false;
 	}
 
+	public ArrayList<ArrayList<String>> getRoomEvents(String groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
