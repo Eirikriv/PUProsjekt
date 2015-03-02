@@ -8,7 +8,6 @@ import DB.PersonDatabaseHandler;
 
 public class Calendar {
 	private PersonDatabaseHandler pdbh;
-	@SuppressWarnings("unused")
 	private GroupDatabaseHandler gdbh;
 	private ArrayList<Event> calendar = new ArrayList<Event>();
 	
