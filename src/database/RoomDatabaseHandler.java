@@ -29,7 +29,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public String add(String[] info) {
 		try {
 			Database.makeStatement("INSERT INTO Room\n"
-						+ "VALUES( '"+info[0]+"', '"+ info[1] +"');");
+						+ "VALUES( '"+info[0]+"', '"+ info[1] +"' , '" + info[2] + "');");
 			return info[0];
 		}
 		catch (Exception e){

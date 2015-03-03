@@ -22,7 +22,7 @@ public class DBTest {
 		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 		rdbh.add(new String[]{"R E5-103", "20", "Grupperom"});
 		EventDatabaseHandler edbh = new EventDatabaseHandler();
-		String eventID = edbh.add(new String[]{"PU-gruppemøte", "2015-03-02 12:15", "2015-03-02 14:00", "Fortsettelse av jobbing med kalendersystem", "RE5-103"});
+		String eventID = edbh.add(new String[]{"PU-gruppemøte", "2015-03-02 12:15", "2015-03-02 14:00", "Fortsettelse av jobbing med kalendersystem", "R E5-103"});
 		edbh.addPerson(eventID, "cecilite");
 		edbh.addPerson(eventID, "eirikriv");
 		edbh.addPerson(eventID, "niconiel");

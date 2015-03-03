@@ -24,10 +24,8 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	@Override
 	public String add(String[] info) {
 		try {
-			Database.makeStatement("INSERT INTO Groups (name)"
-						+ "VALUES('" + info[1] + "');");
-			ResultSet rs = Database.makeQuery("SELECT LAST_INSERT_ID() FROM Groups;");
-			return "" + rs.getInt(1);
+			return "" + Database.makeStatement("INSERT INTO Groups(Name)"
+						+ "VALUES('" + info[0] + "');");
 		}
 		catch (Exception e){
 			return null;
@@ -109,7 +107,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	public boolean addGroupMember(String groupID, String username) {
 		try {
 			String stmt = "INSERT INTO PersonInGroup "
-					+ "VALUES('"+groupID+"','"+username+"');";
+					+ "VALUES('" + username + "'," + groupID + ");";
 			Database.makeStatement(stmt);
 			return true;
 		}
