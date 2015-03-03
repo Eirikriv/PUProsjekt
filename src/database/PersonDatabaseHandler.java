@@ -122,15 +122,14 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
 				personInfo.add(rs.getString(1));
-			return personInfo;
 			}
+			return personInfo;
 		}
 			
 		catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException("Something went wrong");
 		}
-		return null;
 	}
 
 }
