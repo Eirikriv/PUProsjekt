@@ -5,10 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.appointmentController">
    <children>
-      <GridPane>
+      <GridPane fx:id="appointmentContainer">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="134.0" />
@@ -68,7 +67,7 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Label text="Room" />
+                  <Label text="Room size | location" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -83,7 +82,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
                <children>
-                  <Label text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT" />
+                  <Label onMouseClicked="#navigateBack" text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT" />
                </children>
             </StackPane>
          </children>

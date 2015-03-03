@@ -156,6 +156,10 @@ public class ViewController implements Initializable {
 		gp.setHgap(2);
 		gp.setVgap(2);
 	}
+	
+	public void navigateback(ActionEvent e) {
+		System.out.println("clicked");
+	}
 
 	public void fillCalendar(VBox box) {
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
@@ -255,7 +259,6 @@ public class ViewController implements Initializable {
 		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
 		System.out.println(groupNames.size());
-		
 		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
 		
 		return people;
