@@ -118,7 +118,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		try {
 			String query = "SELECT Groups.Name\n"
 					+ "FROM Groups, PersonInGroup\n"
-					+ "WHERE 'PU-gruppe 58' = PersonInGroup.GroupID\n"
+					+ "WHERE PersonInGroup.GroupID = 'PU-gruppe 58'\n"
 					+ "AND PersonInGroup.Username = '" + username + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
