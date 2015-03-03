@@ -44,12 +44,4 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public static boolean checkUserLogin(String username, String password) {
-		//returns true if user exist and password matches the one in the databse.
-		
-		//example;
-		//return DatabaseHandler.checkLogin(username, password);
-		
-		return true;
-	}
 }

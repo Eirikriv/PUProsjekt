@@ -51,5 +51,32 @@
             </AnchorPane>
          </content>
       </Tab>
+      <Tab text="Events">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox prefHeight="298.0" prefWidth="151.0">
+                           <children>
+                              <StackPane prefHeight="48.0" prefWidth="149.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Create Event" />
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="44.0" prefWidth="149.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Edit Event" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="298.0" prefWidth="153.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
    </tabs>
 </TabPane>
