@@ -13,14 +13,18 @@ public class MainController {
     public void setVista(Node node, double height, double width) {
         screenHolder.getChildren().clear();
         screenHolder.getChildren().add(node);
-        stage.setHeight(height);
-        stage.setWidth(width);
-        stage.centerOnScreen();
+        sizeTo(height, width);
         
     }
     
     public void setStage(Stage stage) {
     	this.stage = stage;
+    }
+    
+    public void sizeTo(double height, double width) {
+    	stage.setHeight(height);
+        stage.setWidth(width);
+        stage.centerOnScreen();
     }
    
     

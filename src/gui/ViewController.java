@@ -79,6 +79,7 @@ public class ViewController implements Initializable {
 				eventContainer.getChildren().clear();
 				try {
 					eventContainer.getChildren().add(FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
+					ScreenNavigator.mainController.sizeTo(500, 520);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -109,7 +110,6 @@ public class ViewController implements Initializable {
 	
 	public void setCalendarInfo() {
 		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + cal.get(Calendar.YEAR));
-		System.out.println(monthText.getWidth());
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		int day = cal.get(Calendar.DAY_OF_WEEK);
 		gp.getChildren().clear();
@@ -255,11 +255,10 @@ public class ViewController implements Initializable {
 	}
 	
 	public ObservableList<String> getAllGroups() {
-		//change this to fetch from db
 		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
-		System.out.println(groupNames.size());
 		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
+		SessionData.allGroups = people;
 		
 		return people;
 	}

@@ -75,14 +75,17 @@
                <children>
                   <ListView prefHeight="400.0" prefWidth="170.0">
                      <StackPane.margin>
-                        <Insets left="20.0" />
+                        <Insets left="20.0" right="15.0" top="15.0" />
                      </StackPane.margin>
                   </ListView>
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
                <children>
-                  <Label onMouseClicked="#navigateBack" text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT" />
+                  <Label onMouseClicked="#navigateBack" text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></Label>
                </children>
             </StackPane>
          </children>

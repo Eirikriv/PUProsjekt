@@ -14,8 +14,10 @@ public class ScreenNavigator {
     public static final double SCREEN_CALENDAR_WIDTH = 600;
     public static final double SCREEN_LOGIN_HEIGHT = 350;
     public static final double SCREEN_LOGIN_WIDTH = 250;
+    public static final double SCREEN_NEW_APPOINTMENT_HEIGHT = 400;
+    public static final double SCREEN_NEW_APPOINTMENT_WIDTH = 452;
 
-    private static MainController mainController;
+    public static MainController mainController;
  
     public static void setMainController(MainController mainController) {
         ScreenNavigator.mainController = mainController;
@@ -30,6 +32,9 @@ public class ScreenNavigator {
         	} else if (fxml.compareTo(SCREEN_LOGIN) == 0) {
         		height = SCREEN_LOGIN_HEIGHT;
         		width = SCREEN_LOGIN_WIDTH;
+        	} else if (fxml.compareTo(SCREEN_NEW_APPOINTMENT) == 0) {
+        		height = SCREEN_NEW_APPOINTMENT_HEIGHT;
+        		width = SCREEN_NEW_APPOINTMENT_WIDTH;
         	} else {
         		height = 800;
         		width = 800;
