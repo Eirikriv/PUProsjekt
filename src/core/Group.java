@@ -1,4 +1,4 @@
-package Core;
+package core;
 
 public class Group implements CalendarOwner {
 	private String groupID;

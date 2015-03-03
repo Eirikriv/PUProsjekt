@@ -1,4 +1,4 @@
-package Core;
+package core;
 
 public interface CalendarOwner {
 	public Calendar getCalendar();

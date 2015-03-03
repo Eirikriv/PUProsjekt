@@ -1,11 +1,11 @@
-package Core;
+package core;
 
 
 import java.util.ArrayList;
 
-import DB.GroupDatabaseHandler;
-import DB.PersonDatabaseHandler;
-import DB.RoomDatabaseHandler;
+import database.GroupDatabaseHandler;
+import database.PersonDatabaseHandler;
+import database.RoomDatabaseHandler;
 
 public class Calendar {
 	private PersonDatabaseHandler pdbh;

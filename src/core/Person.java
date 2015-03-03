@@ -1,9 +1,9 @@
-package Core;
+package core;
 
 
 import java.util.ArrayList;
 
-import DB.PersonDatabaseHandler;
+import database.PersonDatabaseHandler;
 
 public class Person implements CalendarOwner{
 	PersonDatabaseHandler pdbh;
