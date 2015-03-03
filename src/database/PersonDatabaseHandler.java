@@ -27,11 +27,12 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	//Returnerer PersonID til personen eller -1 hvis den ikke finnes (altså ikke ble lagt til)
 	public String add(String[] personInfo) {
 		try {
-			Database.makeStatement("INSERT INTO Person\n"
-						+ "VALUES( '"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[3] +"');");
+			Database.makeStatement("INSERT INTO Person "
+						+ "VALUES('"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[2] +"');");
 			return personInfo[0];
 		}
 		catch (Exception e){
+			e.printStackTrace();
 			return null;
 		}
 	}
