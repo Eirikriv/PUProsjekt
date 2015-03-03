@@ -3,7 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import DB.PersonDatabaseHandler;
+import database.PersonDatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
