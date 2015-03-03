@@ -87,16 +87,16 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	public static ArrayList<String> login(String username, String password) {
+	public ArrayList<String> login(String username, String password) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
-			String query = "SELECT *\n"
+			String query = "SELECT username, name, password\n"
 					+ "FROM Person\n"
 					+ "WHERE Username = '" + username + "'\n"
-						+ "AND Password = '" + password + "'";
+						+ "AND Password = '" + password + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 0; i <= 3; i++) {
+				for (int i = 1; i <= 3; i++) {
 					personInfo.add(rs.getString(i));
 				}
 			}
@@ -107,6 +107,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			return personInfo;
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Something went wrong");
 		}
 	}

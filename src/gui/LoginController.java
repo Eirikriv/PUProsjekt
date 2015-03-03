@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.PersonDatabaseHandler;
@@ -29,7 +30,13 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		System.out.println("Clicked login button");
-        		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+        		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
+        		ArrayList<String> person = pdb.login(usernameText.getText(), passwordText.getText());
+        		if (person.size() > 0) {
+        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+        		} else {
+        			System.out.println("else");
+        		}
         	}
         });
         
