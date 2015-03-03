@@ -1,8 +1,8 @@
-package Core;
+package core;
 
 import java.util.ArrayList;
 
-import DB.RoomDatabaseHandler;
+import database.RoomDatabaseHandler;
 
 public class Room implements CalendarOwner{
 	private Calendar roomCal;

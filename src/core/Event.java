@@ -1,7 +1,7 @@
-package Core;
+package core;
 
 
-import DB.EventDatabaseHandler;
+import database.EventDatabaseHandler;
 public class Event {
 	private EventDatabaseHandler edbh;
 	private String name;

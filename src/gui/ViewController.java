@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
@@ -89,12 +88,9 @@ public class ViewController implements Initializable {
 		this.stage = stage;
 	}
 	
-	public void setCalendarGridPane(GridPane gp) {
-		this.gp = gp;
-	}
-	
-	public void setCalendarInfo(Calendar cal) {
-		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()));
+	public void setCalendarInfo() {
+		this.monthText.setText(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + cal.get(Calendar.YEAR));
+		System.out.println(monthText.getWidth());
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		int day = cal.get(Calendar.DAY_OF_WEEK);
 		gp.getChildren().clear();
@@ -107,7 +103,10 @@ public class ViewController implements Initializable {
 			gp.add(dayContainer, x, 0);
 		}
 		Calendar calStart = Calendar.getInstance();
+		Calendar calEnd = Calendar.getInstance();
 		calStart.setTime(cal.getTime());
+		calEnd.setTime(cal.getTime());
+		calEnd.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_MONTH)-1);
 		
 		if (day == 1) {
 			calStart.add(Calendar.DATE, -6);
@@ -120,12 +119,11 @@ public class ViewController implements Initializable {
 		for (int x = 1; x<7; x++) {
 			for (int y = 0; y<7; y++) {
 				StackPane z = new StackPane();
-				if (calStart.before(cal) || (calStart.after(cal))) {
-					//z.setStyle("-fx-background-color:red");
+				if (calStart.before(cal) || (calStart.after(calEnd))) {
+					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("red"), null, null), null));
 				} else {
-					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null), null));
+					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("green"), null, null), null));
 				}
-				z.setStyle("-fx-background-color:Green");
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);
 				z.getChildren().add(l);
@@ -135,23 +133,28 @@ public class ViewController implements Initializable {
 				calStart.add(Calendar.DATE, 1);
 			}
 		}
+		
+		gp.setHgap(2);
+		gp.setVgap(2);
 	}
 
 	public void fillCalendar(VBox box) {
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
+		monthText.setMinWidth(90);
+		monthText.setAlignment(Pos.CENTER);
 		Button bLeft = new Button("<-");
 		Button bRight = new Button("->");
 		bLeft.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				cal.add(Calendar.MONTH, -1);
-				setCalendarInfo(cal);
+				setCalendarInfo();
 				event.consume();
 			}
 		});
 		bRight.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				cal.add(Calendar.MONTH, 1);
-				setCalendarInfo(cal);
+				setCalendarInfo();
 				event.consume();
 			}
 		});
@@ -176,7 +179,7 @@ public class ViewController implements Initializable {
 		gp.setGridLinesVisible(true);
 		gp.setAlignment(Pos.CENTER);
 		
-		setCalendarInfo(cal);
+		setCalendarInfo();
 		calsp.setPadding(new Insets(15, 0, 0, 0));
 		box.getChildren().add(gp);
 		
@@ -208,10 +211,7 @@ public class ViewController implements Initializable {
 			}
 		});
 		
-		hbox.getChildren().add(cb);
-		hbox.getChildren().add(new Label(name));
-		hbox.getChildren().add(b);
-		
+		hbox.getChildren().addAll(cb, new Label(name), b);
 		rightContainer.getChildren().add(hbox);
 		
 	}
