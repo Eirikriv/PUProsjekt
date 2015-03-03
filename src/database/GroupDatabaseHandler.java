@@ -109,7 +109,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	public boolean addGroupMember(String groupID, String username) {
 		try {
 			String stmt = "INSERT INTO PersonInGroup "
-					+ "VALUES(groupID, username);";
+					+ "VALUES('"+groupID+"','"+username+"');";
 			Database.makeStatement(stmt);
 			return true;
 		}
