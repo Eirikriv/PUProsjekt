@@ -111,4 +111,26 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException("Something went wrong");
 		}
 	}
+	
+	public ArrayList<String> getAllGroups(String username) {
+		ArrayList<String> personInfo = new ArrayList<String>();
+		try {
+			String query = "SELECT Groups.Name\n"
+					+ "FROM Groups, PersonInGroup\n"
+					+ "WHERE Groups.GroupID = PersonInGroup.GroupID\n"
+					+ "AND PersonInGroup.Username = '" + username + "';";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next()) {
+				personInfo.add(rs.getString(1));
+			return personInfo;
+			}
+		}
+			
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException("Something went wrong");
+		}
+		return null;
+	}
+
 }
