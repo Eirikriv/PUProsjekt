@@ -39,12 +39,35 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public boolean remove(String primaryKey) {
 		try {
 			Database.makeStatement("DELETE FROM Event"
-								+  "WHERE EventID = '"+primaryKey+"';");
+								+  "WHERE EventID = "+primaryKey+";");
 		return true;
 		}
 		catch (Exception e){
 		return false;
 		}
 	}
-
+	
+	public boolean addPerson(String eventID, String username) {
+		try {
+			String stmt = "INSERT INTO PersonEvent "
+					+ "VALUES(username, eventID);";
+			Database.makeStatement(stmt);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean removePerson(String eventID, String username) {
+		try {
+			String stmt = "DELETE FROM PersonEvent "
+					+ "WHERE GroupID = " + eventID + " AND Username = '" + username + "';";
+			Database.makeStatement(stmt);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
 }

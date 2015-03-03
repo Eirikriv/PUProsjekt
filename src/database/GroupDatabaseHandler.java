@@ -105,4 +105,28 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException("This name does not exist.");
 		}
 	}
+	
+	public boolean addGroupMember(String groupID, String username) {
+		try {
+			String stmt = "INSERT INTO PersonInGroup "
+					+ "VALUES(groupID, username);";
+			Database.makeStatement(stmt);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean removeGroupMember(String groupID, String username) {
+		try {
+			String stmt = "DELETE FROM PersonInGroup "
+					+ "WHERE GroupID = " + groupID + " AND Username = '" + username + "';";
+			Database.makeStatement(stmt);
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
 }
