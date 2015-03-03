@@ -8,6 +8,8 @@ public class ScreenNavigator {
     public static final String MAIN    = "main.fxml";
     public static final String SCREEN_LOGIN = "LoginScreen.fxml";
     public static final String SCREEN_CALENDAR = "CalendarScreen.fxml";
+    public static final String SCREEN_NEW_APPOINTMENT = "CreateAppointment.fxml";
+    
     public static final double SCREEN_CALENDAR_HEIGHT = 600;
     public static final double SCREEN_CALENDAR_WIDTH = 600;
     public static final double SCREEN_LOGIN_HEIGHT = 350;
@@ -29,8 +31,8 @@ public class ScreenNavigator {
         		height = SCREEN_LOGIN_HEIGHT;
         		width = SCREEN_LOGIN_WIDTH;
         	} else {
-        		height = 290;
-        		width = 224;
+        		height = 800;
+        		width = 800;
         	}
             mainController.setVista(FXMLLoader.load(ScreenNavigator.class.getResource(fxml)), height, width);
         } catch (IOException e) {

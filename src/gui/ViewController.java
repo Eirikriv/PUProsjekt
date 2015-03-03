@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -38,6 +41,10 @@ public class ViewController implements Initializable {
 	@FXML private VBox leftContainer;
 	@FXML private VBox rightContainer;
 	@FXML private VBox calBox;
+	@FXML private Button createEventButton;
+	@FXML private Button editEventButton;
+	@FXML private AnchorPane eventContainer;
+	
 	
 	public String username;
 	public Stage stage;
@@ -65,6 +72,17 @@ public class ViewController implements Initializable {
 					String oldValue, String newValue) {
 					addToListBox(newValue, true, rightContainer);
 				}
+		});
+		
+		createEventButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent arg0) {
+				eventContainer.getChildren().clear();
+				try {
+					eventContainer.getChildren().add(FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		});
 		
 		createGroupButton.setOnAction(new EventHandler<ActionEvent>() {
