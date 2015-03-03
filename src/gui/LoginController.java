@@ -29,10 +29,12 @@ public class LoginController implements Initializable {
         
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
+        		//ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
         		System.out.println("Clicked login button");
         		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
         		ArrayList<String> person = pdb.login(usernameText.getText(), passwordText.getText());
         		if (person.size() > 0) {
+        			SessionData.username = person.get(0);
         			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
         		} else {
         			System.out.println("else");

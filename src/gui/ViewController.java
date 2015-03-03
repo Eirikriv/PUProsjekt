@@ -1,11 +1,13 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import database.PersonDatabaseHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -51,11 +53,10 @@ public class ViewController implements Initializable {
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		
 		
-		this.username = "Martin";
+		this.username = SessionData.username;
 		fillCalendar(calBox);
-		
-		ObservableList<String> groupItems = FXCollections.observableArrayList("Martin", "Alexander", "Anders");
-		FilterComboBox fcb = new FilterComboBox(groupItems);
+
+		FilterComboBox fcb = new FilterComboBox(getAllGroups());
 		
 		leftContainer.getChildren().add(1, fcb);
 		
@@ -226,15 +227,19 @@ public class ViewController implements Initializable {
 		leftContainer.getChildren().add(new Label("Group name"));
 		leftContainer.getChildren().add(new TextField());
 		leftContainer.getChildren().add(new Label("Add members"));
-		leftContainer.getChildren().add(new FilterComboBox(getAllPeople()));
+		leftContainer.getChildren().add(new FilterComboBox(getAllGroups()));
 		leftContainer.getChildren().add(b);
 		
 	}
 	
-	public ObservableList<String> getAllPeople() {
+	public ObservableList<String> getAllGroups() {
 		//change this to fetch from db
-		String[] fetchedPeople = {"Martin", "Alex", "Cecilie"};
-		ObservableList<String> people = FXCollections.observableArrayList(fetchedPeople);
+		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
+		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
+		System.out.println(groupNames.size());
+		
+		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
+		
 		return people;
 	}
 }
