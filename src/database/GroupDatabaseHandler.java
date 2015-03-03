@@ -22,14 +22,15 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	}
 
 	@Override
-	public boolean add(String[] info) {
+	public String add(String[] info) {
 		try {
 			Database.makeStatement("INSERT INTO Groups (name)"
 						+ "VALUES('" + info[1] + "');");
-			return true;
+			ResultSet rs = Database.makeQuery("SELECT LAST_INSERT_ID() FROM Groups;");
+			return "" + rs.getInt(1);
 		}
 		catch (Exception e){
-			return false;
+			return null;
 		}
 	}
 

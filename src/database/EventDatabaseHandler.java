@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class EventDatabaseHandler implements DatabaseHandler {
@@ -10,14 +11,15 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	}
 	
 	//Tar inn en liste på formen [name, start, end, desc, roomID]
-	public boolean add(String[] eventInfo) {
+	public String add(String[] eventInfo) {
 		try {
 			Database.makeStatement("INSERT INTO Event\n"
 						+ "VALUES( '"+eventInfo[0]+"', '"+ eventInfo[1] +"', '"+ eventInfo[2] +"', '"+ eventInfo[3] +"', '"+ eventInfo[4] +"');");
-			return true;
+			ResultSet rs = Database.makeQuery("SELECT LAST_INSERT_ID() FROM Event;");
+			return "" + rs.getInt(1);
 		}
 		catch (Exception e){
-			return false;
+			return null;
 		}
 	}
 	

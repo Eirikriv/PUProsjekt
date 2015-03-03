@@ -25,14 +25,14 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	
 	//Legger til person med name, username og pw
 	//Returnerer PersonID til personen eller -1 hvis den ikke finnes (altså ikke ble lagt til)
-	public boolean add(String[] personInfo) {
+	public String add(String[] personInfo) {
 		try {
 			Database.makeStatement("INSERT INTO Person\n"
 						+ "VALUES( '"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[3] +"');");
-			return true;
+			return personInfo[0];
 		}
 		catch (Exception e){
-			return false;
+			return null;
 		}
 	}
 	
