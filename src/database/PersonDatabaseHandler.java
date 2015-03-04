@@ -132,5 +132,23 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException("Something went wrong");
 		}
 	}
+	
+	public ArrayList<String> getAllPersons() {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String query = "SELECT Person.Name\n"
+						+  "FROM Person;";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			return list;
+		}
+			
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException("Something went wrong");
+		}
+	}
 
 }
