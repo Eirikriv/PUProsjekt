@@ -26,10 +26,9 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 		try {
 			Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
-			ResultSet rs = Database.makeQuery("SELECT LAST_INSERT_ID();");
-			String s = "" + rs.getInt(1);
-			System.out.println(s);
-			return s;
+			Database.makeQuery("SELECT LAST_INSERT_ID();");
+
+			return null;
 		}
 		catch (Exception e){
 			e.printStackTrace();
