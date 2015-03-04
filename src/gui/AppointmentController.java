@@ -1,12 +1,15 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -30,14 +33,16 @@ public class AppointmentController implements Initializable {
 	@FXML private ListView<String> listMembersField;
 	@FXML private Button searchRoomsButton;
 	
+	TextField tf = new TextField();
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
+	private ObservableList<String> roomList = FXCollections.observableArrayList();
+	private FilterComboBox members = new FilterComboBox(SessionData.allMembers);
+	private FilterComboBox groups = new FilterComboBox(SessionData.allGroups);
+	private FilterComboBox rooms = new FilterComboBox(roomList);
 	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		FilterComboBox members = new FilterComboBox(SessionData.allMembers);
-		FilterComboBox groups = new FilterComboBox(SessionData.allGroups);
-		FilterComboBox rooms = new FilterComboBox(SessionData.allRooms);
 		listMembersField.setItems(listViewList);
 		
 		members.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -52,7 +57,6 @@ public class AppointmentController implements Initializable {
 		
 		StackPane hb = new StackPane();
 		HBox sp = new HBox();
-		TextField tf = new TextField();
 		
 		sp.getChildren().addAll(tf, rooms);
 		hb.getChildren().add(sp);
@@ -63,6 +67,15 @@ public class AppointmentController implements Initializable {
 	
 	public void navigateBack(MouseEvent e) {
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	}
+	
+	public void fillRoomBox(ActionEvent e) {
+		LocalDate date = dateField.getValue();
+		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		roomList = SessionData.availableRooms(sDate + " " +startField.getText(), sDate + " " +endField.getText(), tf.getText());
+		rooms.setItems(roomList);
+		
 	}
 	
 	public void keyStroke(KeyEvent e) {

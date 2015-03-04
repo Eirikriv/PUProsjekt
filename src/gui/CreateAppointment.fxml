@@ -125,7 +125,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Button fx:id="searchRoomsButton" mnemonicParsing="false" text="Search Rooms" />
+                  <Button fx:id="searchRoomsButton" mnemonicParsing="false" onAction="#fillRoomBox" text="Search Rooms" />
                </children>
             </StackPane>
          </children>
