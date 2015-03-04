@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.appointmentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyStroke" prefHeight="400.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.appointmentController">
    <children>
       <GridPane fx:id="appointmentContainer">
         <columnConstraints>
@@ -30,7 +30,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <TextField prefHeight="25.0" prefWidth="62.0" />
+                  <TextField fx:id="titleField" prefHeight="25.0" prefWidth="62.0" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -40,7 +40,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <DatePicker />
+                  <DatePicker fx:id="dateField" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -49,12 +49,12 @@
                      <children>
                         <StackPane prefHeight="28.0" prefWidth="146.0">
                            <children>
-                              <Label text="Slutt" />
+                              <Label text="End time" />
                            </children>
                         </StackPane>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField>
+                              <TextField fx:id="endField">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
@@ -85,7 +85,7 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <StackPane prefHeight="132.0" prefWidth="184.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="5">
                <children>
-                  <ListView prefHeight="400.0" prefWidth="170.0">
+                  <ListView fx:id="listMembersField" prefHeight="400.0" prefWidth="170.0">
                      <StackPane.margin>
                         <Insets left="20.0" right="15.0" top="15.0" />
                      </StackPane.margin>
@@ -104,12 +104,12 @@
                <children>
                   <StackPane prefHeight="29.0" prefWidth="122.0">
                      <children>
-                        <Label text="Start" />
+                        <Label text="Start time" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="startField">
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </StackPane.margin>
@@ -121,6 +121,11 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
                   <Label text="Members" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <Button fx:id="searchRoomsButton" mnemonicParsing="false" text="Search Rooms" />
                </children>
             </StackPane>
          </children>

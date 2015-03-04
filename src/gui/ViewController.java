@@ -52,6 +52,7 @@ public class ViewController implements Initializable {
 	public Label monthText = new Label();
 	
 	public Calendar cal = Calendar.getInstance();
+	PersonDatabaseHandler pdb = new PersonDatabaseHandler();
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -59,11 +60,11 @@ public class ViewController implements Initializable {
 		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		
-		
+		getAllPeople();
 		this.username = SessionData.username;
 		fillCalendar(calBox);
 
-		FilterComboBox fcb = new FilterComboBox(getAllGroups());
+		FilterComboBox fcb = new FilterComboBox(SessionData.allGroups);
 		
 		leftContainer.getChildren().add(1, fcb);
 		
@@ -254,16 +255,16 @@ public class ViewController implements Initializable {
 		
 	}
 	
-	public ObservableList<String> getAllPeople() {
+	public void getAllPeople() {
+		ArrayList<String> personNames = pdb.getAllPersons();
+		ObservableList<String> people = FXCollections.observableArrayList(personNames);
+		SessionData.allMembers = people;
 		
 	}
 	
-	public ObservableList<String> getAllGroups() {
-		PersonDatabaseHandler pdb = new PersonDatabaseHandler();
+	public void getAllGroups() {
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
 		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
 		SessionData.allGroups = people;
-		
-		return people;
 	}
 }
