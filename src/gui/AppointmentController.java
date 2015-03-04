@@ -72,7 +72,6 @@ public class AppointmentController implements Initializable {
 	public void fillRoomBox(ActionEvent e) {
 		LocalDate date = dateField.getValue();
 		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		
 		roomList = SessionData.availableRooms(sDate + " " +startField.getText(), sDate + " " +endField.getText(), tf.getText());
 		rooms.setItems(roomList);
 		
@@ -86,6 +85,10 @@ public class AppointmentController implements Initializable {
 		if (!listViewList.contains(item)) {
 			this.listViewList.add(item);
 		}
+	}
+	
+	public void createEvent(ActionEvent e) {
+		
 	}
 
 }
