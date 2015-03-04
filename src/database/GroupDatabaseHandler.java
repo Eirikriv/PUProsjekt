@@ -8,7 +8,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> get(String GroupID) {
 		ArrayList<String> groupList = new ArrayList<String>();
 		try {
-			String query = "SELECT * FROM Group WHERE Groups.GroupID = '" + GroupID + "';";
+			String query = "SELECT * FROM Groups WHERE Groups.GroupID = '" + GroupID + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				for (int i = 1; i <= 2; i++)
@@ -24,8 +24,10 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	@Override
 	public String add(String[] info) {
 		try {
-			return "" + Database.makeStatement("INSERT INTO Groups(Name)"
+			Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
+			
+			String query = 
 		}
 		catch (Exception e){
 			return null;
