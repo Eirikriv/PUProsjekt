@@ -24,11 +24,16 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	@Override
 	public String add(String[] info) {
 		try {
-			return "" + Database.makeStatement("INSERT INTO Groups(Name)"
+			Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
+			ResultSet rs = Database.makeQuery("SELECT LAST_INSERT_ID();");
+			String s = "" + rs.getInt(1);
+			System.out.println(s);
+			return s;
 		}
 		catch (Exception e){
-			return null;
+			e.printStackTrace();
+			throw new IllegalStateException();
 		}
 	}
 

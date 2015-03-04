@@ -2,6 +2,7 @@ package database;
 
 //import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DBTest {
 	public static void main(String[] args) throws SQLException {
@@ -19,6 +20,9 @@ public class DBTest {
 		gdbh.addGroupMember(groupID, "niconiel");
 		gdbh.addGroupMember(groupID, "martibni");
 		gdbh.addGroupMember(groupID, "andersro");
+		String groupID1 = gdbh.add(new String[]{"Gruppe"});
+		System.out.println(groupID + " " + groupID1);
+//		gdbh.addGroupMember(groupID1, "cecilite");
 		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 		rdbh.add(new String[]{"R E5-103", "20", "Grupperom"});
 		EventDatabaseHandler edbh = new EventDatabaseHandler();
@@ -28,54 +32,9 @@ public class DBTest {
 		edbh.addPerson(eventID, "niconiel");
 		edbh.addPerson(eventID, "martibni");
 		edbh.addPerson(eventID, "andersro");
-//		String query = "SELECT Person.Name, Event.Name, Start, End, Description\n"
-//				+ "FROM Person, PersonEvent, Event\n"
-//				+ "WHERE Person.PersonID = PersonEvent.PersonID AND Event.EventID = PersonEvent.EventID\n"
-//				+ "GROUP BY	Person.Name;";
-//		ResultSet rs = Database.makeQuery(query);
-//		while (rs.next()){
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.getString(2));
-//			System.out.println(rs.getString(3));
-//			System.out.println(rs.getString(4));
-//			System.out.println(rs.getString(5));
-//			System.out.println();
-//		}
-//		query = "SELECT	Groups.Name, Person.Name\n"
-//				+ "FROM Groups, PersonInGroup, Person\n"
-//				+ "WHERE Groups.GroupID = PersonInGroup.GroupID AND\n"
-//				+ "Person.PersonID = PersonInGroup.PersonID\n"
-//				+ "GROUP BY	Groups.Name;";
-//		rs = Database.makeQuery(query);
-//		while (rs.next()){
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.getString(2));
-//		}
-//		query = "SELECT	Person.Name, Event.Name, Start, End, Description\n"
-//				+ "FROM Groups, GroupEvent, Event, PersonInGroup, Person\n"
-//				+ "WHERE Groups.GroupID = GroupEvent.GroupID AND\n"
-//				+ "Event.EventID = GroupEvent.EventID AND\n"
-//				+ "Person.PersonID = PersonInGroup.PersonID AND Groups.GroupID = PersonInGroup.GroupID\n"
-//				+ "GROUP BY	Person.Name;";
-//		rs = Database.makeQuery(query);
-//		while (rs.next()) {
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.getString(2));
-//			System.out.println(rs.getString(3));
-//			System.out.println(rs.getString(4));
-//			System.out.println(rs.getString(5));
-//			System.out.println();
-//		}
-//		query = "SELECT	Event.Name, Event.RoomID, Capacity, Room.Description\n"
-//				+ "FROM Event, Room\n"
-//				+ "WHERE Event.RoomID = Room.RoomID;";
-//		rs = Database.makeQuery(query);
-//		while (rs.next()){
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.getString(2));
-//			System.out.println(rs.getString(3));
-//			System.out.println(rs.getString(4));
-//			System.out.println();;
-//		}
+		ArrayList<String> list = pdbh.getAllGroups("cecilite");
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
 	}
 }

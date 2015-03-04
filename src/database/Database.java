@@ -28,7 +28,7 @@ public class Database {
 			
 			// Oppretter Person-tabellen
 			makeStatement("CREATE TABLE Person"
-					+ "(Username VARCHAR(20)	NOT NULL,"
+					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "Name VARCHAR(20) NOT NULL,"
 					+ "Password	VARCHAR(20)	NOT NULL,"
 					+ "PRIMARY KEY (Username));");
@@ -142,15 +142,16 @@ public class Database {
 	 * @param statement Statement som skal utføres
 	 * @return returnerer om statementen ble fullført
 	 */
-	public static int makeStatement(String statement) {
+	public static boolean makeStatement(String statement) {
 		try {
 			Connection conn = getConnection();
 			Statement st = conn.createStatement();
-			return st.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
+			st.executeUpdate(statement);
+			return true;
 		} catch (Exception e) {
 			if (DEBUG)
 				e.printStackTrace();
-			return 0;
+			return false;
 		}
 	}
 	
