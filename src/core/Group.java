@@ -11,7 +11,7 @@ public class Group implements CalendarOwner {
 	private ArrayList<String> members;
 	GroupDatabaseHandler gdbh;
 	
-	public Group(String groupID, String groupName, Calendar groupCal) {
+	public Group(String groupID, String groupName) {
 		gdbh = new GroupDatabaseHandler();
 		this.groupName = groupName;
 		this.groupCal = new Calendar(this);
@@ -37,4 +37,4 @@ public class Group implements CalendarOwner {
 			}
 	}
 	
-}
+}	
