@@ -249,8 +249,12 @@ public class ViewController implements Initializable {
 		leftContainer.getChildren().add(new Label("Group name"));
 		leftContainer.getChildren().add(new TextField());
 		leftContainer.getChildren().add(new Label("Add members"));
-		leftContainer.getChildren().add(new FilterComboBox(getAllGroups()));
+		leftContainer.getChildren().add(new FilterComboBox(SessionData.allGroups));
 		leftContainer.getChildren().add(b);
+		
+	}
+	
+	public ObservableList<String> getAllPeople() {
 		
 	}
 	
