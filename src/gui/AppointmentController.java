@@ -44,8 +44,6 @@ public class AppointmentController implements Initializable {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
 					addToListView(newValue);
-					System.out.println(newValue);
-					System.out.println(listViewList.size());
 				}
 		});
 		
@@ -72,7 +70,9 @@ public class AppointmentController implements Initializable {
 	}
 	
 	public void addToListView(String item) {
-		this.listViewList.add(item);
+		if (!listViewList.contains(item)) {
+			this.listViewList.add(item);
+		}
 	}
 
 }
