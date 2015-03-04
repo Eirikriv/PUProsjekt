@@ -26,8 +26,10 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 		try {
 			Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
-			Database.makeQuery("SELECT LAST_INSERT_ID();");
-
+			ResultSet rs = Database.makeQuery("SELECT MAX(GroupID) FROM Groups;");
+			while (rs.next()) {
+				return "" + rs.getInt(1);
+			}
 			return null;
 		}
 		catch (Exception e){
