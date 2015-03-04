@@ -35,12 +35,11 @@ public class DBTest {
 //		for (int i = 0; i < list.size(); i++) {
 //			System.out.println(list.get(i));
 //		}
-		rdbh.add(new String[]{"G022", "15", "Møterom"});
-		ArrayList<String> list = rdbh.getAvailableRooms("2015-03-02 11:00", "2015-03-02 13:00");
+		ArrayList<String> list = rdbh.getAvailableRooms("2015-03-02 11:00", "2015-03-02 13:00", "10");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
-		list = rdbh.getAvailableRooms("2015-03-02 10:00", "2015-03-02 12:00");
+		list = rdbh.getAvailableRooms("2015-03-02 10:00", "2015-03-02 12:00", "10");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
