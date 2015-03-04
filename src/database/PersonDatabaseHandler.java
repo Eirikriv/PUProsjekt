@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class PersonDatabaseHandler implements DatabaseHandler {
 		
 	//Henter ut all info om person med PersonID id
-	//Returnerer en liste på formen [[name, username, password],...]
 	public ArrayList<String> get(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
