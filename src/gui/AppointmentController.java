@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import database.EventDatabaseHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -88,7 +89,27 @@ public class AppointmentController implements Initializable {
 	}
 	
 	public void createEvent(ActionEvent e) {
+		EventDatabaseHandler edb = new EventDatabaseHandler();
 		
+		String title = titleField.getText();
+		if (title.length() < 1) {
+			return;
+		}
+		
+		LocalDate date = dateField.getValue();
+		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		String startTime = startField.getText();
+		String endTime = endField.getText();
+		assert startTime.matches("[0-9]{2}:[0-9]{2}");
+		assert endTime.matches("[0-9]{2}:[0-9]{2}");
+		
+		String start = sDate + " " +  startTime;
+		String end = sDate + " " + endTime;
+		
+		String[] data = {};
+		
+		edb.add(data);
 	}
 
 }
