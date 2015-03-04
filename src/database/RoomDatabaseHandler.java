@@ -71,7 +71,9 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 						+  "SELECT Room.RoomID\n"
 						+  "FROM Room, Event\n"
 						+  "WHERE Room.RoomID = Event.RoomID\n"
-						+  "AND Event.Start>+'"+end+"';)";
+						+  "AND Event.Start < '" +end+ "' AND Event.End > '" +start+ "';);";
+//						+  "OR (Event.Start < '" +start+ "' AND Event.End > '" + start + "') "
+//						+  "OR (Event.Start < '" + end + "' AND Event.End > '" + end + "')););";
 			
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
