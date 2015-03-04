@@ -65,21 +65,22 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAvailableRooms(String start, String end) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Room.RoomID\n"
-						+  "FROM Room"
-						+  "WHERE Room.RoomID NOT IN ("
-						+  "SELECT Room.RoomID\n"
-						+  "FROM Room, Event\n"
-						+  "WHERE Room.RoomID = Event.RoomID\n"
-						+  "AND Event.Start < '" +end+ "' AND Event.End > '" +start+ "';);";
+			String query = "SELECT Room.RoomID "
+						+  "FROM Room "
+						+  "WHERE Room.RoomID NOT IN"
+						+  "(SELECT Room.RoomID "
+						+  "FROM Room, Event "
+						+  "WHERE Room.RoomID = Event.RoomID "
+						+  "AND Event.Start < '" +end+ "' AND Event.End > '" +start+ "');";
 //						+  "OR (Event.Start < '" +start+ "' AND Event.End > '" + start + "') "
 //						+  "OR (Event.Start < '" + end + "' AND Event.End > '" + end + "')););";
 			
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 2; i <= 3; i++)
-					list.add(rs.getString(i));
+				list.add(rs.getString(1));
 			}
+			if (list.size() == 0)
+				return null;
 			return list;
 		}
 		catch(Exception e) {
