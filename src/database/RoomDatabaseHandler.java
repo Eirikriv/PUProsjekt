@@ -72,7 +72,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 						+  "FROM Room, Event "
 						+  "WHERE Room.RoomID = Event.RoomID "
 						+  "AND Event.Start < '" + end + "' AND Event.End > '" +start+ "')"
-						+  "AND Room.Capacity > " + capacity + ";";
+						+  "AND Room.Capacity >= " + capacity + ";";
 //						+  "OR (Event.Start < '" +start+ "' AND Event.End > '" + start + "') "
 //						+  "OR (Event.Start < '" + end + "' AND Event.End > '" + end + "')););";
 			
