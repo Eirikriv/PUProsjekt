@@ -24,10 +24,8 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	@Override
 	public String add(String[] info) {
 		try {
-			Database.makeStatement("INSERT INTO Groups(Name)"
+			return "" + Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
-			
-			String query = 
 		}
 		catch (Exception e){
 			return null;
