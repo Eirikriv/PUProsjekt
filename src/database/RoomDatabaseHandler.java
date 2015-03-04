@@ -61,6 +61,29 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 		return false;
 		}
 	}
+	
+	public ArrayList<String> getAvailableRooms(String start, String end) {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String query = "SELECT Room.RoomID\n"
+						+  "FROM Room"
+						+  "WHERE Room.RoomID NOT IN ("
+						+  "SELECT Room.RoomID\n"
+						+  "FROM Room, Event\n"
+						+  "WHERE Room.RoomID = Event.RoomID\n"
+						+  "AND Event.Start>+'"+end+"';)";
+			
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				for (int i = 2; i <= 3; i++)
+					list.add(rs.getString(i));
+			}
+			return list;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("Does not work");
+		}
+	}
 
 	public ArrayList<ArrayList<String>> getRoomEvents(String groupID) {
 		// TODO Auto-generated method stub
