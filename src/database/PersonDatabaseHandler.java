@@ -135,11 +135,11 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAllPersons() {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Person.Name\n"
+			String query = "SELECT Username, Name\n"
 						+  "FROM Person;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
-				list.add(rs.getString(1));
+				list.add(rs.getString(1) + "<" + rs.getString(2) + ">");
 			}
 			return list;
 		}
