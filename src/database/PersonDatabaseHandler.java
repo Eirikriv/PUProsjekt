@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class PersonDatabaseHandler implements DatabaseHandler {
 		
 	//Henter ut all info om person med PersonID id
-	//Returnerer en liste på formen [[name, username, password],...]
 	public ArrayList<String> get(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -125,6 +124,24 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 				personInfo.add(rs.getString(1));
 			}
 			return personInfo;
+		}
+			
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException("Something went wrong");
+		}
+	}
+	
+	public ArrayList<String> getAllPersons() {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String query = "SELECT Person.Name\n"
+						+  "FROM Person;";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+			return list;
 		}
 			
 		catch (Exception e) {
