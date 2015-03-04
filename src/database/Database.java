@@ -59,7 +59,7 @@ public class Database {
 			//Oppretter Event-tabellen		
 			makeStatement("CREATE TABLE Event"
 					+ "(EventID INT NOT NULL AUTO_INCREMENT,"
-					+ "Name VARCHAR(20) NOT NULL,"
+					+ "Title VARCHAR(20) NOT NULL,"
 					+ "Start CHAR(16) NOT NULL,"
 					+ "End CHAR(16) NOT NULL,"
 					+ "Description VARCHAR(100),"

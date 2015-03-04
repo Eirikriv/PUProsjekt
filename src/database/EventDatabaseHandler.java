@@ -10,7 +10,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		return null;
 	}
 	
-	//Tar inn en liste på formen [name, start, end, desc, roomID]
+	//Tar inn en liste på formen [title, start, end, desc, roomID]
 	public String add(String[] eventInfo) {
 		try {
 			Database.makeStatement("INSERT INTO Event(Name, Start, End, Description, RoomID) "
