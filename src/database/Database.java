@@ -142,16 +142,15 @@ public class Database {
 	 * @param statement Statement som skal utføres
 	 * @return returnerer om statementen ble fullført
 	 */
-	public static boolean makeStatement(String statement) {
+	public static int makeStatement(String statement) {
 		try {
 			Connection conn = getConnection();
 			Statement st = conn.createStatement();
-			st.executeUpdate(statement);
-			return true;
+			return st.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
 		} catch (Exception e) {
 			if (DEBUG)
 				e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 	
