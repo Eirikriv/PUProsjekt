@@ -60,11 +60,14 @@ public class Database {
 			makeStatement("CREATE TABLE Event"
 					+ "(EventID INT NOT NULL AUTO_INCREMENT,"
 					+ "Title VARCHAR(20) NOT NULL,"
+					+ "Owner VARCHAR(20) NOT NULL,"
 					+ "Start CHAR(16) NOT NULL,"
 					+ "End CHAR(16) NOT NULL,"
 					+ "Description VARCHAR(100),"
 					+ "RoomID VARCHAR(20),"
 					+ "PRIMARY KEY (EventID),"
+					+ "FOREIGN KEY (Owner) REFERENCES Person(Username) "
+					+ "ON UPDATE CASCADE ON DELETE CASCADE,"
 					+ "FOREIGN KEY (RoomID) REFERENCES Room(RoomID) "
 					+ "ON UPDATE CASCADE ON DELETE NO ACTION);");
 			
@@ -72,6 +75,8 @@ public class Database {
 			makeStatement("CREATE TABLE PersonEvent"
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "EventID INT NOT NULL,"
+					+ "Status BOOL,"
+					+ "Visibility BOOL,"
 					+ "PRIMARY KEY (Username, EventID),"
 					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
