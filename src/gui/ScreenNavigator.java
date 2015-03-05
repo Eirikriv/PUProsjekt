@@ -14,8 +14,8 @@ public class ScreenNavigator {
     public static final double SCREEN_CALENDAR_WIDTH = 600;
     public static final double SCREEN_LOGIN_HEIGHT = 350;
     public static final double SCREEN_LOGIN_WIDTH = 250;
-    public static final double SCREEN_NEW_APPOINTMENT_HEIGHT = 400;
-    public static final double SCREEN_NEW_APPOINTMENT_WIDTH = 452;
+    public static final double SCREEN_NEW_APPOINTMENT_HEIGHT = 600;
+    public static final double SCREEN_NEW_APPOINTMENT_WIDTH = 600;
 
     public static MainController mainController;
  

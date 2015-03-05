@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyStroke" prefHeight="400.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppointmentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#keyStroke" prefHeight="430.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppointmentController">
    <children>
       <GridPane fx:id="appointmentContainer">
         <columnConstraints>
@@ -14,6 +14,7 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="184.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,17 +34,17 @@
                   <TextField fx:id="titleField" prefHeight="25.0" prefWidth="62.0" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
                   <Label text="Date" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <DatePicker fx:id="dateField" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -65,24 +66,24 @@
                   </VBox>
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <Label text="Add Members" />
-               </children>
-            </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label text="Add Group" />
+                  <Label text="Add Members" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Label text="Room size | location" />
+                  <Label text="Add Group" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
+               <children>
+                  <Label text="Room size | location" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <StackPane prefHeight="132.0" prefWidth="184.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="5">
                <children>
                   <ListView fx:id="listMembersField" prefHeight="400.0" prefWidth="170.0">
@@ -92,7 +93,7 @@
                   </ListView>
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
                   <Label onMouseClicked="#navigateBack" text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
@@ -100,7 +101,7 @@
                      </padding></Label>
                </children>
             </StackPane>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                <children>
                   <StackPane prefHeight="29.0" prefWidth="122.0">
                      <children>
@@ -120,12 +121,27 @@
             </VBox>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label text="Members" />
+                  <Label text="Members" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
                   <Button fx:id="searchRoomsButton" mnemonicParsing="false" onAction="#fillRoomBox" text="Search Rooms" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#createEvent" text="Create Event" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Description" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TextArea fx:id="descriptionText" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </StackPane>
          </children>

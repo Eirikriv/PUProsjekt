@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -61,6 +62,7 @@ public class ViewController implements Initializable {
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		
 		getAllPeople();
+		getAllGroups();
 		this.username = SessionData.username;
 		fillCalendar(calBox);
 
@@ -80,7 +82,6 @@ public class ViewController implements Initializable {
 				eventContainer.getChildren().clear();
 				try {
 					eventContainer.getChildren().add(FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
-					ScreenNavigator.mainController.sizeTo(500, 520);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -116,9 +117,9 @@ public class ViewController implements Initializable {
 		gp.getChildren().clear();
 		
 		String[] daystext = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		for (int x=0; x<7; x++) {
+		for (int x=1; x<8; x++) {
 			StackPane dayContainer = new StackPane();
-			dayContainer.getChildren().add(new Label(daystext[x]));
+			dayContainer.getChildren().add(new Label(daystext[x-1]));
 			dayContainer.setMinSize(80, 30);
 			gp.add(dayContainer, x, 0);
 		}
@@ -135,9 +136,28 @@ public class ViewController implements Initializable {
 		} else {
 			calStart.add(Calendar.DATE, -day+2);
 		}
+		
+		Calendar weekCal = Calendar.getInstance();
+		weekCal.setTime(calStart.getTime());
+		for (int x = 1; x<7; x++) {
+			StackPane z = new StackPane();
+			z.setMinSize(50, 50);
+			Label l = new Label(Integer.toString(weekCal.get(Calendar.WEEK_OF_YEAR)));
+			z.getChildren().add(l);
+			gp.add(z, 0, x);
+			weekCal.add(Calendar.WEEK_OF_YEAR, 1);
+			
+			z.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent arg0) {
+					StackPane s = (StackPane)arg0.getSource();
+					Label l  = (Label)s.getChildren().get(0);
+					System.out.println(l.getText());
+				}
+			});
+		}
 
 		for (int x = 1; x<7; x++) {
-			for (int y = 0; y<7; y++) {
+			for (int y = 1; y<8; y++) {
 				StackPane z = new StackPane();
 				if (calStart.before(cal) || (calStart.after(calEnd))) {
 					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("red"), null, null), null));

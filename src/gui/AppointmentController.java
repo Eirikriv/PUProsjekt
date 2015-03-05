@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import database.EventDatabaseHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,11 +29,13 @@ public class AppointmentController implements Initializable {
 	
 	@FXML private GridPane appointmentContainer;
 	@FXML private TextField titleField;
+	@FXML private TextArea descriptionText;
 	@FXML private DatePicker dateField;
 	@FXML private TextField startField;
 	@FXML private TextField endField;
 	@FXML private ListView<String> listMembersField;
 	@FXML private Button searchRoomsButton;
+	
 	
 	TextField tf = new TextField();
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
@@ -39,6 +43,7 @@ public class AppointmentController implements Initializable {
 	private FilterComboBox members = new FilterComboBox(SessionData.allMembers);
 	private FilterComboBox groups = new FilterComboBox(SessionData.allGroups);
 	private FilterComboBox rooms = new FilterComboBox(roomList);
+	EventDatabaseHandler edb = new EventDatabaseHandler();
 	
 
 	@Override
@@ -52,8 +57,8 @@ public class AppointmentController implements Initializable {
 				}
 		});
 		
-		appointmentContainer.add(members, 1, 3);
-		appointmentContainer.add(groups, 1, 4);
+		appointmentContainer.add(members, 1, 4);
+		appointmentContainer.add(groups, 1, 5);
 		
 		StackPane hb = new StackPane();
 		HBox sp = new HBox();
@@ -61,7 +66,7 @@ public class AppointmentController implements Initializable {
 		sp.getChildren().addAll(tf, rooms);
 		hb.getChildren().add(sp);
 		sp.setAlignment(Pos.CENTER);
-		appointmentContainer.add(hb, 1, 5);
+		appointmentContainer.add(hb, 1, 6);
 		
 	}
 	
@@ -72,7 +77,6 @@ public class AppointmentController implements Initializable {
 	public void fillRoomBox(ActionEvent e) {
 		LocalDate date = dateField.getValue();
 		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		
 		roomList = SessionData.availableRooms(sDate + " " +startField.getText(), sDate + " " +endField.getText(), tf.getText());
 		rooms.setItems(roomList);
 		
@@ -86,6 +90,62 @@ public class AppointmentController implements Initializable {
 		if (!listViewList.contains(item)) {
 			this.listViewList.add(item);
 		}
+	}
+	
+	public void createEvent(ActionEvent e) {
+		EventDatabaseHandler edb = new EventDatabaseHandler();
+		
+		String title = titleField.getText();
+		if (title.length() < 1) {
+			return;
+		}
+		
+		LocalDate date = dateField.getValue();
+		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		String startTime = startField.getText();
+		String endTime = endField.getText();
+		assert startTime.matches("[0-9]{2}:[0-9]{2}");
+		assert endTime.matches("[0-9]{2}:[0-9]{2}");
+		if (startTime.compareTo(endTime) == 1) {
+			System.out.println("startime compare endTime");
+			return;
+		}
+		
+		String start = sDate + " " +  startTime;
+		String end = sDate + " " + endTime;
+		String description = descriptionText.getText();
+		if (description.length() == 0) {
+			description = null;
+		}
+		
+		String roomId = rooms.getValue();
+		if (roomId.length() == 0) {
+			return;
+		}
+		
+		String[] data = {title, start, end, description, roomId};
+		String eventID = edb.add(data);
+		
+		for (String username: listViewList) {
+			for (int x=0; x<username.length(); x++) {
+				if (username.charAt(x) == '<') {
+					username = username.substring(0, x);
+				}
+			}
+				
+			if (edb.addPerson(eventID, username)) {
+				System.out.println("added " + username + " to event:" + eventID);
+			} else {
+				System.out.println(username + "could not be added to event:" + eventID);
+			}
+			
+			
+		}
+		
+		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+		
+		
 	}
 
 }
