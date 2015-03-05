@@ -23,14 +23,16 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public String add(String[] info) {
+		String returnString = "";
 		try {
 			Database.makeStatement("INSERT INTO Groups(Name)"
 						+ "VALUES('" + info[0] + "');");
 			ResultSet rs = Database.makeQuery("SELECT MAX(GroupID) FROM Groups;");
 			while (rs.next()) {
-				return "" + rs.getInt(1);
+				returnString = rs.getString(1);
 			}
-			return null;
+			if(returnString.isEmpty()){
+				throw new IllegalStateException();}else{return returnString;}
 		}
 		catch (Exception e){
 			e.printStackTrace();
