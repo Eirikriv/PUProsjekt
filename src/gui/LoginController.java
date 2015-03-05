@@ -33,8 +33,6 @@ public class LoginController implements Initializable {
         assert loginButton != null : "fx:id=\"loginbutton\" was not injected: check your FXML file 'LoginScreen.fxml'.";
         
         loginButton.setDefaultButton(true);
-        
-        
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		try {
@@ -52,7 +50,6 @@ public class LoginController implements Initializable {
         
         newButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
-        		System.out.println("Clicked new button");
         	}
         });
 		
