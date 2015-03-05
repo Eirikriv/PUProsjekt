@@ -3,14 +3,17 @@ package gui;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.EventDatabaseHandler;
+import database.GroupDatabaseHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -44,6 +47,7 @@ public class AppointmentController implements Initializable {
 	private FilterComboBox groups = new FilterComboBox(SessionData.allGroups);
 	private FilterComboBox rooms = new FilterComboBox(roomList);
 	EventDatabaseHandler edb = new EventDatabaseHandler();
+	GroupDatabaseHandler gdb = new GroupDatabaseHandler();
 	
 
 	@Override
@@ -56,6 +60,17 @@ public class AppointmentController implements Initializable {
 					addToListView(newValue);
 				}
 		});
+		
+		groups.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+					ArrayList<String> members = gdb.getGroupMembers(newValue);
+					for (String name: members) {
+						addToListView(name);
+					}
+				}
+		});
+		
 		
 		appointmentContainer.add(members, 1, 4);
 		appointmentContainer.add(groups, 1, 5);
@@ -89,6 +104,12 @@ public class AppointmentController implements Initializable {
 	public void addToListView(String item) {
 		if (!listViewList.contains(item)) {
 			this.listViewList.add(item);
+		}
+	}
+	
+	public void removeFromListView(String item) {
+		if (listViewList.contains(item)) {
+			listViewList.remove(item);
 		}
 	}
 	
