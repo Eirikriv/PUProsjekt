@@ -11,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -29,12 +30,13 @@ public class AppointmentController implements Initializable {
 	
 	@FXML private GridPane appointmentContainer;
 	@FXML private TextField titleField;
+	@FXML private TextArea descriptionText;
 	@FXML private DatePicker dateField;
 	@FXML private TextField startField;
 	@FXML private TextField endField;
 	@FXML private ListView<String> listMembersField;
 	@FXML private Button searchRoomsButton;
-	@FXML private TextArea descriptionText;
+	
 	
 	TextField tf = new TextField();
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
@@ -42,6 +44,7 @@ public class AppointmentController implements Initializable {
 	private FilterComboBox members = new FilterComboBox(SessionData.allMembers);
 	private FilterComboBox groups = new FilterComboBox(SessionData.allGroups);
 	private FilterComboBox rooms = new FilterComboBox(roomList);
+	EventDatabaseHandler edb = new EventDatabaseHandler();
 	
 
 	@Override
@@ -105,7 +108,7 @@ public class AppointmentController implements Initializable {
 		String endTime = endField.getText();
 		assert startTime.matches("[0-9]{2}:[0-9]{2}");
 		assert endTime.matches("[0-9]{2}:[0-9]{2}");
-		if (startTime.compareTo(endTime) == -1) {
+		if (startTime.compareTo(endTime) == 1) {
 			System.out.println("startime compare endTime");
 			return;
 		}
@@ -122,9 +125,28 @@ public class AppointmentController implements Initializable {
 			return;
 		}
 		
-		String[] data = {title, startTime, endTime, description, roomId};
+		String[] data = {title, start, end, description, roomId};
+		String eventID = edb.add(data);
 		
-		edb.add(data);
+		for (String username: listViewList) {
+			for (int x=0; x<username.length(); x++) {
+				if (username.charAt(x) == '<') {
+					username = username.substring(0, x);
+				}
+			}
+				
+			if (edb.addPerson(eventID, username)) {
+				System.out.println("added " + username + " to event:" + eventID);
+			} else {
+				System.out.println(username + "could not be added to event:" + eventID);
+			}
+			
+			
+		}
+		
+		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+		
+		
 	}
 
 }
