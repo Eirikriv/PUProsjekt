@@ -17,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,7 @@ public class AppointmentController implements Initializable {
 	@FXML private TextField endField;
 	@FXML private ListView<String> listMembersField;
 	@FXML private Button searchRoomsButton;
+	@FXML private TextArea descriptionText;
 	
 	TextField tf = new TextField();
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
@@ -53,8 +55,8 @@ public class AppointmentController implements Initializable {
 				}
 		});
 		
-		appointmentContainer.add(members, 1, 3);
-		appointmentContainer.add(groups, 1, 4);
+		appointmentContainer.add(members, 1, 4);
+		appointmentContainer.add(groups, 1, 5);
 		
 		StackPane hb = new StackPane();
 		HBox sp = new HBox();
@@ -62,7 +64,7 @@ public class AppointmentController implements Initializable {
 		sp.getChildren().addAll(tf, rooms);
 		hb.getChildren().add(sp);
 		sp.setAlignment(Pos.CENTER);
-		appointmentContainer.add(hb, 1, 5);
+		appointmentContainer.add(hb, 1, 6);
 		
 	}
 	
@@ -103,11 +105,24 @@ public class AppointmentController implements Initializable {
 		String endTime = endField.getText();
 		assert startTime.matches("[0-9]{2}:[0-9]{2}");
 		assert endTime.matches("[0-9]{2}:[0-9]{2}");
+		if (startTime.compareTo(endTime) == -1) {
+			System.out.println("startime compare endTime");
+			return;
+		}
 		
 		String start = sDate + " " +  startTime;
 		String end = sDate + " " + endTime;
+		String description = descriptionText.getText();
+		if (description.length() == 0) {
+			description = null;
+		}
 		
-		String[] data = {};
+		String roomId = rooms.getValue();
+		if (roomId.length() == 0) {
+			return;
+		}
+		
+		String[] data = {title, startTime, endTime, description, roomId};
 		
 		edb.add(data);
 	}
