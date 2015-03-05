@@ -80,7 +80,6 @@ public class ViewController implements Initializable {
 				eventContainer.getChildren().clear();
 				try {
 					eventContainer.getChildren().add(FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
-					ScreenNavigator.mainController.sizeTo(500, 520);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
