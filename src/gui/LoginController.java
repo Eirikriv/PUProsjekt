@@ -19,7 +19,6 @@ public class LoginController implements Initializable {
 	
 	@FXML private TextField usernameText;
 	@FXML private PasswordField passwordText;
-	@FXML private Button newButton;
 	@FXML private Button loginButton;
 	@FXML private Text loginLabel;
 	
@@ -27,11 +26,6 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert usernameText != null : "fx:id=\"usernameText\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-        assert passwordText != null : "fx:id=\"passwordText\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-        assert newButton != null : "fx:id=\"newButton\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-        assert loginButton != null : "fx:id=\"loginbutton\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-        
         loginButton.setDefaultButton(true);
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
@@ -45,11 +39,6 @@ public class LoginController implements Initializable {
         			loginLabel.setText("Login failed..");
         			loginLabel.setFill(Color.RED);
         		}
-        	}
-        });
-        
-        newButton.setOnAction(new EventHandler<ActionEvent>() {
-        	@Override public void handle(ActionEvent event) {
         	}
         });
 		
