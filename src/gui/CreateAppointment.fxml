@@ -41,7 +41,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <DatePicker fx:id="dateField" />
+                  <DatePicker fx:id="dateField" onAction="#fillRoomBox" onContextMenuRequested="#fillRoomBox" onKeyTyped="#fillRoomBox" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -55,7 +55,7 @@
                         </StackPane>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="endField">
+                              <TextField fx:id="endField" onAction="#fillRoomBox" onContextMenuRequested="#fillRoomBox" onKeyTyped="#fillRoomBox">
                                  <StackPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </StackPane.margin>
@@ -110,7 +110,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="startField">
+                        <TextField fx:id="startField" onContextMenuRequested="#fillRoomBox" onKeyTyped="#fillRoomBox">
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </StackPane.margin>

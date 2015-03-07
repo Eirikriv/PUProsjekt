@@ -88,6 +88,8 @@ public class ViewController implements Initializable {
 			}
 		});
 		
+		
+		
 		createGroupButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 				initCreateGroup();

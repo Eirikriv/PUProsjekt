@@ -13,7 +13,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -22,6 +24,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -54,6 +57,35 @@ public class AppointmentController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listMembersField.setItems(listViewList);
 		
+		startField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				fillRoomBox();
+			}
+		});
+		endField.textProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				fillRoomBox();
+			}
+			
+		});
+		dateField.valueProperty().addListener(new ChangeListener<LocalDate>() {
+			@Override public void changed(
+					ObservableValue<? extends LocalDate> observable,
+					LocalDate oldValue, LocalDate newValue) {
+				fillRoomBox();
+			}
+		});
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				fillRoomBox();
+			}
+			
+		});
+		
 		members.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
@@ -72,11 +104,15 @@ public class AppointmentController implements Initializable {
 		});
 		
 		
+		
+		
+		
 		appointmentContainer.add(members, 1, 4);
 		appointmentContainer.add(groups, 1, 5);
 		
 		StackPane hb = new StackPane();
 		HBox sp = new HBox();
+		
 		
 		sp.getChildren().addAll(tf, rooms);
 		hb.getChildren().add(sp);
@@ -89,13 +125,43 @@ public class AppointmentController implements Initializable {
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	}
 	
-	public void fillRoomBox(ActionEvent e) {
+	
+	@FXML
+	public void fillRoomBox() {
+		if (dateField.getValue() == null) {
+			System.out.println("1");
+			roomList.clear();
+			rooms.setItems(roomList);
+			return;
+		}
+		
+		if (!startField.getText().matches("[0-9]{2}:[0-9]{2}")) {
+			System.out.println("2");
+			roomList.clear();
+			rooms.setItems(roomList);
+			return;
+		}
+		if (!endField.getText().matches("[0-9]{2}:[0-9]{2}")) {
+			System.out.println("3");
+			roomList.clear();
+			rooms.setItems(roomList);
+			return;
+		}
+		if (tf.getText().length() == 0) {
+			System.out.println("4");
+			roomList.clear();
+			rooms.setItems(roomList);
+			return;
+		}
+		
 		LocalDate date = dateField.getValue();
 		String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		roomList = SessionData.availableRooms(sDate + " " +startField.getText(), sDate + " " +endField.getText(), tf.getText());
 		rooms.setItems(roomList);
 		
 	}
+	
+	
 	
 	public void keyStroke(KeyEvent e) {
 		System.out.println(e.getCharacter());

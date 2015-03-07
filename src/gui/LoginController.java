@@ -33,6 +33,7 @@ public class LoginController implements Initializable {
         			if (usernameText.getText().length() == 0 && passwordText.getText().length() == 0) {
         				SessionData.username = "martibni";
 	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        			return;
         			}
         			
 	        		ArrayList<String> person = pdb.login(usernameText.getText(), passwordText.getText());
