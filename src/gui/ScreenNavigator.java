@@ -38,7 +38,7 @@ public class ScreenNavigator {
         	} else if (fxml.compareTo(SCREEN_NEW_APPOINTMENT) == 0) {
         		height = SCREEN_NEW_APPOINTMENT_HEIGHT;
         		width = SCREEN_NEW_APPOINTMENT_WIDTH;
-        	}else if (fxml.compareTo(SCREEN_NEW_APPOINTMENT) == 0) {
+        	}else if (fxml.compareTo(SCREEN_WEEK) == 0) {
         		height = SCREEN_WEEK_HEIGHT;
         		width = SCREEN_WEEK_WIDTH;
         	} else {
