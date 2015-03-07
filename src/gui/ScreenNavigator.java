@@ -9,6 +9,7 @@ public class ScreenNavigator {
     public static final String SCREEN_LOGIN = "LoginScreen.fxml";
     public static final String SCREEN_CALENDAR = "CalendarScreen.fxml";
     public static final String SCREEN_NEW_APPOINTMENT = "CreateAppointment.fxml";
+    public static final String SCREEN_WEEK = "WeekScreen.fxml";
     
     public static final double SCREEN_CALENDAR_HEIGHT = 600;
     public static final double SCREEN_CALENDAR_WIDTH = 650;
@@ -16,6 +17,8 @@ public class ScreenNavigator {
     public static final double SCREEN_LOGIN_WIDTH = 250;
     public static final double SCREEN_NEW_APPOINTMENT_HEIGHT = 600;
     public static final double SCREEN_NEW_APPOINTMENT_WIDTH = 600;
+    public static final double SCREEN_WEEK_HEIGHT = 600;
+    public static final double SCREEN_WEEK_WIDTH = 600;
 
     public static MainController mainController;
  
@@ -35,6 +38,9 @@ public class ScreenNavigator {
         	} else if (fxml.compareTo(SCREEN_NEW_APPOINTMENT) == 0) {
         		height = SCREEN_NEW_APPOINTMENT_HEIGHT;
         		width = SCREEN_NEW_APPOINTMENT_WIDTH;
+        	}else if (fxml.compareTo(SCREEN_NEW_APPOINTMENT) == 0) {
+        		height = SCREEN_WEEK_HEIGHT;
+        		width = SCREEN_WEEK_WIDTH;
         	} else {
         		height = 800;
         		width = 800;
