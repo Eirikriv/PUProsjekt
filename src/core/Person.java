@@ -11,7 +11,7 @@ public class Person implements CalendarOwner{
 	private String name;
 	private String username;
 	private String password;
-	private String Admin;
+	private String admin;
 	
 	public Person(String name, String username, String password, boolean Adminn) {
 		pdbh = new PersonDatabaseHandler();
@@ -19,10 +19,10 @@ public class Person implements CalendarOwner{
 		this.username = username;
 		this.password = password;
 		if(Adminn){
-			this.Admin = "1";
-		} else Admin = "0"; 
+			this.admin = "TRUE";
+		} else admin = "FALSE"; 
 		this.cal = new Calendar(this);
-		pdbh.add(new String[]{name, username, password,Admin});
+		pdbh.add(new String[]{name, username, password,admin});
 	}
 	
 	public Person(String name,boolean Admin) {
@@ -57,11 +57,15 @@ public class Person implements CalendarOwner{
 	}
 
 	public boolean isAdmin() {
-		return Admin;
+		if(admin == "TRUE")
+			return true;
+		return false;
 	}
 
 	public void setAdmin(boolean admin) {
-		Admin = admin;
+		if(admin)
+			this.admin = "TRUE";
+		this.admin = "FALSE";
 	}
 	
 }
