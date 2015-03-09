@@ -87,7 +87,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	//Returnerer en liste på formen [username, name, password]
+	//Returnerer en liste på formen [username, name, password, admin]
 	public ArrayList<String> login(String username, String password, String admin) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
@@ -97,7 +97,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 						+ "AND Password = '" + password + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 1; i <= 3; i++) {
+				for (int i = 1; i <= 4; i++) {
 					personInfo.add(rs.getString(i));
 				}
 			}
