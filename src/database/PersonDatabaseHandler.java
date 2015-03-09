@@ -88,7 +88,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 	
 	//Returnerer en liste på formen [username, name, password, admin]
-	public ArrayList<String> login(String username, String password, String admin) {
+	public ArrayList<String> login(String username, String password) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
 			String query = "SELECT *\n"
