@@ -63,7 +63,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 
 	//Henter ut alle hendelser for person med PersonID id
-	//Returnerer en liste på formen [[name, description, start, end], ...] 
+	//Returnerer en liste på formen [[title, description, start, end], ...] 
 	public ArrayList<ArrayList<String>> getPersonEvents(String username) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
@@ -88,24 +88,24 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 	
 	//Returnerer en liste på formen [username, name, password, admin]
-	public ArrayList<String> login(String username, String password) {
-		ArrayList<String> personInfo = new ArrayList<String>();
+	public String login(String username, String password) {
+		String username1 = "";
 		try {
-			String query = "SELECT *\n"
+			String query = "SELECT Username\n"
 					+ "FROM Person\n"
 					+ "WHERE Username = '" + username + "'\n"
 						+ "AND Password = '" + password + "';";
 			ResultSet rs = Database.makeQuery(query);
+			int x = 0;
 			while (rs.next()) {
-				for (int i = 1; i <= 4; i++) {
-					personInfo.add(rs.getString(i));
-				}
+				if (x > 0)
+					throw new IllegalStateException("Multiple users found...");
+				username1 = rs.getString(1);
+				x++;
 			}
-			if (personInfo.size() == 0)
+			if (username1.length() == 0)
 				throw new IllegalStateException("User not found in database");
-			if (personInfo.size() > 3)
-				throw new IllegalStateException("More than one user found...");
-			return personInfo;
+			return username1;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
