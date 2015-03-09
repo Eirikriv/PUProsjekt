@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane prefHeight="327.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+<TabPane prefHeight="515.0" prefWidth="589.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
    <tabs>
       <Tab text="Calender">
          <content>
@@ -55,7 +55,7 @@
         <content>
           <AnchorPane fx:id="eventContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox prefHeight="449.0" prefWidth="506.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="298.0" prefWidth="151.0">
                            <children>
@@ -71,7 +71,20 @@
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox prefHeight="298.0" prefWidth="153.0" />
+                        <VBox prefHeight="486.0" prefWidth="415.0">
+                           <children>
+                              <TableView fx:id="eventTableView" prefHeight="378.0" prefWidth="308.0">
+                                <columns>
+                                  <TableColumn fx:id="titleColumn" prefWidth="82.0" text="Title" />
+                                  <TableColumn prefWidth="99.0" text="Description" />
+                                    <TableColumn minWidth="0.0" prefWidth="55.0" text="Start" />
+                                    <TableColumn prefWidth="51.0" text="End" />
+                                </columns>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </TableView>
+                           </children></VBox>
                      </children>
                   </HBox>
                </children>
