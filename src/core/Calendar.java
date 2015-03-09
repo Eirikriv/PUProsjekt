@@ -12,6 +12,7 @@ public class Calendar {
 	private GroupDatabaseHandler gdbh;
 	private RoomDatabaseHandler rdbh;
 	private ArrayList<Event> calendar = new ArrayList<Event>();
+	
 	public Calendar(CalendarOwner owner) {
 		//make the calendar
 		ArrayList<String> list = pdbh.getPersonEvents(owner.getPrimaryKey());
