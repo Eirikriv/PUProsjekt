@@ -10,11 +10,11 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		return null;
 	}
 	
-	//Tar inn en liste på formen [title, start, end, desc, roomID]
+	//Tar inn en liste på formen [title, owner, start, end, desc, roomID]
 	public String add(String[] eventInfo) {
 		try {
-			Database.makeStatement("INSERT INTO Event(Title, Start, End, Description, RoomID) "
-				+ "VALUES( '"+eventInfo[0]+"', '"+ eventInfo[1] +"', '"+ eventInfo[2] +"', '"+ eventInfo[3] +"', '"+ eventInfo[4] +"');");
+			Database.makeStatement("INSERT INTO Event(Title, Owner, Start, End, Description, RoomID) "
+				+ "VALUES( '"+eventInfo[0]+"', '"+ eventInfo[1] +"', '"+ eventInfo[2] +"', '"+ eventInfo[3] +"', '"+ eventInfo[4] +"', '" + eventInfo[5] + "');");
 			ResultSet rs = Database.makeQuery("SELECT MAX(EventID) FROM Event;");
 			while(rs.next()) {
 				return "" + rs.getInt(1);
