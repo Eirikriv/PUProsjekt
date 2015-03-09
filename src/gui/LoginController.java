@@ -32,6 +32,7 @@ public class LoginController implements Initializable {
         		try {
         			if (usernameText.getText().length() == 0 && passwordText.getText().length() == 0) {
         				SessionData.username = "martibni";
+        				SessionData.message = "Login sucessful";
 	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	        			return;
         			}

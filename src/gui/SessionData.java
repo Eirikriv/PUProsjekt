@@ -13,7 +13,9 @@ public class SessionData {
 	public static ObservableList<String> allMembers;
 	public static ObservableList<String> allGroups;
 	public static ObservableList<String> allRooms;
+	public static ObservableList<GroupData> allGroupInfo;
 	public static String currentWeek;
+	public static String message;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		System.out.println("" + start + end + capacity);

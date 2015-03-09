@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import database.PersonDatabaseHandler;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,6 +25,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,12 +48,15 @@ public class ViewController implements Initializable {
 	@FXML private Button createEventButton;
 	@FXML private Button editEventButton;
 	@FXML private AnchorPane eventContainer;
+	@FXML private TableView<StringProperty> eventTableView;
+	@FXML private TableColumn<String, String> titleColumn;
 	
 	
 	public String username;
 	public Stage stage;
 	public GridPane gp = new GridPane();
 	public Label monthText = new Label();
+	Label message = new Label();
 	
 	public Calendar cal = Calendar.getInstance();
 	PersonDatabaseHandler pdb = new PersonDatabaseHandler();
@@ -60,6 +66,8 @@ public class ViewController implements Initializable {
 		assert createGroupButton != null : "fx:id=\"createGroupButton\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
+		message.setText(SessionData.message);
+		
 		
 		getAllPeople();
 		getAllGroups();
@@ -81,7 +89,7 @@ public class ViewController implements Initializable {
 			public void handle(ActionEvent arg0) {
 				eventContainer.getChildren().clear();
 				try {
-					eventContainer.getChildren().add(FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
+					eventContainer.getChildren().add((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -209,11 +217,12 @@ public class ViewController implements Initializable {
 		Label showCal = new Label("show calendar\nfor : ");
 		StackPane sp = new StackPane();
 		StackPane calsp = new StackPane();
-		sp.getChildren().addAll(username, showCal);
+		sp.getChildren().addAll(username, showCal, message);
 		HBox titleBox = new HBox();
 		titleBox.getChildren().addAll(bLeft, monthText, bRight);
 		calsp.getChildren().add(titleBox);
 		
+		StackPane.setAlignment(message, Pos.CENTER);
 		StackPane.setAlignment(titleBox, Pos.CENTER);
 		StackPane.setAlignment(username, Pos.TOP_LEFT);
 		StackPane.setAlignment(showCal, Pos.TOP_RIGHT);
@@ -245,11 +254,11 @@ public class ViewController implements Initializable {
 	}
 	
 	
-	public void addToListBox(String name, boolean checked, VBox list) {
+	public void addToListBox(String name, boolean checked, final VBox list) {
 		HBox hbox = new HBox();
 		CheckBox cb = new CheckBox();
 		cb.selectedProperty().set(true);
-		Button b = new Button("remove");
+		final Button b = new Button("remove");
 		b.setStyle("-fx-color:red; -fx-");
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
@@ -286,7 +295,16 @@ public class ViewController implements Initializable {
 	}
 	
 	public void getAllGroups() {
+		ArrayList<GroupData> groups = new ArrayList<GroupData>();
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
+		
+		for (String g: groupNames) {
+			String sLeft = g.split(":")[0];
+			String sRight = g.split(":")[1];
+			groups.add(new GroupData(sLeft, sRight));
+		}
+		
+		
 		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
 		SessionData.allGroups = people;
 	}

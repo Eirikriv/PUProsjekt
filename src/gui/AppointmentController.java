@@ -96,16 +96,13 @@ public class AppointmentController implements Initializable {
 		groups.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
+					System.out.println(newValue);
 					ArrayList<String> members = gdb.getGroupMembers(newValue);
 					for (String name: members) {
 						addToListView(name);
 					}
 				}
 		});
-		
-		
-		
-		
 		
 		appointmentContainer.add(members, 1, 4);
 		appointmentContainer.add(groups, 1, 5);
@@ -210,8 +207,8 @@ public class AppointmentController implements Initializable {
 		if (roomId.length() == 0) {
 			return;
 		}
-		
-		String[] data = {title, start, end, description, roomId};
+		String owner = SessionData.username;
+		String[] data = {title, owner, start, end, description, roomId};
 		String eventID = edb.add(data);
 		
 		for (String username: listViewList) {
@@ -230,6 +227,7 @@ public class AppointmentController implements Initializable {
 			
 		}
 		
+		SessionData.message = "New appointment created!";
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 		
 		
