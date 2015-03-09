@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class EventDatabaseHandler implements DatabaseHandler {
 
-	@Override
+	//Returnerer en liste på formen [title, owner, start, end, desc, roomID]
 	public ArrayList<String> get(String primaryKey) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -54,7 +54,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public boolean remove(String primaryKey) {
 		try {
 			Database.makeStatement("DELETE FROM Event"
-								+  "WHERE EventID = "+primaryKey+";");
+								+  "WHERE EventID = " + primaryKey + ";");
 		return true;
 		}
 		catch (Exception e){
