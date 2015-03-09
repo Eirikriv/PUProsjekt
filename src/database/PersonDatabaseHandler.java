@@ -67,7 +67,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<ArrayList<String>> getPersonEvents(String username) {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		try {
-			String query = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
+			String query = "SELECT Event.Title, Event.Description, Event.Start, Event.End\n"
 						+  "FROM Person, Event, PersonEvent\n"
 						+  "WHERE Person.PersonID = PersonEvent.PersonID\n"
 						+  "AND Event.EventID = PersonEvent.EventID\n"
