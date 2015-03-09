@@ -31,7 +31,6 @@ public class Database {
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "Name VARCHAR(20) NOT NULL,"
 					+ "Password	VARCHAR(20)	NOT NULL,"
-					+ "Admin BOOLEAN NOT NULL DEFAULT 0"
 					+ "PRIMARY KEY (Username));");
 			
 			//Oppretter Group-tabellen		
