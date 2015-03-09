@@ -121,7 +121,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 					+ "AND PersonInGroup.Username = '" + username + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
-				personInfo.add(rs.getString(2)+" "+rs.getString(1));
+				personInfo.add(rs.getString(2)+":"+rs.getString(1));
 
 			}
 			return personInfo;
