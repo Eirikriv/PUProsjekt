@@ -7,7 +7,19 @@ public class EventDatabaseHandler implements DatabaseHandler {
 
 	@Override
 	public ArrayList<String> get(String primaryKey) {
-		return null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String query = "SELECT * FROM Event WHERE Event.EventID = '" + primaryKey + "'";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				for (int i = 2; i <= 7; i++)
+					list.add(rs.getString(i));
+			}
+			return list;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("EventID: " + primaryKey + "- does not exist.");
+		}
 	}
 	
 	//Tar inn en liste på formen [title, owner, start, end, desc, roomID]

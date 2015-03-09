@@ -9,7 +9,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> get(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT * FROM Person WHERE Person.Username = " + username + "";
+			String query = "SELECT * FROM Person WHERE Person.Username = '" + username + "'";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				for (int i = 2; i <= 4; i++)
@@ -64,10 +64,10 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 
 	//Henter ut alle hendelser for person med PersonID id
 	//Returnerer en liste på formen [[title, description, start, end], ...] 
-	public ArrayList<ArrayList<String>> getPersonEvents(String username) {
-		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+	public ArrayList<String> getPersonEvents(String username) {
+		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Event.Title, Event.Description, Event.Start, Event.End\n"
+			String query = "SELECT Event.EventID\n"
 						+  "FROM Person, Event, PersonEvent\n"
 						+  "WHERE Person.Username = PersonEvent.Username\n"
 						+  "AND Event.EventID = PersonEvent.EventID\n"
@@ -75,10 +75,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				ArrayList<String> temp = new ArrayList<String>();
-				for (int i = 1; i <= 4; i++)
-					temp.add(rs.getString(i));
-				list.add(temp);
+				list.add(rs.getString(1));
 			}
 			return list;
 		}
