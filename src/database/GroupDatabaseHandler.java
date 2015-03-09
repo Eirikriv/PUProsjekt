@@ -96,11 +96,11 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getGroupMembers(String groupID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Person.Username, Person.Name"
-						+  "FROM Person, Groups, PersonGroup\n"
-						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
-						+  "AND Groups.GroupID = '" + groupID + "'\n"
-						+  "GROUP BY Groups.Name;";
+			String query = "SELECT Person.Username, Person.Name "
+						+  "FROM Person, Groups, PersonInGroup "
+						+  "WHERE Person.Username = PersonInGroup.Username "
+						+  "AND Groups.GroupID = PersonInGroup.GroupID "
+						+  "AND Groups.GroupID = '" + groupID + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				list.add(rs.getString(1) + "<" + rs.getString(2) + ">");
