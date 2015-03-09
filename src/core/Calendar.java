@@ -24,8 +24,8 @@ public class Calendar {
 		this.calendar = result;
 	}
 	
-	public void addEvent(String name, String start, String end, String desc, String roomId) {
-		Event e = new Event(name, start, end, desc, roomId);
+	public void addEvent(String owner, String name, String start, String end, String desc, String roomId) {
+		Event e = new Event(name, owner, start, end, desc, roomId);
 		this.calendar.add(e);
 	}
 
