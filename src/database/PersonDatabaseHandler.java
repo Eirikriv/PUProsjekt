@@ -115,13 +115,14 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAllGroups(String username) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
-			String query = "SELECT Groups.Name\n"
+			String query = "SELECT Groups.Name, Groups.GroupID\n"
 					+ "FROM Groups, PersonInGroup\n"
 					+ "WHERE PersonInGroup.GroupID = Groups.GroupID\n"
 					+ "AND PersonInGroup.Username = '" + username + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
-				personInfo.add(rs.getString(1));
+				personInfo.add(rs.getString(2)+":"+rs.getString(1));
+
 			}
 			return personInfo;
 		}

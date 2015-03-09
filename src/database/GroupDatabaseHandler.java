@@ -93,13 +93,13 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	
 	//Henter ut alle gruppemedlemer av en gruppe
 	//Returnerer en liste på [[], ...]
-	public ArrayList<String> getGroupMembers(String groupName) {
+	public ArrayList<String> getGroupMembers(String groupID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT Person.Username, Person.Name"
 						+  "FROM Person, Groups, PersonGroup\n"
 						+  "WHERE Person.PersonID = PersonInGroup.PersonID\n"
-						+  "AND Groups.GroupID = PersonGroup.GroupID AND Groups.Name = " + groupName + "\n"
+						+  "AND Groups.GroupID = '" + groupID + "'\n"
 						+  "GROUP BY Groups.Name;";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
