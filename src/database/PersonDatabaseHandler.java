@@ -69,7 +69,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		try {
 			String query = "SELECT Event.Title, Event.Description, Event.Start, Event.End\n"
 						+  "FROM Person, Event, PersonEvent\n"
-						+  "WHERE Person.PersonID = PersonEvent.PersonID\n"
+						+  "WHERE Person.Username = PersonEvent.Username\n"
 						+  "AND Event.EventID = PersonEvent.EventID\n"
 						+  "AND Person.Username = '" + username + "'\n"
 						+  "ORDER BY Event.Start";
