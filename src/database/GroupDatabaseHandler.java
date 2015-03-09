@@ -67,21 +67,18 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	
 	//Henter alle events til en gruppe
 	//Returnerer en liste på formen [[name, description, start, end], ...]
-	public ArrayList<ArrayList<String>> getGroupEvents(String groupID) {
-		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+	public ArrayList<String> getGroupEvents(String groupID) {
+		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String q = "SELECT Event.Name, Event.Description, Event.Start, Event.End\n"
-					+  "FROM Group, Event, GroupEvent\n"
-					+  "WHERE Group.GroupID = GroupEvent.GroupID\n"
-					+  "AND EventID = GroupEvent.EventID\n"
-					+  "AND Group.GroupID = " + groupID
-					+  "\nORDER BY Event.Start;";
+			String q = "SELECT Event.EventID "
+					+  "FROM Group, Event, GroupEvent "
+					+  "WHERE Group.GroupID = GroupEvent.GroupID "
+					+  "AND EventID = GroupEvent.EventID "
+					+  "AND Group.GroupID = " + groupID + " "
+					+  "ORDER BY Event.Start;";
 			ResultSet rs = Database.makeQuery(q);
 			while (rs.next()) {
-				ArrayList<String> temp = new ArrayList<String>();
-				for (int i = 1; i <= 4; i++)
-					temp.add(rs.getString(i));
-				list.add(temp);
+					list.add(rs.getString(1));
 			}
 			return list;
 			

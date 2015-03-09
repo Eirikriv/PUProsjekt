@@ -89,7 +89,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 		}
 	}
 
-	public ArrayList<ArrayList<String>> getRoomEvents(String groupID) {
+	public ArrayList<String> getRoomEvents(String groupID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

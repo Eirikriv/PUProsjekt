@@ -34,6 +34,10 @@ public class Event {
 		roomID = eventInfo.get(5);
 	}
 	
+	public String getOwner() {
+		return owner;
+	}
+	
 	public String getName() {
 		return name;
 	}

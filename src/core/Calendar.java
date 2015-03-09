@@ -37,10 +37,10 @@ public class Calendar {
 		ArrayList<String> list = null;
 		if (Person.class.isInstance(owner))
 			list = pdbh.getPersonEvents(owner.getPrimaryKey());
-//		else if (Group.class.isInstance(owner))
-//			list = gdbh.getGroupEvents(owner.getPrimaryKey());
-//		else if (Room.class.isInstance(owner))
-//			list = rdbh.getRoomEvents(owner.getPrimaryKey());
+		else if (Group.class.isInstance(owner))
+			list = gdbh.getGroupEvents(owner.getPrimaryKey());
+		else if (Room.class.isInstance(owner))
+			list = rdbh.getRoomEvents(owner.getPrimaryKey());
 		else
 			throw new IllegalArgumentException("Invalid CalendarOwner object");
 		ArrayList<Event> result = new ArrayList<Event>();
