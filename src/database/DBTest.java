@@ -9,7 +9,7 @@ public class DBTest {
 //		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 //		GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
-		EventDatabaseHandler edbh = new EventDatabaseHandler();
+//		EventDatabaseHandler edbh = new EventDatabaseHandler();
 		
 //		Database.initializeDatabase();
 //		pdbh.add(new String[]{"cecilite", "Cecilie Teisberg", "password"});
@@ -42,8 +42,6 @@ public class DBTest {
 //		for(String string : list) {
 //			System.out.println(string);
 //		}
-		
-		edbh.remove("6");
 		
 //		ArrayList<String> list = rdbh.getAvailableRooms("2015-03-02 11:00", "2015-03-02 13:00", "10");
 //		for (int i = 0; i < list.size(); i++) {

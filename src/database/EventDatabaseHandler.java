@@ -53,7 +53,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	@Override
 	public boolean remove(String primaryKey) {
 		try {
-			Database.makeStatement("DELETE FROM Event"
+			Database.makeStatement("DELETE FROM Event "
 								+  "WHERE EventID = " + primaryKey + ";");
 		return true;
 		}
