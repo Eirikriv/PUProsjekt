@@ -14,10 +14,11 @@ public class Event {
 	private String end;
 	private String roomID;
 	
-	Event(String title, String start, String end, String desc, String roomid){
-		String eventID = edbh.add(new String[]{title, start, end, desc, roomid});
+	Event(String title, String owner, String start, String end, String desc, String roomid){
+		String eventID = edbh.add(new String[]{title, owner, start, end, desc, roomid});
 		this.eventID = eventID;
 		this.name = title;
+		this.owner = owner;
    		this.start= start;
 		this.end = end;
 		this.desc = desc;
@@ -77,7 +78,4 @@ public class Event {
 		this.end = end;
 		edbh.update(new String[]{this.name, this.start, end, this.desc,this.roomID});
 	}
-	
-	
-
 }
