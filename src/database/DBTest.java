@@ -35,6 +35,8 @@ public class DBTest {
 //		for (int i = 0; i < list.size(); i++) {
 //			System.out.println(list.get(i));
 //		}
+		
+		
 		ArrayList<String> list = rdbh.getAvailableRooms("2015-03-02 11:00", "2015-03-02 13:00", "10");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
