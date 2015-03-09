@@ -87,16 +87,17 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	public ArrayList<String> login(String username, String password) {
+	//Returnerer en liste på formen [username, name, password, admin]
+	public ArrayList<String> login(String username, String password, String admin) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
-			String query = "SELECT username, name, password\n"
+			String query = "SELECT *\n"
 					+ "FROM Person\n"
 					+ "WHERE Username = '" + username + "'\n"
 						+ "AND Password = '" + password + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 1; i <= 3; i++) {
+				for (int i = 1; i <= 4; i++) {
 					personInfo.add(rs.getString(i));
 				}
 			}
