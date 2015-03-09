@@ -13,7 +13,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	//Tar inn en liste på formen [title, start, end, desc, roomID]
 	public String add(String[] eventInfo) {
 		try {
-			Database.makeStatement("INSERT INTO Event(Name, Start, End, Description, RoomID) "
+			Database.makeStatement("INSERT INTO Event(Title, Start, End, Description, RoomID) "
 				+ "VALUES( '"+eventInfo[0]+"', '"+ eventInfo[1] +"', '"+ eventInfo[2] +"', '"+ eventInfo[3] +"', '"+ eventInfo[4] +"');");
 			ResultSet rs = Database.makeQuery("SELECT MAX(EventID) FROM Event;");
 			while(rs.next()) {
@@ -26,12 +26,12 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	//Tar inn en liste på formen [name, start, end, desc, roomID]
+	//Tar inn en liste på formen [eventID, title, start, end, desc, roomID]
 	public boolean update(String[] eventInfo) {
 		try {
 			Database.makeStatement("UPDATE Event\n"
-								 + "SET name = '"+ eventInfo[0]+", start = '"+ eventInfo[1] + "', end = '"+eventInfo[2] +"', desc = '"+ eventInfo[3]+ "', roomID = '"+eventInfo[4]+"\n"
-								 + "WHERE name = '"+eventInfo[0]+"';");
+								 + "SET title = '"+ eventInfo[1]+", start = '"+ eventInfo[2] + "', end = '"+eventInfo[3] +"', desc = '"+ eventInfo[4]+ "', roomID = '"+eventInfo[5]+"\n"
+								 + "WHERE EventID = '"+eventInfo[0]+"';");
 		return true;
 		}
 		catch (Exception e){
@@ -52,7 +52,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	
 	public boolean addPerson(String eventID, String username) {
 		try {
-			String stmt = "INSERT INTO PersonEvent "
+			String stmt = "INSERT INTO PersonEvent(Username, EventID) "
 					+ "VALUES('" + username + "', '" + eventID + "');";
 			Database.makeStatement(stmt);
 			return true;
