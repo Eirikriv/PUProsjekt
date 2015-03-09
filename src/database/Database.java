@@ -61,7 +61,7 @@ public class Database {
 			makeStatement("CREATE TABLE Event"
 					+ "(EventID INT NOT NULL AUTO_INCREMENT,"
 					+ "Title VARCHAR(20) NOT NULL,"
-					+ "Owner VARCHAR(20) NOT NULL,"
+					+ "Owner VARCHAR(20) NOT NULL DEFAULT FALSE,"
 					+ "Start CHAR(16) NOT NULL,"
 					+ "End CHAR(16) NOT NULL,"
 					+ "Description VARCHAR(100),"
