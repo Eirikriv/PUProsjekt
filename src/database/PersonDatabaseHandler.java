@@ -166,4 +166,13 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public void isNotified(String username) {
+		try {
+			String statement = "UPDATE Person SET Notified = TRUE WHERE Username = '" + username + "'";
+			Database.makeStatement(statement);
+		} catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
 }
