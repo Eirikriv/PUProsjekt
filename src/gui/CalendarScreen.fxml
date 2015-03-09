@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane prefHeight="515.0" prefWidth="589.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+<TabPane prefHeight="539.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
    <tabs>
       <Tab text="Calender">
          <content>
@@ -57,7 +57,7 @@
                <children>
                   <HBox prefHeight="449.0" prefWidth="506.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="298.0" prefWidth="151.0">
+                        <VBox prefHeight="510.0" prefWidth="98.0">
                            <children>
                               <StackPane prefHeight="48.0" prefWidth="149.0">
                                  <children>
@@ -71,19 +71,66 @@
                               </StackPane>
                            </children>
                         </VBox>
-                        <VBox prefHeight="486.0" prefWidth="415.0">
+                        <VBox prefHeight="510.0" prefWidth="573.0">
                            <children>
-                              <TableView fx:id="eventTableView" prefHeight="378.0" prefWidth="308.0">
-                                <columns>
-                                  <TableColumn fx:id="titleColumn" prefWidth="82.0" text="Title" />
-                                  <TableColumn prefWidth="99.0" text="Description" />
-                                    <TableColumn minWidth="0.0" prefWidth="55.0" text="Start" />
-                                    <TableColumn prefWidth="51.0" text="End" />
-                                </columns>
-                                 <VBox.margin>
-                                    <Insets top="15.0" />
-                                 </VBox.margin>
-                              </TableView>
+                              <StackPane>
+                                 <children>
+                                    <Label text="Events">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </StackPane>
+                              <GridPane fx:id="eventGrid" prefHeight="71.0" prefWidth="528.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="111.0" />
+                                  <ColumnConstraints hgrow="ALWAYS" maxWidth="267.0" minWidth="10.0" prefWidth="258.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="108.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="Title">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="71.0" prefWidth="235.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="Description">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="71.0" prefWidth="104.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label text="Start">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                       <children>
+                                          <Label text="End">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </GridPane>
                            </children></VBox>
                      </children>
                   </HBox>
