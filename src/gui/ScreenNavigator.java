@@ -1,5 +1,6 @@
 package gui;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 
 import java.io.IOException;
  
@@ -12,7 +13,7 @@ public class ScreenNavigator {
     public static final String SCREEN_WEEK = "WeekScreen.fxml";
     
     public static final double SCREEN_CALENDAR_HEIGHT = 600;
-    public static final double SCREEN_CALENDAR_WIDTH = 650;
+    public static final double SCREEN_CALENDAR_WIDTH = 750;
     public static final double SCREEN_LOGIN_HEIGHT = 350;
     public static final double SCREEN_LOGIN_WIDTH = 250;
     public static final double SCREEN_NEW_APPOINTMENT_HEIGHT = 600;
@@ -45,7 +46,7 @@ public class ScreenNavigator {
         		height = 800;
         		width = 800;
         	}
-            mainController.setVista(FXMLLoader.load(ScreenNavigator.class.getResource(fxml)), height, width);
+            mainController.setVista((Node)FXMLLoader.load(ScreenNavigator.class.getResource(fxml)), height, width);
         } catch (IOException e) {
             e.printStackTrace();
         }

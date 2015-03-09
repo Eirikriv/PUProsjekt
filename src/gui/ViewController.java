@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -48,8 +49,7 @@ public class ViewController implements Initializable {
 	@FXML private Button createEventButton;
 	@FXML private Button editEventButton;
 	@FXML private AnchorPane eventContainer;
-	@FXML private TableView<StringProperty> eventTableView;
-	@FXML private TableColumn<String, String> titleColumn;
+	@FXML private GridPane eventGrid;
 	
 	
 	public String username;
@@ -60,6 +60,7 @@ public class ViewController implements Initializable {
 	
 	public Calendar cal = Calendar.getInstance();
 	PersonDatabaseHandler pdb = new PersonDatabaseHandler();
+	EventDatabaseHandler edb = new EventDatabaseHandler();
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -67,7 +68,24 @@ public class ViewController implements Initializable {
 		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		message.setText(SessionData.message);
+		SessionData.allEvents = pdb.getPersonEvents(SessionData.username);
 		
+		int rowCount = 1;
+		int columnCount = 0;
+		
+		for (ArrayList<String> event: SessionData.allEvents) {
+			for (String item: event) {
+				System.out.println(item);
+				StackPane itemContainer = new StackPane();
+				//Label itemText = new Label(item.substring(0, Math.min(10, item.length())));
+				Label itemText = new Label(item);
+				itemContainer.getChildren().add(itemText);
+				eventGrid.add(itemContainer, columnCount, rowCount);
+				columnCount += 1;
+			}
+			columnCount = 0;
+			rowCount += 1;
+		}
 		
 		getAllPeople();
 		getAllGroups();
