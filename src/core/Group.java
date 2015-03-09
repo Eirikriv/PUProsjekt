@@ -26,6 +26,12 @@ public class Group implements CalendarOwner {
 	public String getName() {
 		return groupName;
 	}
+	
+	public void setName(String name) {
+		this.groupName = name;
+		this.gdbh.update(new String[] {this.groupID,this.groupName});
+	}
+	
 	public void addMember(String username){
 		members.add(username);//legg at db oppdaterer 
 		gdbh.addGroupMember(groupID, username);
