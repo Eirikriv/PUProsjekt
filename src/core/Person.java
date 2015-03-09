@@ -11,23 +11,27 @@ public class Person implements CalendarOwner{
 	private String name;
 	private String username;
 	private String password;
+	private String Admin;
 	
-	
-	public Person(String name, String username, String password) {
+	public Person(String name, String username, String password, boolean Adminn) {
 		pdbh = new PersonDatabaseHandler();
 		this.name = name;
 		this.username = username;
 		this.password = password;
+		if(Adminn){
+			this.Admin = "1";
+		} else Admin = "0"; 
 		this.cal = new Calendar(this);
-		pdbh.add(new String[]{name, username, password});
+		pdbh.add(new String[]{name, username, password,Admin});
 	}
 	
-	public Person(String name) {
+	public Person(String name,boolean Admin) {
 		this.cal = new Calendar(this);
 		ArrayList<String> list = pdbh.get(name);
 		this.name = name;
 		this.username = list.get(1);
 		this.password = list.get(2);
+		this.setAdmin(Admin);
 	}
 	
 	public void updatePassword(String password) {
@@ -50,6 +54,14 @@ public class Person implements CalendarOwner{
 	
 	public String getPrimaryKey() {
 		return username;
+	}
+
+	public boolean isAdmin() {
+		return Admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		Admin = admin;
 	}
 	
 }

@@ -27,7 +27,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public String add(String[] personInfo) {
 		try {
 			Database.makeStatement("INSERT INTO Person "
-						+ "VALUES('"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[2] +"');");
+						+ "VALUES('"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[2] +"', '" + personInfo[3] + "');");
 			return personInfo[0];
 		}
 		catch (Exception e){
