@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
 import javafx.beans.property.StringProperty;
@@ -68,17 +69,15 @@ public class ViewController implements Initializable {
 		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		message.setText(SessionData.message);
-		SessionData.allEvents = pdb.getPersonEvents(SessionData.username);
-		
+		SessionData.allEvents = SessionData.person.getCalendar().getCalendar();
 		int rowCount = 1;
 		int columnCount = 0;
 		
-		for (ArrayList<String> event: SessionData.allEvents) {
-			for (String item: event) {
-				System.out.println(item);
+		for (Event event: SessionData.allEvents) {
+			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
+			for (int x = 0; x<4; x++) {
 				StackPane itemContainer = new StackPane();
-				//Label itemText = new Label(item.substring(0, Math.min(10, item.length())));
-				Label itemText = new Label(item);
+				Label itemText = new Label(eventInfo[x]);
 				itemContainer.getChildren().add(itemText);
 				eventGrid.add(itemContainer, columnCount, rowCount);
 				columnCount += 1;

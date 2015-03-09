@@ -2,6 +2,8 @@ package gui;
 
 import java.util.ArrayList;
 
+import core.Event;
+import core.Person;
 import database.RoomDatabaseHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,8 @@ public class SessionData {
 	public static ObservableList<GroupData> allGroupInfo;
 	public static String currentWeek;
 	public static String message;
-	public static ArrayList<ArrayList<String>> allEvents;
+	public static ArrayList<Event> allEvents;
+	public static Person person;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		System.out.println("" + start + end + capacity);

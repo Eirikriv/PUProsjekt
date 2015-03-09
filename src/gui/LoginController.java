@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import core.Person;
 import database.PersonDatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,16 +34,18 @@ public class LoginController implements Initializable {
         			if (usernameText.getText().length() == 0 && passwordText.getText().length() == 0) {
         				SessionData.username = "martibni";
         				SessionData.message = "Login sucessful";
+        				SessionData.person = new Person(SessionData.username);
 	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	        			return;
         			}
         			
-	        		ArrayList<String> person = pdb.login(usernameText.getText(), passwordText.getText());
-	        		if (person.size() > 0) {
-	        			SessionData.username = person.get(0);
+	        		String person = pdb.login(usernameText.getText(), passwordText.getText());
+	        		if (person.length() > 0) {
+	        			SessionData.username = person;
 	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	        		}
         		} catch (Exception e) {
+        			e.printStackTrace();
         			loginLabel.setText("Login failed..");
         			loginLabel.setFill(Color.RED);
         		}
