@@ -1,12 +1,10 @@
 package core;
 
-
 import java.util.ArrayList;
-
 import database.PersonDatabaseHandler;
 
 public class Person implements CalendarOwner{
-	PersonDatabaseHandler pdbh;
+	PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 	private Calendar cal;
 	private String name;
 	private String username;
@@ -14,7 +12,6 @@ public class Person implements CalendarOwner{
 	private String admin;
 	
 	public Person(String name, String username, String password, String admin) {
-		pdbh = new PersonDatabaseHandler();
 		this.name = name;
 		this.username = username;
 		this.password = password;
@@ -47,7 +44,7 @@ public class Person implements CalendarOwner{
 	}
 	
 	public ArrayList<String> getAllGroups() {
-		return this.pdbh.getAllGroups(this.username);
+		return this.pdbh.getAllGroups(username);
 	}
 	
 //	public ArrayList<Event> getPersonEvents() {
@@ -69,7 +66,7 @@ public class Person implements CalendarOwner{
 	}
 
 	public boolean isAdmin() {
-		if(admin == "TRUE")
+		if(admin == "1")
 			return true;
 		return false;
 	}
