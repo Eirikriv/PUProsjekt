@@ -9,20 +9,32 @@ public class Group implements CalendarOwner {
 	private String groupName;
 	private Calendar groupCal;
 	private ArrayList<String> members;
-	GroupDatabaseHandler gdbh;
+	GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 	
 	public Group(String groupID, String groupName) {
-		gdbh = new GroupDatabaseHandler();
-		this.groupName = groupName;
+		if (groupID == null) {
+			this.groupID = gdbh.add(new String[]{groupName});
+			this.groupName = groupName;
+		}
+		else if (groupName == null) {
+			this.groupID = groupID;
+			this.groupName = gdbh.get(groupID).get(0);
+		}
+		else {
+			this.groupID = groupID;
+			this.groupName = groupName;
+		}
 		this.groupCal = new Calendar(this);
-		this.groupID=gdbh.add(new String[]{groupID});
 	}
+	
 	public Calendar getCalendar() {
 		return groupCal;
 	}
+	
 	public String getPrimaryKey() {
 		return groupID;
 	}
+	
 	public String getName() {
 		return groupName;
 	}
@@ -36,6 +48,7 @@ public class Group implements CalendarOwner {
 		members.add(username);//legg at db oppdaterer 
 		gdbh.addGroupMember(groupID, username);
 	}
+	
 	public void removeMember(String username){
 		if(members.contains(username)){
 			members.remove(username);

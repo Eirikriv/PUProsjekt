@@ -1,6 +1,7 @@
 package core;
 
 //import database.EventDatabaseHandler;
+//import database.EventDatabaseHandler;
 //import database.GroupDatabaseHandler;
 import database.PersonDatabaseHandler;
 //import database.RoomDatabaseHandler;
@@ -16,4 +17,6 @@ public class Program {
 		Person p = new Person(id);
 		return p;
 	}
+	
+	
 }
