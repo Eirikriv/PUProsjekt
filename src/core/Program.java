@@ -17,6 +17,4 @@ public class Program {
 		Person p = new Person(id);
 		return p;
 	}
-	
-	
 }

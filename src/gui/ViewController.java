@@ -38,6 +38,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
@@ -189,9 +190,9 @@ public class ViewController implements Initializable {
 			for (int y = 1; y<8; y++) {
 				StackPane z = new StackPane();
 				if (calStart.before(cal) || (calStart.after(calEnd))) {
-					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("red"), null, null), null));
+					z.setBackground(new Background(new BackgroundFill(Color.web("0xCDCDCD"), null, null), null));
 				} else {
-					z.setBackground(new Background(new BackgroundFill(Paint.valueOf("green"), null, null), null));
+					z.setBackground(new Background(new BackgroundFill(Color.web("0xCBEDFF"), null, null), null));
 				}
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);

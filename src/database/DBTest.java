@@ -15,7 +15,6 @@ public class DBTest {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
-		
 //		Database.initializeDatabase();
 //		pdbh.add(new String[]{"cecilite", "Cecilie Teisberg", "password"});
 //		pdbh.add(new String[]{"eirikriv", "Eirik Rivedal", "password1"});
