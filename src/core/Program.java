@@ -1,6 +1,7 @@
 package core;
 
 //import database.EventDatabaseHandler;
+//import database.EventDatabaseHandler;
 //import database.GroupDatabaseHandler;
 import database.PersonDatabaseHandler;
 //import database.RoomDatabaseHandler;
@@ -17,9 +18,5 @@ public class Program {
 		return p;
 	}
 	
-	public static boolean createNewPerson(String username, String name, String password, String admin) {
-		if (pdbh.add(new String[]{username, name, password, admin}) == null)
-			return false;
-		return true;
-	}
+	
 }

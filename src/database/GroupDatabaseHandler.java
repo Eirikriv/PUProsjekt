@@ -4,11 +4,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class GroupDatabaseHandler implements DatabaseHandler {
-	@Override
+	
+	//Returnerer en liste på formen [name]
 	public ArrayList<String> get(String GroupID) {
 		ArrayList<String> groupList = new ArrayList<String>();
 		try {
-			String query = "SELECT * FROM Groups WHERE Groups.GroupID = '" + GroupID + "';";
+			String query = "SELECT Name FROM Groups WHERE Groups.GroupID = '" + GroupID + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				for (int i = 1; i <= 2; i++)
@@ -21,7 +22,7 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 		}
 	}
 
-	@Override
+	//Tar inn en liste på formen [name]
 	public String add(String[] info) {
 		String returnString = "";
 		try {
