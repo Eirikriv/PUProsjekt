@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import database.EventDatabaseHandler;
 public class Event {
-	private EventDatabaseHandler edbh;
+	private EventDatabaseHandler edbh = new EventDatabaseHandler();
 	private String eventID;
 	private String owner;
 	private String name;

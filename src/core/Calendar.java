@@ -8,9 +8,9 @@ import database.PersonDatabaseHandler;
 import database.RoomDatabaseHandler;
 
 public class Calendar {
-	private PersonDatabaseHandler pdbh;
-	private GroupDatabaseHandler gdbh;
-	private RoomDatabaseHandler rdbh;
+	private PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
+	private GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
+	private RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 	private ArrayList<Event> calendar = new ArrayList<Event>();
 	
 	public Calendar(CalendarOwner owner) {
