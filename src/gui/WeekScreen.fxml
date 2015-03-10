@@ -13,52 +13,52 @@
          <children>
             <StackPane GridPane.rowIndex="1">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="08:00" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="08:00" GridPane.rowIndex="1" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="2">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="09:00" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="09:00" GridPane.rowIndex="2" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="3">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="10:00" GridPane.rowIndex="3" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="4">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="11:00" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="11:00" GridPane.rowIndex="4" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="5">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="12:00" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="12:00" GridPane.rowIndex="5" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="6">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="13:00" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="13:00" GridPane.rowIndex="6" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="7">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14:00" GridPane.rowIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="14:00" GridPane.rowIndex="7" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="8">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="15:00" GridPane.rowIndex="8" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="15:00" GridPane.rowIndex="8" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="9">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="16:00" GridPane.rowIndex="9" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="16:00" GridPane.rowIndex="9" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.rowIndex="10">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="17:00" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="17:00" GridPane.rowIndex="10" StackPane.alignment="TOP_CENTER" />
                </children>
             </StackPane>
             <StackPane GridPane.columnIndex="1">

@@ -31,7 +31,6 @@ public class Main extends Application {
         mainController.setStage(stage);
         ScreenNavigator.setMainController(mainController);
         ScreenNavigator.loadVista(ScreenNavigator.SCREEN_LOGIN);
- 
         return mainPane;
     }
  

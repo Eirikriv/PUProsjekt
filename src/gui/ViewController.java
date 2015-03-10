@@ -179,8 +179,8 @@ public class ViewController implements Initializable {
 				@Override public void handle(MouseEvent arg0) {
 					StackPane s = (StackPane)arg0.getSource();
 					Label l  = (Label)s.getChildren().get(0);
-					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_WEEK);
 					SessionData.currentWeek = l.getText();
+					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_WEEK);
 				}
 			});
 		}

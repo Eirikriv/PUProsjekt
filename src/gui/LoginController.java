@@ -1,11 +1,7 @@
 package gui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import core.Person;
-import database.PersonDatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,8 +18,6 @@ public class LoginController implements Initializable {
 	@FXML private PasswordField passwordText;
 	@FXML private Button loginButton;
 	@FXML private Text loginLabel;
-	
-	PersonDatabaseHandler pdb = new PersonDatabaseHandler();
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
