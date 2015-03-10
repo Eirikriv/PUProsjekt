@@ -30,11 +30,7 @@ public class Calendar {
 	}
 
 	
-	public ArrayList<Event> getCalendar() {
-		return calendar;
-	}
-	
-	public void updateCalendar(CalendarOwner owner) {
+	public ArrayList<Event> updateCalendar(CalendarOwner owner) {
 		ArrayList<String> list = null;
 		if (Person.class.isInstance(owner))
 			list = pdbh.getPersonEvents(owner.getPrimaryKey());
@@ -50,6 +46,7 @@ public class Calendar {
 			result.add(e);
 		}
 		this.calendar = result;
+		return calendar;
 	}
 		
 }
