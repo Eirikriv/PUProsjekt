@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,8 +26,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,7 +36,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
@@ -70,7 +66,7 @@ public class ViewController implements Initializable {
 		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		message.setText(SessionData.message);
-		SessionData.allEvents = SessionData.person.getCalendar().getCalendar();
+		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
 		int rowCount = 1;
 		int columnCount = 0;
 		SessionData.cal = this.cal;

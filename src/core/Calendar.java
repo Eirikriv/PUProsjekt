@@ -12,9 +12,11 @@ public class Calendar {
 	private GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 	private RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 	private ArrayList<Event> calendar = new ArrayList<Event>();
+	private CalendarOwner calOwner;
 	
 	public Calendar(CalendarOwner owner) {
 		//make the calendar
+		calOwner = owner;
 		ArrayList<String> list = pdbh.getPersonEvents(owner.getPrimaryKey());
 		ArrayList<Event> result = new ArrayList<Event>();
 		for (int i=0; i<list.size() ; i++) {
@@ -24,20 +26,20 @@ public class Calendar {
 		this.calendar = result;
 	}
 	
-	public void addEvent(String owner, String name, String start, String end, String desc, String roomId) {
-		Event e = new Event(name, owner, start, end, desc, roomId);
+	public void addEvent(String name, String start, String end, String desc, String roomId) {
+		Event e = new Event(name, calOwner.getPrimaryKey(), start, end, desc, roomId);
 		this.calendar.add(e);
 	}
 
 	
-	public ArrayList<Event> updateCalendar(CalendarOwner owner) {
+	public ArrayList<Event> updateCalendar() {
 		ArrayList<String> list = null;
-		if (Person.class.isInstance(owner))
-			list = pdbh.getPersonEvents(owner.getPrimaryKey());
-		else if (Group.class.isInstance(owner))
-			list = gdbh.getGroupEvents(owner.getPrimaryKey());
-		else if (Room.class.isInstance(owner))
-			list = rdbh.getRoomEvents(owner.getPrimaryKey());
+		if (Person.class.isInstance(calOwner))
+			list = pdbh.getPersonEvents(calOwner.getPrimaryKey());
+		else if (Group.class.isInstance(calOwner))
+			list = gdbh.getGroupEvents(calOwner.getPrimaryKey());
+		else if (Room.class.isInstance(calOwner))
+			list = rdbh.getRoomEvents(calOwner.getPrimaryKey());
 		else
 			throw new IllegalArgumentException("Invalid CalendarOwner object");
 		ArrayList<Event> result = new ArrayList<Event>();
