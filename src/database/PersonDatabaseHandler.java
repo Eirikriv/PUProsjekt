@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class PersonDatabaseHandler implements DatabaseHandler {
 		
-	//Henter ut all info om person med PersonID id
+	//Henter ut all info om person med brukernavn username
 	public ArrayList<String> get(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -22,12 +22,12 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	//Legger til person med name, username og pw
-	//Returnerer PersonID til personen eller -1 hvis den ikke finnes (altså ikke ble lagt til)
+	//Legger til person med [username, name, password, admin]
+	//Returnerer Username til personen eller -1 hvis den ikke finnes (altså ikke ble lagt til)
 	public String add(String[] personInfo) {
 		try {
-			Database.makeStatement("INSERT INTO Person(Username, Name, Admin) "
-						+ "VALUES('"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[2] +"');");
+			Database.makeStatement("INSERT INTO Person "
+						+ "VALUES('"+ personInfo[0] +"', '"+ personInfo[1] +"', '"+ personInfo[2] +"', '" + personInfo[3] + "');");
 			return personInfo[0];
 		}
 		catch (Exception e){
@@ -88,10 +88,9 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public String login(String username, String password) {
 		String username1 = "";
 		try {
-			String query = "SELECT Username\n"
-					+ "FROM Person\n"
-					+ "WHERE Username = '" + username + "'\n"
-						+ "AND Password = '" + password + "';";
+			String query = "SELECT Username FROM Person "
+					+ "WHERE Username = '" + username + "' "
+					+ "AND Password = '" + password + "';";
 			ResultSet rs = Database.makeQuery(query);
 			int x = 0;
 			while (rs.next()) {

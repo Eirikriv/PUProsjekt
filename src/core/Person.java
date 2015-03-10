@@ -24,12 +24,12 @@ public class Person implements CalendarOwner{
 	}
 	
 	public Person(String username) {
-		cal = new Calendar(this);
-		ArrayList<String> list = pdbh.get(name);
+		ArrayList<String> list = pdbh.get(username);
 		this.username = username;
-		name = list.get(1);
-		password = list.get(2);
-		admin = list.get(3);
+		name = list.get(0);
+		password = list.get(1);
+		admin = list.get(2);
+		cal = new Calendar(this);
 	}
 	
 	public void updatePassword(String password) {

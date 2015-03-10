@@ -43,14 +43,14 @@ public class Group implements CalendarOwner {
 			}
 	}
 	
-	public ArrayList<Event> getGroupEvents() {
-		ArrayList<String> events = gdbh.getGroupEvents(groupID);
-		ArrayList<Event> groupEvents = new ArrayList<Event>();
-		for (int i = 0; i < events.size(); i++) {
-			Event e = new Event(events.get(i));
-			groupEvents.add(e);
-		}
-		return groupEvents;
-	}
+//	public ArrayList<Event> getGroupEvents() {
+//		ArrayList<String> events = gdbh.getGroupEvents(groupID);
+//		ArrayList<Event> groupEvents = new ArrayList<Event>();
+//		for (int i = 0; i < events.size(); i++) {
+//			Event e = new Event(events.get(i));
+//			groupEvents.add(e);
+//		}
+//		return groupEvents;
+//	}
 	
 }	
