@@ -16,4 +16,10 @@ public class Program {
 		Person p = new Person(id);
 		return p;
 	}
+	
+	public static boolean createNewPerson(String username, String name, String password, String admin) {
+		if (pdbh.add(new String[]{username, name, password, admin}) == null)
+			return false;
+		return true;
+	}
 }
