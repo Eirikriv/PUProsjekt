@@ -13,8 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class WeekController implements Initializable {
 	
@@ -34,7 +38,7 @@ public class WeekController implements Initializable {
 			LocalTime endHour = LocalTime.parse(event.getEnd().split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
 			Calendar calstart = Calendar.getInstance();
 			calstart.setTime(SessionData.cal.getTime());
-			calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek));
+			calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek)+1);
 			while (calstart.get(Calendar.DAY_OF_WEEK) != 2) {
 				calstart.add(Calendar.DAY_OF_YEAR, -1);
 			}
@@ -48,7 +52,7 @@ public class WeekController implements Initializable {
 				int day = startDate.getDayOfWeek().getValue();
 				StackPane sp = new StackPane();
 				sp.getChildren().add(new Label(title));
-				sp.setStyle("-fx-background-color: green");
+				sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xD1EFFF"), null, null), null));
 				int hours = endHour.getHour() - startHour.getHour();
 				GridPane.setRowSpan(sp, hours);
 				innerWeekGrid.add(sp, day-1, startHour.getHour()-8);

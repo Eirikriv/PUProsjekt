@@ -190,9 +190,9 @@ public class ViewController implements Initializable {
 			for (int y = 1; y<8; y++) {
 				StackPane z = new StackPane();
 				if (calStart.before(cal) || (calStart.after(calEnd))) {
-					z.setBackground(new Background(new BackgroundFill(Color.web("0xCDCDCD"), null, null), null));
+					z.setBackground(new Background(new BackgroundFill(Color.web("0xECECEC"), null, null), null));
 				} else {
-					z.setBackground(new Background(new BackgroundFill(Color.web("0xCBEDFF"), null, null), null));
+					z.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
 				}
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);
