@@ -16,7 +16,6 @@ public class SessionData {
 	public static ObservableList<String> allMembers;
 	public static ObservableList<String> allGroups;
 	public static ObservableList<String> allRooms;
-	public static ObservableList<GroupData> allGroupInfo;
 	public static String currentWeek;
 	public static String message;
 	public static ArrayList<Event> allEvents;
