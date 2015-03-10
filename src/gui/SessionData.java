@@ -21,6 +21,7 @@ public class SessionData {
 	public static ArrayList<Event> allEvents;
 	public static Person person;
 	public static Calendar cal;
+	public static String id;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		System.out.println("" + start + end + capacity);
