@@ -5,7 +5,7 @@ package core;
 import database.PersonDatabaseHandler;
 //import database.RoomDatabaseHandler;
 
-public class CalendarProgram {
+public class Program {
 	private static PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 //	private static GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //	private static EventDatabaseHandler edbh = new EventDatabaseHandler();
