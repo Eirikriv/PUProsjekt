@@ -21,8 +21,8 @@ public class Person implements CalendarOwner{
 	}
 	
 	public Person(String username) {
-		ArrayList<String> list = pdbh.get(username);
 		this.username = username;
+		ArrayList<String> list = pdbh.get(username);
 		name = list.get(0);
 		password = list.get(1);
 		admin = list.get(2);
