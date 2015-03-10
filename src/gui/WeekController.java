@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import core.Event;
@@ -25,6 +26,7 @@ public class WeekController implements Initializable {
 		for (Event event: SessionData.allEvents) {
 			String title = event.getName();
 			LocalDate start = LocalDate.parse(event.getStart().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			Calendar calstart = SessionData.cal;
 		}
 	}
 	

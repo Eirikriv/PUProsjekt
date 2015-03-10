@@ -72,6 +72,7 @@ public class ViewController implements Initializable {
 		SessionData.allEvents = SessionData.person.getCalendar().getCalendar();
 		int rowCount = 1;
 		int columnCount = 0;
+		SessionData.cal = this.cal;
 		
 		for (Event event: SessionData.allEvents) {
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};

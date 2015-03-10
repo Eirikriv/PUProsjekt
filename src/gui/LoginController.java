@@ -31,19 +31,12 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		try {
-        			if (usernameText.getText().length() == 0 && passwordText.getText().length() == 0) {
-        				SessionData.username = "martibni";
-        				SessionData.message = "Login sucessful";
-        				SessionData.person = new Person(SessionData.username);
-	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-	        			return;
-        			}
-        			
-	        		String person = pdb.login(usernameText.getText(), passwordText.getText());
-	        		if (person.length() > 0) {
-	        			SessionData.username = person;
-	        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-	        		}
+        			SessionData.username = "martibni";
+        			SessionData.message = "Login sucessful";
+        			SessionData.person = core.Program.login("martibni", "password3");	
+        			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        		return;
+
         		} catch (Exception e) {
         			e.printStackTrace();
         			loginLabel.setText("Login failed..");

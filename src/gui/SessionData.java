@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import core.Event;
 import core.Person;
@@ -20,6 +21,7 @@ public class SessionData {
 	public static String message;
 	public static ArrayList<Event> allEvents;
 	public static Person person;
+	public static Calendar cal;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		System.out.println("" + start + end + capacity);
