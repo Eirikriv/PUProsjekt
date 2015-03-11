@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.adminController">
+   <children>
+      <HBox prefHeight="441.0" prefWidth="451.0">
+         <children>
+            <VBox prefHeight="441.0" prefWidth="247.0">
+               <children>
+                  <StackPane prefHeight="73.0" prefWidth="247.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#newUser" prefHeight="25.0" prefWidth="81.0" text="New user" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="74.0" prefWidth="247.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#newRoom" prefHeight="25.0" prefWidth="85.0" text="New room" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="85.0" prefWidth="247.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#newGroup" prefHeight="25.0" prefWidth="89.0" text="New group" />
+                     </children>
+                  </StackPane>
+               </children>
+            </VBox>
+            <TabPane prefHeight="421.0" prefWidth="265.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="People">
+                     <content>
+                        <ListView fx:id="peopleList" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                </Tab>
+                <Tab text="Groups">
+                     <content>
+                        <ListView fx:id="groupList" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                </Tab>
+                  <Tab text="Rooms">
+                     <content>
+                        <ListView fx:id="roomList" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
+            </TabPane>
+         </children>
+      </HBox>
+   </children>
+</StackPane>
