@@ -319,14 +319,18 @@ public class ViewController implements Initializable {
 		
 	}
 	
-	public void getAllPeople() {
-		ArrayList<String> personNames = pdb.getAllPersons();
-		ObservableList<String> people = FXCollections.observableArrayList(personNames);
+	public static void getAllPeople() {
+		ArrayList<core.Person> personNames = core.Program.getAllPersons();
+		ArrayList<String> peoples = new ArrayList<String>();
+		for (int x=0; x<personNames.size();x++){
+			peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
+		}
+		ObservableList<String> people = FXCollections.observableArrayList(peoples);
 		SessionData.allMembers = people;
 		
 	}
 	
-	public void getAllRooms() {
+	public static void getAllRooms() {
 		ArrayList<core.Room> room = core.Program.getAllRooms();
 		ArrayList<String> roomNames = new ArrayList<String>();
 		for (int x=0; x<room.size(); x++) {
