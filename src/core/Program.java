@@ -36,7 +36,7 @@ public class Program {
 		ArrayList<String> persons = pdbh.getAllPersons();
 		ArrayList<Person> allPersons = new ArrayList<Person>();
 		for (int i = 0; i < persons.size(); i++) {
-			Person p = new Person(persons.get(i));
+			Person p = new Person(persons.get(i).split("<")[0]);
 			allPersons.add(p);
 		}
 		return allPersons;
