@@ -37,6 +37,8 @@ public class AdminController implements Initializable {
 		peopleList.setItems(SessionData.allMembers);
 		groupList.setItems(SessionData.allGroups);
 		roomList.setItems(SessionData.allRooms);
+		
+		
 	}
 	
 	@FXML private void newUser() {
@@ -72,6 +74,8 @@ public class AdminController implements Initializable {
 				}
 				Person p = new Person(nameText.getText(), usernameText.getText(), passwordText.getText(), isAnAdmin);
 				ViewController.getAllPeople();
+				peopleList.setItems(SessionData.allMembers);
+				userContainer.getChildren().clear();
 			}
 		});
 		
