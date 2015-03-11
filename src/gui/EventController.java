@@ -58,7 +58,7 @@ public class EventController implements Initializable {
 		for (int i = 0; i < list.length; i++) {
 			StackPane sp = new StackPane();
 			sp.getChildren().add(list[i]);
-			StackPane.setAlignment(list[i], Pos.CENTER_LEFT);
+			StackPane.setAlignment(list[i], Pos.TOP_LEFT);
 			grid.add(sp, 1, i);
 		}
 		

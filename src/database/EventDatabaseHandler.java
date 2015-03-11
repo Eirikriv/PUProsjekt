@@ -91,7 +91,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		try {
 			String query = "SELECT Username FROM PersonEvent "
 					+ "WHERE EventID = " + eventID + " AND "
-					+ "(Status = NULL OR Status = 1);";
+					+ "(Status = NULL OR Status = '1');";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next())
 				participants.add(rs.getString(1));
