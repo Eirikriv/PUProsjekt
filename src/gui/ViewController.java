@@ -327,8 +327,12 @@ public class ViewController implements Initializable {
 	}
 	
 	public void getAllRooms() {
-		ArrayList<String> room = pdb.getAllPersons();
-		ObservableList<String> rooms = FXCollections.observableArrayList(room);
+		ArrayList<core.Room> room = core.Program.getAllRooms();
+		ArrayList<String> roomNames = new ArrayList<String>();
+		for (int x=0; x<room.size(); x++) {
+			roomNames.add(room.get(x).getPrimaryKey() + " [" +room.get(x).getCapacity() + "]");
+		}
+		ObservableList<String> rooms = FXCollections.observableArrayList(roomNames);
 		SessionData.allRooms = rooms;
 	}
 	
