@@ -92,5 +92,19 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getRoomEvents(String groupID) {
 		return null;
 	}
+	
+	public ArrayList<String> getAllRooms() {
+		ArrayList<String> rooms = new ArrayList<String>();
+		try {
+			String query = "SELECT RoomID FROM Room";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next())
+				rooms.add("" + rs.getString(1));
+			return rooms;
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new IllegalStateException();
+		}
+	}
 
 }
