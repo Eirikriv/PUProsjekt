@@ -67,6 +67,8 @@ public class ViewController implements Initializable {
 		int rowCount = 1;
 		int columnCount = 0;
 		SessionData.cal = this.cal;
+		getAllPeople();
+		getAllGroups();
 		
 		if (SessionData.person.isAdmin()) {
 			Tab tab = new Tab();
@@ -92,8 +94,6 @@ public class ViewController implements Initializable {
 			rowCount += 1;
 		}
 		
-		getAllPeople();
-		getAllGroups();
 		this.username = SessionData.username;
 		fillCalendar(calBox);
 
