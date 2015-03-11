@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
@@ -70,9 +69,6 @@ public class ViewController implements Initializable {
 		int rowCount = 1;
 		int columnCount = 0;
 		SessionData.cal = this.cal;
-		if (SessionData.person.isAdmin()) {
-			
-		}
 		
 		for (Event event: SessionData.allEvents) {
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
