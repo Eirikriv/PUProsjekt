@@ -10,9 +10,9 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> get(String roomID) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT *\n"
-					+  "FROM Room\n"
-					+  "WHERE Room.RoomID = " + roomID;
+			String query = "SELECT * "
+					+  "FROM Room "
+					+  "WHERE Room.RoomID = '" + roomID + "'";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				for (int i = 2; i <= 3; i++)
