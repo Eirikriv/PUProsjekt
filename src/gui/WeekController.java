@@ -11,8 +11,10 @@ import core.Event;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +26,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
+import javafx.stage.Popup;
 
 public class WeekController implements Initializable {
 	
@@ -67,8 +70,13 @@ public class WeekController implements Initializable {
 				sp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent e) {
-						SessionData.id = event.getEventID();
-						System.out.println(SessionData.id);
+						try {
+							SessionData.id = event.getEventID();
+							System.out.println(SessionData.id);
+							
+						} catch (Exception exc) {
+							exc.printStackTrace();
+						}
 					}
 				});
 			}
