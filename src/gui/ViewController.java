@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
@@ -25,6 +26,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -47,7 +50,7 @@ public class ViewController implements Initializable {
 	@FXML private Button editEventButton;
 	@FXML private AnchorPane eventContainer;
 	@FXML private GridPane eventGrid;
-	
+	@FXML private TabPane tabPane;
 	
 	public String username;
 	public Stage stage;
@@ -69,6 +72,13 @@ public class ViewController implements Initializable {
 		int rowCount = 1;
 		int columnCount = 0;
 		SessionData.cal = this.cal;
+		
+		if (SessionData.person.isAdmin()) {
+			System.out.println("admin");
+			Tab tab = new Tab();
+			tab.setText("Admin");
+			tabPane.getTabs().add(tab);
+		}
 		
 		for (Event event: SessionData.allEvents) {
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
@@ -97,17 +107,6 @@ public class ViewController implements Initializable {
 					String oldValue, String newValue) {
 					addToListBox(newValue, true, rightContainer);
 				}
-		});
-		
-		createEventButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent arg0) {
-				eventContainer.getChildren().clear();
-				try {
-					eventContainer.getChildren().add((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		});
 		
 		
@@ -252,6 +251,20 @@ public class ViewController implements Initializable {
 		setCalendarInfo();
 		calsp.setPadding(new Insets(15, 0, 0, 0));
 		box.getChildren().add(gp);
+		Button createEvent = new Button("New event");
+		box.getChildren().add(createEvent);
+		
+		createEvent.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent arg0) {
+				eventContainer.getChildren().clear();
+				try {
+					eventContainer.getChildren().add((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_NEW_APPOINTMENT)));
+					tabPane.getSelectionModel().select(2);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		
 	}
 	
@@ -322,4 +335,6 @@ public class ViewController implements Initializable {
 		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
 		SessionData.allGroups = people;
 	}
+	
+	
 }

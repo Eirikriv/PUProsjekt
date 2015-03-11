@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane prefHeight="539.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+<TabPane fx:id="tabPane" prefHeight="539.0" prefWidth="673.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
    <tabs>
       <Tab text="Calender">
          <content>
