@@ -62,9 +62,6 @@ public class ViewController implements Initializable {
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert createGroupButton != null : "fx:id=\"createGroupButton\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
-		assert leftContainer != null : "fx:id=\"leftContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
-		assert rightContainer != null : "fx:id=\"rightContainer\" was not injected: check your FXML file 'CalendarScreen.fxml'.";
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
 		int rowCount = 1;
@@ -72,7 +69,6 @@ public class ViewController implements Initializable {
 		SessionData.cal = this.cal;
 		
 		if (SessionData.person.isAdmin()) {
-			System.out.println("admin");
 			Tab tab = new Tab();
 			tab.setText("Admin");
 			tabPane.getTabs().add(tab);
@@ -249,8 +245,13 @@ public class ViewController implements Initializable {
 		setCalendarInfo();
 		calsp.setPadding(new Insets(15, 0, 0, 0));
 		box.getChildren().add(gp);
+		StackPane buttonContainer = new StackPane();
+		buttonContainer.setMinHeight(100);
 		Button createEvent = new Button("New event");
-		box.getChildren().add(createEvent);
+		StackPane.setAlignment(createEvent, Pos.CENTER);
+		buttonContainer.getChildren().add(createEvent);
+		box.getChildren().add(buttonContainer);
+		
 		
 		createEvent.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
