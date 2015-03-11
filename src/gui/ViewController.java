@@ -70,6 +70,11 @@ public class ViewController implements Initializable {
 		
 		if (SessionData.person.isAdmin()) {
 			Tab tab = new Tab();
+			try {
+				tab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_ADMIN)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			tab.setText("Admin");
 			tabPane.getTabs().add(tab);
 		}

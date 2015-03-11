@@ -12,6 +12,7 @@ public class ScreenNavigator {
     public static final String SCREEN_NEW_APPOINTMENT = "CreateAppointment.fxml";
     public static final String SCREEN_WEEK = "WeekScreen.fxml";
     public static final String SCREEN_EVENT = "EventScreen.fxml";
+    public static final String SCREEN_ADMIN = "AdminScreen.fxml";
     
     public static final double SCREEN_CALENDAR_HEIGHT = 600;
     public static final double SCREEN_CALENDAR_WIDTH = 750;
