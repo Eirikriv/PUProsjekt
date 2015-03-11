@@ -46,8 +46,6 @@ public class ViewController implements Initializable {
 	@FXML private VBox leftContainer;
 	@FXML private VBox rightContainer;
 	@FXML private VBox calBox;
-	@FXML private Button createEventButton;
-	@FXML private Button editEventButton;
 	@FXML private AnchorPane eventContainer;
 	@FXML private GridPane eventGrid;
 	@FXML private TabPane tabPane;
