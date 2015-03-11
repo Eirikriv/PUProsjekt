@@ -225,8 +225,6 @@ public class AppointmentController implements Initializable {
 		
 		SessionData.message = "New appointment created!";
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-		
-		
 	}
 
 }
