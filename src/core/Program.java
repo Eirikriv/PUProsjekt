@@ -41,4 +41,8 @@ public class Program {
 		}
 		return allPersons;
 	}
+	
+	public static void removePerson(String username) {
+		pdbh.remove(username);
+	}
 }
