@@ -14,7 +14,7 @@ public class Event {
 	private String end;
 	private String roomID;
 	
-	Event(String title, String owner, String start, String end, String desc, String roomid){
+	public Event(String title, String owner, String start, String end, String desc, String roomid){
 		String eventID = edbh.add(new String[]{title, owner, start, end, desc, roomid});
 		this.eventID = eventID;
 		this.name = title;
@@ -24,7 +24,7 @@ public class Event {
 		this.desc = desc;
 		this.roomID = roomid;	
 	}
-	Event(String eventID) {
+	public Event(String eventID) {
 		this.eventID = eventID;
 		ArrayList<String> eventInfo = edbh.get(eventID);
 		name = eventInfo.get(0);
