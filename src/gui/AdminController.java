@@ -71,6 +71,7 @@ public class AdminController implements Initializable {
 					isAnAdmin = "0";
 				}
 				Person p = new Person(nameText.getText(), usernameText.getText(), passwordText.getText(), isAnAdmin);
+				ViewController.getAllPeople();
 			}
 		});
 		
