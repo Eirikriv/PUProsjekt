@@ -325,6 +325,12 @@ public class ViewController implements Initializable {
 		
 	}
 	
+	public void getAllRooms() {
+		ArrayList<String> room = pdb.getAllPersons();
+		ObservableList<String> rooms = FXCollections.observableArrayList(room);
+		SessionData.allRooms = rooms;
+	}
+	
 	public void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
