@@ -3,14 +3,15 @@ package database;
 //import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.util.ArrayList;
-import java.util.ArrayList;
 
 public class DBTest {
 	public static void main(String[] args) throws SQLException {
 //		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 //		GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
-		EventDatabaseHandler edbh = new EventDatabaseHandler();
+//		EventDatabaseHandler edbh = new EventDatabaseHandler();
+		
+		
 //		ArrayList<String> list = pdbh.get("martibni");
 //		for (int i = 0; i < list.size(); i++) {
 //			System.out.println(list.get(i));
@@ -18,9 +19,11 @@ public class DBTest {
 //		ArrayList<String> rooms = rdbh.getAllRooms();		
 //		for (int i = 0; i < rooms.size(); i++)
 //			System.out.println(rooms.get(i));
-		ArrayList<String> p = edbh.getAllParticipants("4");
-		for (int i = 0; i < p.size(); i++)
-			System.out.println(p.get(i));
+//		ArrayList<String> p = edbh.getAllParticipants("4");
+		
+//		for (int i = 0; i < p.size(); i++)
+//			System.out.println(p.get(i));
+		
 //		Database.initializeDatabase();
 //		pdbh.add(new String[]{"cecilite", "Cecilie Teisberg", "password"});
 //		pdbh.add(new String[]{"eirikriv", "Eirik Rivedal", "password1"});
