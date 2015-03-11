@@ -96,7 +96,7 @@ public class RoomDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAllRooms() {
 		ArrayList<String> rooms = new ArrayList<String>();
 		try {
-			String query = "SELECT RoomID FROM Room";
+			String query = "SELECT RoomID FROM Room;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next())
 				rooms.add("" + rs.getString(1));

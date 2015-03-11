@@ -44,5 +44,4 @@ public class Room implements CalendarOwner{
 	public String getDescription() {
 		return desc;
 	}
-
 }
