@@ -21,13 +21,12 @@
             <Insets bottom="45.0" right="120.0" />
          </StackPane.margin>
       </Label>
-      <GridPane prefHeight="294.0" prefWidth="560.0">
+      <GridPane fx:id="grid" prefHeight="294.0" prefWidth="560.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="88.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="472.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
@@ -36,16 +35,21 @@
           <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="start" text="Start:" GridPane.rowIndex="1" />
-            <Label fx:id="end" text="End:" GridPane.rowIndex="2" />
-            <Label fx:id="desc" text="Description:" GridPane.rowIndex="3" />
-            <Label fx:id="room" text="Room:" GridPane.rowIndex="4" />
-            <Label fx:id="participants" text="Participants:" GridPane.rowIndex="5" />
-            <Label fx:id="declined" text="Declined:" GridPane.rowIndex="6" />
+            <Label fx:id="start" text="Start:" />
+            <Label fx:id="end" text="End:" GridPane.rowIndex="1" />
+            <Label fx:id="desc" text="Description:" GridPane.rowIndex="2" />
+            <Label fx:id="room" text="Room:" GridPane.rowIndex="3" />
+            <Label fx:id="participants" text="Participants:" GridPane.rowIndex="4" />
+            <Label fx:id="declined" text="Declined:" GridPane.rowIndex="5" />
          </children>
          <StackPane.margin>
-            <Insets bottom="85.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="85.0" left="20.0" right="20.0" top="70.0" />
          </StackPane.margin>
       </GridPane>
+      <HBox fx:id="titleBox" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets bottom="325.0" />
+         </StackPane.margin>
+      </HBox>
    </children>
 </StackPane>
