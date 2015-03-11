@@ -66,8 +66,9 @@ public class Person implements CalendarOwner{
 	}
 
 	public boolean isAdmin() {
-		if(admin == "1")
-			return true;
+		if(admin == "1") {
+			return true;			
+		}
 		return false;
 	}
 
@@ -75,6 +76,12 @@ public class Person implements CalendarOwner{
 		if(admin)
 			this.admin = "TRUE";
 		this.admin = "FALSE";
+	}
+	
+	public static void main(String[] args) {
+		Person p = new Person("anders", "a", "b", "0");
+		System.out.println(p.getName());
+		
 	}
 	
 }
