@@ -66,7 +66,7 @@ public class Person implements CalendarOwner{
 	}
 
 	public boolean isAdmin() {
-		if(admin == "1") {
+		if(admin.equals("1")) {
 			return true;			
 		}
 		return false;
