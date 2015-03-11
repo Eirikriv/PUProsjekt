@@ -69,6 +69,7 @@ public class ViewController implements Initializable {
 		SessionData.cal = this.cal;
 		getAllPeople();
 		getAllGroups();
+		getAllRooms();
 		
 		if (SessionData.person.isAdmin()) {
 			Tab tab = new Tab();

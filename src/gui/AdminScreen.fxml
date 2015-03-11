@@ -6,14 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AdminController">
    <children>
       <HBox prefHeight="441.0" prefWidth="451.0">
          <children>
             <VBox prefHeight="441.0" prefWidth="247.0">
                <children>
-                  <StackPane prefHeight="73.0" prefWidth="247.0">
+                  <StackPane fx:id="userContainer" prefHeight="73.0" prefWidth="247.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#newUser" prefHeight="25.0" prefWidth="81.0" text="New user" />
                      </children>
