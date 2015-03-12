@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import core.Person;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -150,6 +151,14 @@ public class AdminController implements Initializable {
 		
 		groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 		groupContainer.setMinSize(100, 200);
+		
+		add.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent arg0) {
+				System.out.println(peopleList.getSelectionModel().getSelectedItem());
+			}
+		});
+		
+		
 	}
 	
 	@FXML private void newRoom() {
