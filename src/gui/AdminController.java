@@ -3,8 +3,6 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.javafx.collections.ChangeHelper;
-
 import core.Person;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -144,7 +142,7 @@ public class AdminController implements Initializable {
 		Button add = new Button("<");
 		Button delete = new Button(">");
 		ccont.getChildren().addAll(add, delete);
-		ListView lw = new ListView<String>();
+		ListView<String> lw = new ListView<String>();
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		

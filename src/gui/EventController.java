@@ -31,7 +31,7 @@ public class EventController implements Initializable {
 		Label desc = new Label(e.getDesc());
 		Label room = new Label(e.getRoom());
 		String p = "";
-		ArrayList<core.CalendarOwner> ps = e.getParticipants();
+		ArrayList<String> ps = e.getParticipants();
 		for (int i = 0; i < ps.size(); i++) {
 			if (i != 0)
 				p += ", ";

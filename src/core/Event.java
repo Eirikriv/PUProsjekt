@@ -13,7 +13,7 @@ public class Event {
 	private String start;
 	private String end;
 	private String roomID;
-	private ArrayList<CalendarOwner> participants = new ArrayList<CalendarOwner>();
+	private ArrayList<String> participants = new ArrayList<String>();
 	private ArrayList<CalendarOwner> declined = new ArrayList<CalendarOwner>(); 
 	
 	public Event(String title, String owner, String start, String end, String desc, String roomid){
@@ -37,7 +37,7 @@ public class Event {
 		roomID = eventInfo.get(5);
 		ArrayList<String> p = edbh.getAllParticipants(eventID);
 		for (int i = 0; i < p.size(); i++) {
-			//participants.add(new Person(p.get(i)));
+			participants.add(p.get(i));
 		}
 			
 		ArrayList<String> d = edbh.getAllDeclined(eventID);
@@ -98,7 +98,7 @@ public class Event {
 		return roomID;
 	}
 	
-	public ArrayList<CalendarOwner> getParticipants() {
+	public ArrayList<String> getParticipants() {
 		return participants;
 	}
 	
