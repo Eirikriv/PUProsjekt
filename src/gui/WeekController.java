@@ -76,6 +76,7 @@ public class WeekController implements Initializable {
 						}
 					}
 				});
+				
 			}
 			
 			
@@ -90,7 +91,7 @@ public class WeekController implements Initializable {
 	
 	@FXML
 	public void newEvent(ActionEvent e) {
-
+		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_NEW_APPOINTMENT);
 	}
 
 }

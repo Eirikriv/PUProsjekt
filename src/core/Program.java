@@ -3,6 +3,10 @@ package core;
 import java.util.ArrayList;
 
 
+
+
+import database.EventDatabaseHandler;
+import database.GroupDatabaseHandler;
 //import database.EventDatabaseHandler;
 //import database.EventDatabaseHandler;
 //import database.GroupDatabaseHandler;
@@ -12,8 +16,8 @@ import database.RoomDatabaseHandler;
 
 public class Program {
 	private static PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
-//	private static GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
-//	private static EventDatabaseHandler edbh = new EventDatabaseHandler();
+    private static GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
+    private static EventDatabaseHandler edbh = new EventDatabaseHandler();
 	private static RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 	
 	public static Person login(String username, String password) {
@@ -31,6 +35,11 @@ public class Program {
 		}
 		return rooms;
 	}
+	
+	public static ArrayList<String> getAllGroups(String username) {
+		ArrayList<String> list = pdbh.getAllGroups(username);
+		return list;
+		}
 	
 	public static ArrayList<Person> getAllPersons() {
 		ArrayList<String> persons = pdbh.getAllPersons();

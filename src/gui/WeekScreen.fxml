@@ -159,7 +159,7 @@
             <StackPane prefHeight="150.0" prefWidth="200.0" />
             <StackPane prefHeight="100.0" prefWidth="244.0">
                <children>
-                  <Button fx:id="eventButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#newEvent" text="New Appointment" />
+                  <Button fx:id="eventButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#newEvent" text="New Event" />
                </children>
             </StackPane>
          </children>

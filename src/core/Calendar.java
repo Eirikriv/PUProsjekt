@@ -26,6 +26,9 @@ public class Calendar {
 		this.calendar = result;
 	}
 	
+	public ArrayList<Event> getEvents() {
+		return this.calendar;
+	}
 	public void addEvent(String name, String start, String end, String desc, String roomId) {
 		Event e = new Event(name, calOwner.getPrimaryKey(), start, end, desc, roomId);
 		this.calendar.add(e);

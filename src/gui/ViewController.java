@@ -254,7 +254,8 @@ public class ViewController implements Initializable {
 		StackPane buttonContainer = new StackPane();
 		buttonContainer.setMinHeight(100);
 		Button createEvent = new Button("New event");
-		StackPane.setAlignment(createEvent, Pos.CENTER);
+		StackPane.setAlignment(createEvent, Pos.CENTER_RIGHT);
+		StackPane.setMargin(createEvent, new Insets(0,70,0,0));
 		buttonContainer.getChildren().add(createEvent);
 		box.getChildren().add(buttonContainer);
 		

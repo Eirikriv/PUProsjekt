@@ -1,15 +1,26 @@
 package database;
 
 //import java.sql.ResultSet;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import core.Calendar;
+import core.Event;
+import core.Person;
 //import java.util.ArrayList;
 
 public class DBTest {
 	public static void main(String[] args) throws SQLException {
-//		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
+		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 //		GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 //		EventDatabaseHandler edbh = new EventDatabaseHandler();
+		pdbh.remove("Alex");
+		ArrayList<String> list = pdbh.getAllPersons();
+		for (String s : list) {
+			System.out.println(s);
+		}
 		
 		
 //		ArrayList<String> list = pdbh.get("martibni");
