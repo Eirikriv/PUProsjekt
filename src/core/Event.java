@@ -36,11 +36,14 @@ public class Event {
 		desc = eventInfo.get(4);
 		roomID = eventInfo.get(5);
 		ArrayList<String> p = edbh.getAllParticipants(eventID);
-		for (int i = 0; i < p.size(); i++)
-			participants.add(new Person(p.get(i)));
+		for (int i = 0; i < p.size(); i++) {
+			//participants.add(new Person(p.get(i)));
+		}
+			
 		ArrayList<String> d = edbh.getAllDeclined(eventID);
-		for (int i = 0; i < d.size(); i++)
-			declined.add(new Person(d.get(i)));
+		for (int i = 0; i < d.size(); i++) {
+			//declined.add(new Person(d.get(i)));
+		}
 	}
 	
 	public void addParticipant(CalendarOwner owner) {

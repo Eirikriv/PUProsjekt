@@ -27,7 +27,9 @@ public class LoginController implements Initializable {
         		try {
         			SessionData.username = "martibni";
         			SessionData.message = "Login sucessful";
-        			SessionData.person = core.Program.login("martibni", "password3");	
+        			System.out.println("a");
+        			SessionData.person = core.Program.login("martibni", "password3");
+        			System.out.println("b");
         			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	        		return;
 
