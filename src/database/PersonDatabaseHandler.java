@@ -63,15 +63,15 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	}
 
 	//Henter ut alle hendelser for person med PersonID id
-	//Returnerer en liste på formen [[title, description, start, end], ...] 
+	//Returnerer en liste med eventID'er
 	public ArrayList<String> getPersonEvents(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Event.EventID\n"
-						+  "FROM Person, Event, PersonEvent\n"
-						+  "WHERE Person.Username = PersonEvent.Username\n"
-						+  "AND Event.EventID = PersonEvent.EventID\n"
-						+  "AND Person.Username = '" + username + "'\n"
+			String query = "SELECT Event.EventID "
+						+  "FROM Person, Event, PersonEvent "
+						+  "WHERE Person.Username = PersonEvent.Username "
+						+  "AND Event.EventID = PersonEvent.EventID "
+						+  "AND Person.Username = '" + username + "' "
 						+  "ORDER BY Event.Start";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
@@ -112,9 +112,9 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAllGroups(String username) {
 		ArrayList<String> personInfo = new ArrayList<String>();
 		try {
-			String query = "SELECT Groups.Name, Groups.GroupID\n"
-					+ "FROM Groups, PersonInGroup\n"
-					+ "WHERE PersonInGroup.GroupID = Groups.GroupID\n"
+			String query = "SELECT Groups.Name, Groups.GroupID "
+					+ "FROM Groups, PersonInGroup "
+					+ "WHERE PersonInGroup.GroupID = Groups.GroupID "
 					+ "AND PersonInGroup.Username = '" + username + "';";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
@@ -133,7 +133,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getAllPersons() {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Username, Name\n"
+			String query = "SELECT Username, Name "
 						+  "FROM Person;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {

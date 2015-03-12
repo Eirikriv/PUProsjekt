@@ -45,4 +45,8 @@ public class Program {
 	public static void removePerson(String username) {
 		pdbh.remove(username);
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(login("martibni", "password3"));
+	}
 }

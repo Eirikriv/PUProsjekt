@@ -9,7 +9,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> get(String primaryKey) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT * FROM Event WHERE Event.EventID = '" + primaryKey + "'";
+			String query = "SELECT * FROM Event WHERE Event.EventID = " + primaryKey + ";";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				for (int i = 2; i <= 7; i++)
@@ -91,7 +91,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		try {
 			String query = "SELECT Username FROM PersonEvent "
 					+ "WHERE EventID = " + eventID + " AND "
-					+ "(Status = NULL OR Status = '1');";
+					+ "(Status is NULL OR Status = '1');";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next())
 				participants.add(rs.getString(1));
