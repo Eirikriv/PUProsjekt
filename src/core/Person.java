@@ -46,16 +46,7 @@ public class Person implements CalendarOwner{
 	public ArrayList<String> getAllGroups() {
 		return this.pdbh.getAllGroups(username);
 	}
-	
-//	public ArrayList<Event> getPersonEvents() {
-//		ArrayList<String> events = pdbh.getPersonEvents(username);
-//		ArrayList<Event> personEvents = new ArrayList<Event>();
-//		for (int i = 0; i < events.size(); i++) {
-//			Event e = new Event(events.get(i));
-//			personEvents.add(e);
-//		}
-//		return personEvents;
-//	}
+
 	
 	public Calendar getCalendar() {
 		return cal;

@@ -6,13 +6,14 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 /** Håndterer kommunikasjon mellom programmet og MySQL-databasen */
-public class Database {
+public class Database{
 	public static boolean DEBUG = true;
 	private static String url = "jdbc:mysql://mysql.stud.ntnu.no/";
 	private static String dbName = "alekh_PU_DB";
 	private static String driver = "com.mysql.jdbc.Driver";
 	private static String userName = "alekh_PU";
 	private static String password = "abcd1234";
+	private static Connection conn = getConnection();
 	
 
 	public static boolean initializeDatabase() {
@@ -132,7 +133,6 @@ public class Database {
 	public static ResultSet makeQuery(String query) {
 		ResultSet res = null;
 		try {
-			Connection conn = getConnection();
 			Statement st = conn.createStatement();
 			res = st.executeQuery(query);
 			//conn.close(); // M� kommenteres ut for at getIdNameMap skal fungere...
@@ -151,7 +151,6 @@ public class Database {
 	 */
 	public static int makeStatement(String statement) {
 		try {
-			Connection conn = getConnection();
 			Statement st = conn.createStatement();
 			return st.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
 		} catch (Exception e) {

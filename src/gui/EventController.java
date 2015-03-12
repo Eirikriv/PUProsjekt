@@ -38,14 +38,16 @@ public class EventController implements Initializable {
 			p += ps.get(i);
 		}
 		Label participants = new Label(p);
+		participants.setAlignment(Pos.CENTER_LEFT);
 		String d = "";
-		ArrayList<core.CalendarOwner> ds = e.getDeclined();
+		ArrayList<String> ds = e.getDeclined();
 		for (int i = 0; i < ds.size(); i++) {
 			if (i != 0)
 				d += ", ";
 			d += ps.get(i);
 		}
 		Label declined = new Label(d);
+		
 		Label[] list = new Label[]{start, end, desc, room, participants, declined};
 		
 		title.setFont(new Font("Arial", 25));
