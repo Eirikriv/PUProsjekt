@@ -153,7 +153,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		try {
 			String query = "SELECT EventID FROM Event, PersonEvent, Person "
 					+ "WHERE Event.EventID = PersonEvent.EventID AND Person.PersonID = PersonEvent.PersonID AND "
-					+ "PersonID = '" + username + "' AND Notified = FALSE";
+					+ "PersonID = '" + username + "' AND Notified = FALSE;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
 				list.add("" + rs.getInt(1));
@@ -167,7 +167,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	
 	public void isNotified(String username) {
 		try {
-			String statement = "UPDATE Person SET Notified = TRUE WHERE Username = '" + username + "'";
+			String statement = "UPDATE Person SET Notified = TRUE WHERE Username = '" + username + "';";
 			Database.makeStatement(statement);
 		} catch(Exception e) {
 			throw new IllegalArgumentException();
