@@ -18,7 +18,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 			return list;
 		}
 		catch(Exception e) {
-			throw new IllegalArgumentException("EventID: " + primaryKey + "- does not exist.");
+			throw new IllegalArgumentException("EventID: " + primaryKey + " does not exist.");
 		}
 	}
 	

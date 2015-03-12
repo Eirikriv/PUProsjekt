@@ -320,13 +320,17 @@ public class ViewController implements Initializable {
 	}
 	
 	public static void getAllPeople() {
-		ArrayList<core.Person> personNames = core.Program.getAllPersons();
-		ArrayList<String> peoples = new ArrayList<String>();
-		for (int x=0; x<personNames.size();x++){
-			peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
+		try {
+			ArrayList<core.Person> personNames = core.Program.getAllPersons();
+			ArrayList<String> peoples = new ArrayList<String>();
+			for (int x=0; x<personNames.size();x++){
+				peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
+			}
+			ObservableList<String> people = FXCollections.observableArrayList(peoples);
+			SessionData.allMembers = people;
+		} catch (Exception e) {
+			
 		}
-		ObservableList<String> people = FXCollections.observableArrayList(peoples);
-		SessionData.allMembers = people;
 		
 	}
 	

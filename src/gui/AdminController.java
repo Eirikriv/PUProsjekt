@@ -3,7 +3,11 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.collections.ChangeHelper;
+
 import core.Person;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,7 +42,39 @@ public class AdminController implements Initializable {
 		groupList.setItems(SessionData.allGroups);
 		roomList.setItems(SessionData.allRooms);
 		
+		peopleList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
+			@Override public void changed(final ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				Button delete = new Button("delete");
+				StackPane sp = wrap(delete);
+				userContainer.getChildren().clear();
+				userContainer.getChildren().add(sp);
+				delete.setOnAction(new EventHandler<ActionEvent>(){
+					@Override public void handle(ActionEvent argx0) {
+						String user = arg0.getValue();
+						core.Program.removePerson(user.split("<")[0]);
+						userContainer.getChildren().clear();
+						ViewController.getAllPeople();
+						peopleList.setItems(SessionData.allMembers);
+					}
+					
+				});
+			}
+		});
 		
+		groupList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
+			@Override public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				System.out.println(arg0.getValue());
+			}
+		});
+		
+		roomList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
+			@Override public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				System.out.println(arg0.getValue());
+			}
+		});
 	}
 	
 	@FXML private void newUser() {
