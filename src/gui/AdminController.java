@@ -33,8 +33,11 @@ public class AdminController implements Initializable {
 	@FXML private Button newGroup;
 	@FXML private Button newRoom;
 	@FXML private VBox userContainer;
+	@FXML private VBox groupContainer;
+	@FXML private VBox roomContainer;
 	
-	private boolean isClicked = false;
+	private boolean userIsClicked = false;
+	private boolean groupIsClicked = false;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -78,12 +81,12 @@ public class AdminController implements Initializable {
 	}
 	
 	@FXML private void newUser() {
-		if (isClicked) {
+		if (userIsClicked) {
 			userContainer.getChildren().clear();
-			isClicked = false;
+			userIsClicked = false;
 			return;
 		}
-		isClicked = true;
+		userIsClicked = true;
 		userContainer.getChildren().clear();
 		Label name = new Label("Name:");
 		final TextField nameText = new TextField();
@@ -127,7 +130,18 @@ public class AdminController implements Initializable {
 	}
 	
 	@FXML private void newGroup() {
+		if (groupIsClicked) {
+			userContainer.getChildren().clear();
+			groupIsClicked = false;
+			return;
+		}
+		groupIsClicked = true;
+		groupContainer.getChildren().clear();
+		Label name = new Label("Group name:");
+		final TextField nameText = new TextField();
+		Button createGroup = new Button("Create group");
 		
+		groupContainer.getChildren().addAll(name, nameText, createGroup);
 	}
 	
 	@FXML private void newRoom() {

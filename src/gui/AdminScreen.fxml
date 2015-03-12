@@ -31,13 +31,37 @@
                   </StackPane>
                   <StackPane prefHeight="74.0" prefWidth="247.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#newRoom" prefHeight="25.0" prefWidth="85.0" text="New room" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <StackPane>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#newRoom" prefHeight="25.0" prefWidth="85.0" text="New room" />
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="roomContainer" prefHeight="200.0" prefWidth="100.0" />
+                           </children>
+                        </VBox>
                      </children>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
                   </StackPane>
                   <StackPane prefHeight="85.0" prefWidth="247.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#newGroup" prefHeight="25.0" prefWidth="89.0" text="New group" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <StackPane>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#newGroup" prefHeight="25.0" prefWidth="89.0" text="New group" />
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="groupContainer" prefHeight="200.0" prefWidth="100.0" />
+                           </children>
+                        </VBox>
                      </children>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
                   </StackPane>
                </children>
             </VBox>
