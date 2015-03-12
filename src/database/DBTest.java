@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import core.Calendar;
 import core.Event;
 import core.Person;
+import core.Program;
 //import java.util.ArrayList;
 
 public class DBTest {
@@ -16,9 +17,14 @@ public class DBTest {
 //		GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 //		EventDatabaseHandler edbh = new EventDatabaseHandler();
-		pdbh.remove("Alex");
-		ArrayList<String> list = pdbh.getAllPersons();
-		for (String s : list) {
+		Program p = new Program();
+		ArrayList<String> l = p.getAllGroups("andersro");
+		for(String s : l) {
+			System.out.println(s);
+		}
+		
+		ArrayList<String> list = pdbh.getNotifications("cecilite");
+		for(String s: list) {
 			System.out.println(s);
 		}
 		

@@ -8,10 +8,11 @@ public class Group implements CalendarOwner {
 	private String groupID;
 	private String groupName;
 	private Calendar groupCal;
-	private ArrayList<String> members;
+	private ArrayList<String> members = new ArrayList<String>();;
 	GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 	
 	public Group(String groupID, String groupName) {
+		
 		if (groupID == null) {
 			this.groupID = gdbh.add(new String[]{groupName});
 			this.groupName = groupName;
