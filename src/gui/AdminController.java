@@ -138,13 +138,16 @@ public class AdminController implements Initializable {
 		HBox cont = new HBox();
 		VBox ccont = new VBox();
 		Button add = new Button("<");
+		add.setMinSize(25, 20);
 		Button delete = new Button(">");
+		delete.setMinSize(25, 20);
 		ccont.getChildren().addAll(add, delete);
 		ListView<String> lw = new ListView<String>();
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		
 		groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
+		groupContainer.setMinSize(100, 200);
 	}
 	
 	@FXML private void newRoom() {
