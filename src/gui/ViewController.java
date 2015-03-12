@@ -321,7 +321,9 @@ public class ViewController implements Initializable {
 	
 	public static void getAllPeople() {
 		try {
+			System.out.println("a");
 			ArrayList<core.Person> personNames = core.Program.getAllPersons();
+			System.out.println("b");
 			ArrayList<String> peoples = new ArrayList<String>();
 			for (int x=0; x<personNames.size();x++){
 				peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
@@ -335,7 +337,9 @@ public class ViewController implements Initializable {
 	}
 	
 	public static void getAllRooms() {
+		System.out.println("a");
 		ArrayList<core.Room> room = core.Program.getAllRooms();
+		System.out.println("b");
 		ArrayList<String> roomNames = new ArrayList<String>();
 		for (int x=0; x<room.size(); x++) {
 			roomNames.add(room.get(x).getPrimaryKey() + " [" +room.get(x).getCapacity() + "]");
@@ -346,7 +350,9 @@ public class ViewController implements Initializable {
 	
 	public void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
+		System.out.println("a");
 		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
+		System.out.println("b");
 		
 		for (String g: groupNames) {
 			String sLeft = g.split(":")[0];

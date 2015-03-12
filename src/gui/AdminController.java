@@ -131,7 +131,7 @@ public class AdminController implements Initializable {
 	
 	@FXML private void newGroup() {
 		if (groupIsClicked) {
-			userContainer.getChildren().clear();
+			groupContainer.getChildren().clear();
 			groupIsClicked = false;
 			return;
 		}
@@ -139,9 +139,16 @@ public class AdminController implements Initializable {
 		groupContainer.getChildren().clear();
 		Label name = new Label("Group name:");
 		final TextField nameText = new TextField();
+		HBox cont = new HBox();
+		VBox ccont = new VBox();
+		Button add = new Button("<");
+		Button delete = new Button(">");
+		ccont.getChildren().addAll(add, delete);
+		ListView lw = new ListView<String>();
+		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		
-		groupContainer.getChildren().addAll(name, nameText, createGroup);
+		groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 	}
 	
 	@FXML private void newRoom() {
