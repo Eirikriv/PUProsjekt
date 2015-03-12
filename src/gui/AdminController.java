@@ -1,12 +1,14 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import core.Person;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,6 +39,10 @@ public class AdminController implements Initializable {
 	
 	private boolean userIsClicked = false;
 	private boolean groupIsClicked = false;
+	
+	ArrayList<String> groupPeople = new ArrayList<String>();
+	ObservableList<String> groupItems = FXCollections.observableArrayList(groupPeople);
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -143,19 +149,39 @@ public class AdminController implements Initializable {
 		Button delete = new Button(">");
 		delete.setMinSize(25, 20);
 		ccont.getChildren().addAll(add, delete);
-		ListView<String> lw = new ListView<String>();
+		final ListView<String> lw = new ListView<String>();
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		
 		groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 		groupContainer.setMinSize(100, 200);
 		
+		
 		add.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent arg0) {
-				System.out.println(peopleList.getSelectionModel().getSelectedItem());
+				String name = peopleList.getSelectionModel().getSelectedItem();
+				if (!groupItems.contains(name)) {
+					groupItems.add(name);
+					lw.setItems(groupItems);
+				}
 			}
 		});
 		
+		delete.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent arg0) {
+				String name = lw.getSelectionModel().getSelectedItem();
+				lw.getItems().remove(name);
+				lw.setItems(groupItems);
+			}
+		});
+		
+		createGroup.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent event) {
+				if (nameText.getText().length() != 0 && lw.getItems().size() != 0) {
+					//
+				}
+			}
+		});
 		
 	}
 	
