@@ -349,10 +349,10 @@ public class ViewController implements Initializable {
 		SessionData.allRooms = rooms;
 	}
 	
-	public void getAllGroups() {
+	public static void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
 		System.out.println("a");
-		ArrayList<String> groupNames = pdb.getAllGroups(SessionData.username);
+		ArrayList<String> groupNames = SessionData.person.getAllGroups();
 		System.out.println("b");
 		
 		for (String g: groupNames) {

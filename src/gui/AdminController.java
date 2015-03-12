@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import core.Group;
 import core.Person;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,6 +40,7 @@ public class AdminController implements Initializable {
 	
 	private boolean userIsClicked = false;
 	private boolean groupIsClicked = false;
+	private boolean roomIsClicked = false;
 	
 	ArrayList<String> groupPeople = new ArrayList<String>();
 	ObservableList<String> groupItems = FXCollections.observableArrayList(groupPeople);
@@ -178,7 +180,16 @@ public class AdminController implements Initializable {
 		createGroup.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent event) {
 				if (nameText.getText().length() != 0 && lw.getItems().size() != 0) {
-					//
+					Group grp = new Group(null, nameText.getText());
+					for (String s: lw.getItems()) {
+						String name = s.split("<")[1];
+						name = name.split(">")[0];
+						System.out.println(name);
+						grp.addMember(name);
+						groupContainer.getChildren().clear();
+						ViewController.getAllGroups();
+						groupList.setItems(SessionData.allGroups);
+					}
 				}
 			}
 		});
@@ -186,6 +197,16 @@ public class AdminController implements Initializable {
 	}
 	
 	@FXML private void newRoom() {
+		if (roomIsClicked) {
+			roomContainer.getChildren().clear();
+			roomIsClicked = false;
+			return;
+		}
+		roomIsClicked = true;
+		roomContainer.getChildren().clear();
+		
+		
+		
 		
 	}
 	
