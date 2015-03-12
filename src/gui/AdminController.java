@@ -131,7 +131,7 @@ public class AdminController implements Initializable {
 		bottom.getChildren().addAll(adminCont, isAdminCont, createUserCont);
 
 		userContainer.getChildren().addAll(name, nameText, username, usernameText, password, passwordText, bottom);
-		//userContainer.autosize();
+		userContainer.autosize();
 	}
 	
 	@FXML private void newGroup() {
