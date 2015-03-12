@@ -100,8 +100,8 @@ public class AppointmentController implements Initializable {
 				}
 		});
 		
-		appointmentContainer.add(members, 1, 4);
-		appointmentContainer.add(groups, 1, 5);
+		appointmentContainer.add(members, 1, 5);
+		appointmentContainer.add(groups, 1, 6);
 		
 		StackPane hb = new StackPane();
 		HBox sp = new HBox();
@@ -110,7 +110,7 @@ public class AppointmentController implements Initializable {
 		sp.getChildren().addAll(tf, rooms);
 		hb.getChildren().add(sp);
 		sp.setAlignment(Pos.CENTER);
-		appointmentContainer.add(hb, 1, 6);
+		appointmentContainer.add(hb, 1, 7);
 		
 	}
 	

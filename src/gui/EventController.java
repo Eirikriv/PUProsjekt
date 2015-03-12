@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -65,6 +66,8 @@ public class EventController implements Initializable {
 			StackPane.setAlignment(list[i], Pos.CENTER_LEFT);
 			grid.add(sp, 1, i);
 		}
+		StackPane.setAlignment(desc, Pos.TOP_LEFT);
+		StackPane.setMargin(desc, new Insets(5,0,0,0));
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
