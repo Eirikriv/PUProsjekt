@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -18,7 +20,7 @@ public class EventController implements Initializable {
 	@FXML private GridPane grid;
 	@FXML private HBox titleBox;
 	@FXML private HBox createdBox;
-	@FXML private Button back;
+	@FXML private Button backButton;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,8 +49,7 @@ public class EventController implements Initializable {
 			d += ps.get(i);
 		}
 		Label declined = new Label(d);
-		
-		Label[] list = new Label[]{start, end, desc, room, participants, declined};
+		Label[] list = new Label[]{start, end, room, participants, declined};
 		
 		title.setFont(new Font("Arial", 25));
 		titleBox.getChildren().add(title);
@@ -57,13 +58,18 @@ public class EventController implements Initializable {
 		createdBox.getChildren().add(createdBy);
 		createdBox.setAlignment(Pos.CENTER);
 		
+		
 		for (int i = 0; i < list.length; i++) {
 			StackPane sp = new StackPane();
 			sp.getChildren().add(list[i]);
-			StackPane.setAlignment(list[i], Pos.TOP_LEFT);
+			StackPane.setAlignment(list[i], Pos.CENTER_LEFT);
 			grid.add(sp, 1, i);
 		}
 		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				ScreenNavigator.loadVista(ScreenNavigator.SCREEN_WEEK);
+			}
+		});
 	}
-	
 }
