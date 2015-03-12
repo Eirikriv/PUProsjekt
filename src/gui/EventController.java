@@ -49,7 +49,7 @@ public class EventController implements Initializable {
 			d += ps.get(i);
 		}
 		Label declined = new Label(d);
-		Label[] list = new Label[]{start, end, room, participants, declined};
+		Label[] list = new Label[]{start, end, desc, room, participants, declined};
 		
 		title.setFont(new Font("Arial", 25));
 		titleBox.getChildren().add(title);
