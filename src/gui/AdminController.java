@@ -109,7 +109,7 @@ public class AdminController implements Initializable {
 				} else {
 					isAnAdmin = "0";
 				}
-				Person p = new Person(nameText.getText(), usernameText.getText(), passwordText.getText(), isAnAdmin);
+				new Person(nameText.getText(), usernameText.getText(), passwordText.getText(), isAnAdmin);
 				ViewController.getAllPeople();
 				peopleList.setItems(SessionData.allMembers);
 				userContainer.getChildren().clear();
@@ -120,9 +120,7 @@ public class AdminController implements Initializable {
 		StackPane isAdminCont = wrap(isAdmin);
 		StackPane createUserCont = wrap(createUser);
 		bottom.getChildren().addAll(adminCont, isAdminCont, createUserCont);
-		
-		
-		
+
 		userContainer.getChildren().addAll(name, nameText, username, usernameText, password, passwordText, bottom);
 		//userContainer.autosize();
 	}
