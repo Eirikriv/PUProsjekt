@@ -152,8 +152,8 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
 			String query = "SELECT Notification FROM Event, PersonEvent, Person "
-					+ "WHERE Event.EventID = PersonEvent.EventID AND Person.PersonID = PersonEvent.PersonID AND "
-					+ "PersonID = '" + username + "' AND Notification IS NOT NULL;";
+					+ "WHERE Event.EventID = PersonEvent.EventID AND Person.Username = PersonEvent.Username AND "
+					+ "Username = '" + username + "' AND Notification IS NOT NULL;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
 				list.add(rs.getString(1));
