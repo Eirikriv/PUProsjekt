@@ -24,33 +24,7 @@
                </children>
             </AnchorPane>
          </content></Tab>
-      <Tab text="Groups">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="236.0" prefWidth="245.0">
-               <children>
-                  <HBox prefHeight="298.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <VBox fx:id="leftContainer" prefHeight="298.0" prefWidth="158.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search Group" wrappingWidth="156.13671875">
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                 </VBox.margin>
-                              </Text>
-                              <Button fx:id="createGroupButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Create new group">
-                                 <VBox.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="50.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="rightContainer" prefHeight="298.0" prefWidth="142.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
+      <Tab fx:id="groupTab" text="Groups" />
       <Tab text="Events">
         <content>
           <AnchorPane fx:id="eventContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

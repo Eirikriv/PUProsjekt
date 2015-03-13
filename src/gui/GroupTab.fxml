@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GroupController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <StackPane prefHeight="100.0" prefWidth="600.0">
+               <children>
+                  <Label text="My groups">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <HBox prefHeight="297.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="297.0" prefWidth="193.0">
+                     <children>
+                        <StackPane prefHeight="40.0" prefWidth="193.0">
+                           <children>
+                              <Label text="Choose a group" />
+                           </children>
+                        </StackPane>
+                        <VBox fx:id="leftContainer" prefHeight="240.0" prefWidth="193.0">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="297.0" prefWidth="214.0">
+                     <children>
+                        <StackPane prefHeight="37.0" prefWidth="214.0">
+                           <children>
+                              <Label text="Group members" />
+                           </children>
+                        </StackPane>
+                        <ListView fx:id="listPeople" prefHeight="224.0" prefWidth="214.0">
+                           <VBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

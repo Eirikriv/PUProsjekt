@@ -41,14 +41,11 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
-	
-	@FXML private Button createGroupButton;
-	@FXML private VBox leftContainer;
-	@FXML private VBox rightContainer;
 	@FXML private VBox calBox;
 	@FXML private AnchorPane eventContainer;
 	@FXML private GridPane eventGrid;
 	@FXML private TabPane tabPane;
+	@FXML private Tab groupTab;
 	
 	public String username;
 	public Stage stage;
@@ -122,36 +119,11 @@ public class ViewController implements Initializable {
 		
 		this.username = SessionData.username;
 		fillCalendar(calBox);
-
-		FilterComboBox fcb = new FilterComboBox(SessionData.allGroups);
-		
-		leftContainer.getChildren().add(1, fcb);
-		
-		fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-				public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-					addToListBox(newValue, true, rightContainer);
-				}
-		});
-		
-		
-		
-		createGroupButton.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent arg0) {
-				initCreateGroup();
-				FilterComboBox fcb = (FilterComboBox) leftContainer.getChildren().get(3);
-				fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-					public void changed(ObservableValue<? extends String> observable,
-							String oldValue, String newValue) {
-							addToListBox(newValue, true, rightContainer);
-							if (rightContainer.getChildren().size() >= 2) {
-								
-							}
-						}
-				});
-			}
-		});
-		
+		try {
+			groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setStage(Stage stage) {
@@ -309,52 +281,6 @@ public class ViewController implements Initializable {
 				}
 			}
 		});
-		
-	}
-	
-	public void removeFromListBox(String name, VBox list) {
-		ListIterator<Node> li = list.getChildren().listIterator();
-		while (li.hasNext()) {
-			HBox box = (HBox) li.next();
-			Label l = (Label) box.getChildren().get(1);
-			if (l.getText().compareTo(name) == 0) {
-				list.getChildren().remove(box);
-				return;
-			}
-		}
-	}
-	
-	
-	public void addToListBox(String name, boolean checked, final VBox list) {
-		HBox hbox = new HBox();
-		CheckBox cb = new CheckBox();
-		cb.selectedProperty().set(true);
-		final Button b = new Button("remove");
-		b.setStyle("-fx-color:red; -fx-");
-		b.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent arg0) {
-				Label l = (Label)b.getParent().getChildrenUnmodifiable().get(1);
-				removeFromListBox(l.getText(), list);
-			}
-		});
-		
-		hbox.getChildren().addAll(cb, new Label(name), b);
-		rightContainer.getChildren().add(hbox);
-		
-	}
-	
-	public void initCreateGroup() {
-		leftContainer.getChildren().clear();
-		rightContainer.getChildren().clear();
-		
-		Button b = new Button("Create Group");
-		b.setVisible(false);
-		
-		leftContainer.getChildren().add(new Label("Group name"));
-		leftContainer.getChildren().add(new TextField());
-		leftContainer.getChildren().add(new Label("Add members"));
-		leftContainer.getChildren().add(new FilterComboBox(SessionData.allGroups));
-		leftContainer.getChildren().add(b);
 		
 	}
 	
