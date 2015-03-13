@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import core.Group;
 import core.Person;
+import core.Room;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -82,16 +83,31 @@ public class AdminController implements Initializable {
 				delete.setOnAction(new EventHandler<ActionEvent>(){
 					@Override public void handle(ActionEvent argx0) {
 						String group = arg0.getValue();
-						//core.Program.removeGroup();
+						core.Program.removeGroup(group.split(":")[0]);
+						groupContainer.getChildren().clear();
+						ViewController.getAllGroups();
+						groupList.setItems(SessionData.allGroups);
 					}
 				});
 			}
 		});
 		
 		roomList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
-			@Override public void changed(ObservableValue<? extends String> arg0,
+			@Override public void changed(final ObservableValue<? extends String> arg0,
 					String arg1, String arg2) {
-				System.out.println(arg0.getValue());
+				Button delete = new Button("delete");
+				StackPane sp = wrap(delete);
+				roomContainer.getChildren().clear();
+				roomContainer.getChildren().add(sp);
+				delete.setOnAction(new EventHandler<ActionEvent>(){
+					@Override public void handle(ActionEvent argx0) {
+						String room = arg0.getValue();
+						core.Program.removeRoom(room.split("[")[0].trim());
+						roomContainer.getChildren().clear();
+						ViewController.getAllRooms();
+						roomList.setItems(SessionData.allRooms);
+					}
+				});
 			}
 		});
 	}
@@ -140,12 +156,12 @@ public class AdminController implements Initializable {
 		bottom.getChildren().addAll(adminCont, isAdminCont, createUserCont);
 
 		userContainer.getChildren().addAll(name, nameText, username, usernameText, password, passwordText, bottom);
-		userContainer.autosize();
 	}
 	
 	@FXML private void newGroup() {
 		if (groupIsClicked) {
 			groupContainer.getChildren().clear();
+			groupContainer.setMinSize(0, 0);
 			groupIsClicked = false;
 			return;
 		}
@@ -197,6 +213,7 @@ public class AdminController implements Initializable {
 						groupContainer.getChildren().clear();
 						ViewController.getAllGroups();
 						groupList.setItems(SessionData.allGroups);
+						VBox.setMargin(userContainer, new Insets(20));
 					}
 				}
 			}
@@ -213,11 +230,25 @@ public class AdminController implements Initializable {
 		roomIsClicked = true;
 		roomContainer.getChildren().clear();
 		
+		Label nameLabel = new Label("Room name:");
+		Label capacityLabel = new Label("Capacity:");
+		Label descLabel = new Label("Description:");
+		final TextField nameText = new TextField();
+		final TextField capacityText = new TextField();
+		final TextField descText = new TextField();
+		Button createRoom = new Button("Create room");
 		
+		roomContainer.getChildren().addAll(nameLabel, nameText, capacityLabel, capacityText, descLabel, descText, createRoom);
 		
-		
-		
-		
+		createRoom.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent arg0) {
+				Room r = new Room(nameText.getText(), capacityText.getText(), descText.getText());
+				System.out.println("added " + r.getPrimaryKey());
+				roomContainer.getChildren().clear();
+				ViewController.getAllRooms();
+				roomList.setItems(SessionData.allRooms);
+			}
+		});
 	}
 	
 	private StackPane wrap(Node n) {
