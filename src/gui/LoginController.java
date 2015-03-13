@@ -42,33 +42,34 @@ public class LoginController implements Initializable {
         			
         			//Notification pop-up
         			ArrayList<core.Notification> n = SessionData.person.getNotifications();
-        			final Stage dialog = new Stage();
-        			dialog.initModality(Modality.APPLICATION_MODAL);
-        			dialog.initOwner(null);
-        			VBox dialogVbox = new VBox(20);
-        			Text t = new Text("You have " + n.size() + " new notifications");
-        			dialogVbox.getChildren().add(t);
-        			dialogVbox.setAlignment(Pos.TOP_CENTER);
-        			VBox.setMargin(t, new Insets(50, 0, 0, 0));
-        			
-        			StackPane sp = new StackPane();
-        			dialogVbox.getChildren().add(sp);
-        			Button ok = new Button("OK");
-        			sp.getChildren().add(ok);
-        			sp.setAlignment(Pos.BOTTOM_RIGHT);
-        			StackPane.setMargin(ok, new Insets(0, 60, 0, 0));
-        			
-        			ok.setDefaultButton(true);
-        			ok.setOnAction(new EventHandler<ActionEvent>() {
-						public void handle(ActionEvent event) {
-							dialog.close();
-						}
-        			});
-        			
-        			Scene dialogScene = new Scene(dialogVbox, 250, 150);
-        			dialog.setScene(dialogScene);
-        			dialog.show();
-        			
+        			if (n.size() > 0) {
+	        			final Stage dialog = new Stage();
+	        			dialog.initModality(Modality.APPLICATION_MODAL);
+	        			dialog.initOwner(null);
+	        			VBox dialogVbox = new VBox(20);
+	        			Text t = new Text("You have " + n.size() + " new notifications");
+	        			dialogVbox.getChildren().add(t);
+	        			dialogVbox.setAlignment(Pos.TOP_CENTER);
+	        			VBox.setMargin(t, new Insets(50, 0, 0, 0));
+	        			
+	        			StackPane sp = new StackPane();
+	        			dialogVbox.getChildren().add(sp);
+	        			Button ok = new Button("OK");
+	        			sp.getChildren().add(ok);
+	        			sp.setAlignment(Pos.BOTTOM_RIGHT);
+	        			StackPane.setMargin(ok, new Insets(0, 60, 0, 0));
+	        			
+	        			ok.setDefaultButton(true);
+	        			ok.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								dialog.close();
+							}
+	        			});
+	        			
+	        			Scene dialogScene = new Scene(dialogVbox, 250, 150);
+	        			dialog.setScene(dialogScene);
+	        			dialog.show();
+        			}
         			
         			ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	        		return;
