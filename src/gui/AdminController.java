@@ -73,9 +73,18 @@ public class AdminController implements Initializable {
 		});
 		
 		groupList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
-			@Override public void changed(ObservableValue<? extends String> arg0,
+			@Override public void changed(final ObservableValue<? extends String> arg0,
 					String arg1, String arg2) {
-				System.out.println(arg0.getValue());
+				Button delete = new Button("delete");
+				StackPane sp = wrap(delete);
+				groupContainer.getChildren().clear();
+				groupContainer.getChildren().add(sp);
+				delete.setOnAction(new EventHandler<ActionEvent>(){
+					@Override public void handle(ActionEvent argx0) {
+						String group = arg0.getValue();
+						//core.Program.removeGroup();
+					}
+				});
 			}
 		});
 		
@@ -184,7 +193,6 @@ public class AdminController implements Initializable {
 					for (String s: lw.getItems()) {
 						String name = s.split("<")[1];
 						name = name.split(">")[0];
-						System.out.println(name);
 						grp.addMember(name);
 						groupContainer.getChildren().clear();
 						ViewController.getAllGroups();
@@ -204,6 +212,8 @@ public class AdminController implements Initializable {
 		}
 		roomIsClicked = true;
 		roomContainer.getChildren().clear();
+		
+		
 		
 		
 		

@@ -35,7 +35,7 @@ public class LoginController implements Initializable {
         			SessionData.username = "martibni";
         			SessionData.message = "Login sucessful";
         			System.out.println("a");
-        			SessionData.person = core.Program.login("martibni", "password3");
+        			SessionData.person = core.Program.login("martibni", "passord3");
         			System.out.println("b");
         			
         			//Notification pop-up
