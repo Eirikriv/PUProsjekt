@@ -50,6 +50,7 @@ public class ViewController implements Initializable {
 	@FXML private AnchorPane eventContainer;
 	@FXML private GridPane eventGrid;
 	@FXML private TabPane tabPane;
+	@FXML private Tab eTab;
 	
 	public String username;
 	public Stage stage;
@@ -63,6 +64,9 @@ public class ViewController implements Initializable {
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+		if (SessionData.eventTab) {
+			eTab.isSelected();
+		}
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
 		int rowCount = 1;
@@ -83,11 +87,21 @@ public class ViewController implements Initializable {
 			tabPane.getTabs().add(tab);
 		}
 		
-		for (Event event: SessionData.allEvents) {
+		for (final Event event: SessionData.allEvents) {
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
 			for (int x = 0; x<4; x++) {
 				StackPane itemContainer = new StackPane();
 				Label itemText = new Label(eventInfo[x]);
+				if (x == 0) {
+					itemText.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event1) {
+							SessionData.id = event.getEventID();
+							SessionData.eventTab = true;
+							SessionData.prevScreen = ScreenNavigator.MAIN;
+							ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+						}
+					});
+				}
 				itemContainer.getChildren().add(itemText);
 				eventGrid.add(itemContainer, columnCount, rowCount);
 				columnCount += 1;

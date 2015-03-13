@@ -71,7 +71,7 @@ public class EventController implements Initializable {
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				ScreenNavigator.loadVista(ScreenNavigator.SCREEN_WEEK);
+				ScreenNavigator.loadVista(SessionData.prevScreen);
 			}
 		});
 	}

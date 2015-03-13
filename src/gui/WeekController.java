@@ -69,6 +69,7 @@ public class WeekController implements Initializable {
 					public void handle(MouseEvent e) {
 						try {
 							SessionData.id = event.getEventID();
+							SessionData.prevScreen = ScreenNavigator.SCREEN_WEEK;
 							ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 							
 						} catch (Exception exc) {
