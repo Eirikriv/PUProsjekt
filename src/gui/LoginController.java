@@ -58,6 +58,13 @@ public class LoginController implements Initializable {
         			sp.setAlignment(Pos.BOTTOM_RIGHT);
         			StackPane.setMargin(ok, new Insets(0, 60, 0, 0));
         			
+        			ok.setDefaultButton(true);
+        			ok.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent event) {
+							dialog.close();
+						}
+        			});
+        			
         			Scene dialogScene = new Scene(dialogVbox, 250, 150);
         			dialog.setScene(dialogScene);
         			dialog.show();
