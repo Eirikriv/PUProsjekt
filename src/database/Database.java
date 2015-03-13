@@ -32,7 +32,7 @@ public class Database{
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "Name VARCHAR(20) NOT NULL,"
 					+ "Password	VARCHAR(20)	NOT NULL,"
-					+ "Admin BOOLEAN NOT NULL DEFAULT FALSE"
+					+ "Admin BOOLEAN NOT NULL DEFAULT FALSE,"
 					+ "PRIMARY KEY (Username));");
 			
 			//Oppretter Group-tabellen		
@@ -79,7 +79,7 @@ public class Database{
 					+ "EventID INT NOT NULL,"
 					+ "Status BOOL DEFAULT NULL,"
 					+ "Visibility BOOL DEFAULT NULL,"
-					+ "Notified BOOL DEFAULT FALSE, "
+					+ "Notification VARCHAR(100), "
 					+ "PRIMARY KEY (Username, EventID),"
 					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE, "
@@ -96,26 +96,28 @@ public class Database{
 					+ "FOREIGN KEY (EventID) REFERENCES Event(EventID) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE);");
 			
-//			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-//					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
-//			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-//					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
-//			makeStatement("INSERT INTO Groups(Name)\n"
-//					+ "VALUES('PU');");
-//			makeStatement("INSERT INTO PersonInGroup\n"
-//					+ "VALUES('1', '1');");
-//			makeStatement("INSERT INTO PersonInGroup\n"
-//					+ "VALUES('2', '1');");
-//			makeStatement("INSERT INTO Room\n"
-//					+ "VALUES('R1', '300', 'Forelesningssal')");
-//			makeStatement("INSERT INTO Event(Name, Start, End, RoomID)\n"
-//					+ "VALUES('Fysikkforelesning', '2015-02-26 08:15', '2015-02-26 10:00', 'R1')");
-//			makeStatement("INSERT INTO GroupEvent\n"
-//					+ "VALUES('1', '1')");
-//			makeStatement("INSERT INTO PersonEvent\n"
-//					+ "VALUES('1', '1')");
-//			makeStatement("INSERT INTO PersonEvent\n"
-//					+ "VALUES('2', '1')");
+			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
+			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
+			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
+					+ "VALUES('Martin Børø Nilsen', 'martibni', 'passord3');");
+			makeStatement("INSERT INTO Groups(Name)\n"
+					+ "VALUES('PU');");
+			makeStatement("INSERT INTO PersonInGroup\n"
+					+ "VALUES('martibni', '1');");
+			makeStatement("INSERT INTO PersonInGroup\n"
+					+ "VALUES('cecilite', '1');");
+			makeStatement("INSERT INTO Room\n"
+					+ "VALUES('R1', '300', 'Forelesningssal')");
+			makeStatement("INSERT INTO Event(Title, Owner, Start, End, RoomID) "
+					+ "VALUES('PU-gruppemøte', 'cecilite', '2015-02-26 08:15', '2015-02-26 10:00', 'R1')");
+			makeStatement("INSERT INTO GroupEvent\n"
+					+ "VALUES('1', '1')");
+			makeStatement("INSERT INTO PersonEvent(Username, EventID) "
+					+ "VALUES('martibni', '1')");
+			makeStatement("INSERT INTO PersonEvent(Username, EventID) "
+					+ "VALUES('cecilite', '1')");
 			return true;
 
 		} catch (Exception e) {

@@ -3,24 +3,15 @@ package database;
 //import java.sql.ResultSet;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import core.Calendar;
-import core.Event;
-import core.Group;
-import core.Person;
-import core.Program;
-//import java.util.ArrayList;
 
 public class DBTest {
 	public static void main(String[] args) throws SQLException {
-		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
+//		PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
 //		GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
 //		RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 //		EventDatabaseHandler edbh = new EventDatabaseHandler();
-		Group g = new Group(null,"test");
-		g.addMember("martibni");
-		
+//		Group g = new Group(null,"test");
+//		g.addMember("martibni");
 //		ArrayList<String> list = pdbh.get("martibni");
 //		for (int i = 0; i < list.size(); i++) {
 //			System.out.println(list.get(i));
