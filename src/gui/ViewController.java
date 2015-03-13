@@ -38,6 +38,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class ViewController implements Initializable {
@@ -165,7 +166,20 @@ public class ViewController implements Initializable {
 		for (int x = 1; x<7; x++) {
 			StackPane z = new StackPane();
 			z.setMinSize(50, 50);
-			Label l = new Label(Integer.toString(weekCal.get(Calendar.WEEK_OF_YEAR)));
+			final Label l = new Label(Integer.toString(weekCal.get(Calendar.WEEK_OF_YEAR)));
+			l.setUnderline(true);
+			l.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent arg0) {
+					l.setTextFill(Paint.valueOf("blue"));
+				}
+			});
+			
+			l.setOnMouseExited(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent arg0) {
+					l.setTextFill(Paint.valueOf("black"));
+				}
+			});
+			
 			z.getChildren().add(l);
 			gp.add(z, 0, x);
 			weekCal.add(Calendar.WEEK_OF_YEAR, 1);
@@ -338,9 +352,7 @@ public class ViewController implements Initializable {
 	}
 	
 	public static void getAllRooms() {
-		System.out.println("a");
 		ArrayList<core.Room> room = core.Program.getAllRooms();
-		System.out.println("b");
 		ArrayList<String> roomNames = new ArrayList<String>();
 		for (int x=0; x<room.size(); x++) {
 			roomNames.add(room.get(x).getPrimaryKey() + " [" +room.get(x).getCapacity() + "]");
@@ -351,9 +363,7 @@ public class ViewController implements Initializable {
 	
 	public static void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
-		System.out.println("a");
 		ArrayList<String> groupNames = SessionData.person.getAllGroups();
-		System.out.println("b");
 		
 		for (String g: groupNames) {
 			String sLeft = g.split(":")[0];
