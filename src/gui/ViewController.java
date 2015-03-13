@@ -65,7 +65,7 @@ public class ViewController implements Initializable {
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		if (SessionData.eventTab) {
-			eTab.isSelected();
+			tabPane.getSelectionModel().select(2);
 		}
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
@@ -97,7 +97,7 @@ public class ViewController implements Initializable {
 						public void handle(MouseEvent event1) {
 							SessionData.id = event.getEventID();
 							SessionData.eventTab = true;
-							SessionData.prevScreen = ScreenNavigator.MAIN;
+							SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
 							ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 						}
 					});
