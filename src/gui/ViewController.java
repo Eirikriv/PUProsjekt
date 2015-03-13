@@ -94,9 +94,18 @@ public class ViewController implements Initializable {
 				final Label itemText = new Label(eventInfo[x]);
 				if (x == 0) {
 					itemText.setUnderline(true);
+					itemText.setOnMouseEntered(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							itemText.setTextFill(Color.web("0x949494"));
+						}
+					});
+					itemText.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							itemText.setTextFill(Paint.valueOf("black"));
+						}
+					});
 					itemText.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event1) {
-							itemText.setTextFill(Paint.valueOf("grey"));
 							SessionData.id = event.getEventID();
 							SessionData.eventTab = true;
 							SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
@@ -186,7 +195,7 @@ public class ViewController implements Initializable {
 			l.setUnderline(true);
 			l.setOnMouseEntered(new EventHandler<MouseEvent>() {
 				@Override public void handle(MouseEvent arg0) {
-					l.setTextFill(Paint.valueOf("blue"));
+					l.setTextFill(Color.web("0x949494"));
 				}
 			});
 			
