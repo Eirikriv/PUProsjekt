@@ -51,6 +51,10 @@ public class Program {
 		gdbh.remove(groupID);
 	}
 	
+	public static void removeRoom(String roomID) {
+		rdbh.remove(roomID);
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(login("martibni", "password3"));
 	}

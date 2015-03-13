@@ -9,10 +9,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -46,8 +48,17 @@ public class LoginController implements Initializable {
         			VBox dialogVbox = new VBox(20);
         			Text t = new Text("You have " + n.size() + " new notifications");
         			dialogVbox.getChildren().add(t);
-        			VBox.setMargin(t, new Insets(50, 30, 50, 30));
-        			Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        			dialogVbox.setAlignment(Pos.TOP_CENTER);
+        			VBox.setMargin(t, new Insets(50, 0, 0, 0));
+        			
+        			StackPane sp = new StackPane();
+        			dialogVbox.getChildren().add(sp);
+        			Button ok = new Button("OK");
+        			sp.getChildren().add(ok);
+        			sp.setAlignment(Pos.BOTTOM_RIGHT);
+        			StackPane.setMargin(ok, new Insets(0, 60, 0, 0));
+        			
+        			Scene dialogScene = new Scene(dialogVbox, 250, 150);
         			dialog.setScene(dialogScene);
         			dialog.show();
         			
