@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
@@ -361,9 +360,7 @@ public class ViewController implements Initializable {
 	
 	public static void getAllPeople() {
 		try {
-			System.out.println("a");
 			ArrayList<core.Person> personNames = core.Program.getAllPersons();
-			System.out.println("b");
 			ArrayList<String> peoples = new ArrayList<String>();
 			for (int x=0; x<personNames.size();x++){
 				peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
