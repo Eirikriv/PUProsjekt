@@ -2,22 +2,14 @@ package core;
 
 import java.util.ArrayList;
 
-
-
-
-import database.EventDatabaseHandler;
 import database.GroupDatabaseHandler;
-//import database.EventDatabaseHandler;
-//import database.EventDatabaseHandler;
-//import database.GroupDatabaseHandler;
 import database.PersonDatabaseHandler;
-//import database.RoomDatabaseHandler;
 import database.RoomDatabaseHandler;
 
 public class Program {
 	private static PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
     private static GroupDatabaseHandler gdbh = new GroupDatabaseHandler();
-    private static EventDatabaseHandler edbh = new EventDatabaseHandler();
+//    private static EventDatabaseHandler edbh = new EventDatabaseHandler();
 	private static RoomDatabaseHandler rdbh = new RoomDatabaseHandler();
 	
 	public static Person login(String username, String password) {
@@ -53,6 +45,10 @@ public class Program {
 	
 	public static void removePerson(String username) {
 		pdbh.remove(username);
+	}
+	
+	public static void removeGroup(String groupID) {
+		gdbh.remove(groupID);
 	}
 	
 	public static void main(String[] args) {

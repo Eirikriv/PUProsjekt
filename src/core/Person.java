@@ -69,6 +69,20 @@ public class Person implements CalendarOwner{
 		this.admin = "FALSE";
 	}
 	
+	public ArrayList<Notification> getNotifications() {
+		ArrayList<String> n = pdbh.getNotifications(this.username);
+		ArrayList<Notification> notifications = new ArrayList<Notification>();
+		for (int i = 0; i < n.size(); i++) {
+			String[] temp = n.get(i).split(" ");
+			notifications.add(new Notification(new Event(temp[0]), temp[1]));
+		}
+		return notifications;
+	}
+	
+	public void removeNotifications() {
+		pdbh.isNotified(this.username);
+	}
+	
 	public static void main(String[] args) {
 		Person p = new Person("anders", "a", "b", "0");
 		System.out.println(p.getName());
