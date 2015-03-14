@@ -152,7 +152,7 @@ public class ViewController implements Initializable {
 			calStart.add(Calendar.DATE, -day+2);
 		}
 		
-		Calendar weekCal = Calendar.getInstance();
+		final Calendar weekCal = Calendar.getInstance();
 		weekCal.setTime(calStart.getTime());
 		for (int x = 1; x<7; x++) {
 			StackPane z = new StackPane();
@@ -186,6 +186,7 @@ public class ViewController implements Initializable {
 		}
 
 		for (int x = 1; x<7; x++) {
+			final int weekIndex = 7+x-1;
 			for (int y = 1; y<8; y++) {
 				StackPane z = new StackPane();
 				if (calStart.before(cal) || (calStart.after(calEnd))) {
@@ -197,6 +198,14 @@ public class ViewController implements Initializable {
 				StackPane.setAlignment(l, Pos.TOP_LEFT);
 				z.getChildren().add(l);
 				z.setMinSize(80, 50);
+				z.setOnMousePressed(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						StackPane s = (StackPane)gp.getChildren().get(weekIndex);
+						Label l = (Label)s.getChildren().get(0);
+						SessionData.currentWeek = l.getText(); 
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_WEEK);
+					}
+				});
 				gp.add(z, y, x);
 				
 				calStart.add(Calendar.DATE, 1);

@@ -36,6 +36,11 @@ public class WeekController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		StackPane s  = new StackPane();
+		Label lb = new Label("Week: " + SessionData.currentWeek);
+		s.getChildren().add(lb);
+		s.setAlignment(Pos.CENTER);
+		outerWeekGrid.add(s, 0, 0);
 		for (final Event event: SessionData.allEvents) {
 			String title = event.getName();
 			LocalDate startDate = LocalDate.parse(event.getStart().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
