@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -39,13 +38,13 @@ public class LoginController implements Initializable {
         			SessionData.person = core.Program.login("martibni", "passord3");
         			
         			//Notification pop-up
-        			ArrayList<core.Notification> n = SessionData.person.getNotifications();
-        			if (n.size() > 0) {
+        			SessionData.allNotifications = SessionData.person.getNotifications();
+        			if (SessionData.allNotifications.size() > 0) {
 	        			final Stage dialog = new Stage();
 	        			dialog.initModality(Modality.APPLICATION_MODAL);
 	        			dialog.initOwner(null);
 	        			VBox dialogVbox = new VBox(20);
-	        			Text t = new Text("You have " + n.size() + " new notifications");
+	        			Text t = new Text("You have " + SessionData.allNotifications.size() + " new notifications");
 	        			dialogVbox.getChildren().add(t);
 	        			dialogVbox.setAlignment(Pos.TOP_CENTER);
 	        			VBox.setMargin(t, new Insets(50, 0, 0, 0));

@@ -23,6 +23,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class WeekController implements Initializable {
@@ -60,10 +61,20 @@ public class WeekController implements Initializable {
 			
 			if (calstart.get(Calendar.DAY_OF_YEAR) <= startDate.getDayOfYear() && calend.get(Calendar.DAY_OF_YEAR) >= startDate.getDayOfYear()) {
 				int day = startDate.getDayOfWeek().getValue();
-				StackPane sp = new StackPane();
+				final StackPane sp = new StackPane();
 				Label l = new Label(title);
 				sp.getChildren().add(l);
-				sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xE6F7FF"), null, null), null));
+				sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xD1EFFF"), null, null), null));
+				sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						sp.setBackground(new Background(new BackgroundFill(Color.web("0xDEF3FF"), null, null), null));
+					}
+				});
+				sp.setOnMouseExited(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						sp.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
+					}
+				});
 				sp.setBorder(new Border(new BorderStroke(Paint.valueOf("0x000000"), BorderStrokeStyle.SOLID, null, null)));
 				StackPane.setAlignment(l, Pos.TOP_CENTER);
 				int hours = endHour.getHour() - startHour.getHour();

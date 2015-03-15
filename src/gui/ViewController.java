@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
@@ -41,6 +42,8 @@ public class ViewController implements Initializable {
 	@FXML private GridPane eventGrid;
 	@FXML private TabPane tabPane;
 	@FXML private Tab groupTab;
+	@FXML private Tab nTab;
+	@FXML private GridPane nGrid;
 	
 	public String username;
 	public Stage stage;
@@ -118,6 +121,29 @@ public class ViewController implements Initializable {
 			groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		
+		int x = 0;
+		for (final core.Notification n: SessionData.allNotifications) {
+			StackPane sp = new StackPane();
+			Label event = new Label(n.getEvent().getName());
+			sp.getChildren().add(event);
+			sp.setAlignment(Pos.CENTER_LEFT);
+			nGrid.getChildren().add(sp);
+			sp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					SessionData.id = n.getEvent().getEventID();
+					SessionData.prevScreen = ScreenNavigator.SCREEN_NOTIFICATIONS;
+					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+				}
+			});
+			StackPane sp1 = new StackPane();
+			Label message = new Label(n.getMessage());
+			sp1.getChildren().add(message);
+			sp1.setAlignment(Pos.CENTER_LEFT);
+			nGrid.getChildren().add(sp1);
+			nGrid.addRow(x, sp, sp1);
+			x++;
 		}
 	}
 	

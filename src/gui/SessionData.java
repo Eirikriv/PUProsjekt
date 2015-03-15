@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import core.Event;
+import core.Notification;
 import core.Person;
 import database.RoomDatabaseHandler;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ public class SessionData {
 	public static String id;
 	public static String prevScreen;
 	public static boolean eventTab;
+	public static ArrayList<Notification> allNotifications;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		System.out.println("" + start + end + capacity);
