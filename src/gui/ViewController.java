@@ -188,11 +188,31 @@ public class ViewController implements Initializable {
 		for (int x = 1; x<7; x++) {
 			final int weekIndex = 7+x-1;
 			for (int y = 1; y<8; y++) {
-				StackPane z = new StackPane();
+				final StackPane z = new StackPane();
 				if (calStart.before(cal) || (calStart.after(calEnd))) {
 					z.setBackground(new Background(new BackgroundFill(Color.web("0xECECEC"), null, null), null));
+					z.setOnMouseEntered(new EventHandler<MouseEvent>(){
+						public void handle(MouseEvent event) {
+							z.setBackground(new Background(new BackgroundFill(Color.web("0xF2F2F2"), null, null), null));
+						}
+					});
+					z.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							z.setBackground(new Background(new BackgroundFill(Color.web("0xECECEC"), null, null), null));
+						}
+					});
 				} else {
 					z.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
+					z.setOnMouseEntered(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							z.setBackground(new Background(new BackgroundFill(Color.web("0xDEF3FF"), null, null), null));
+						}
+					});
+					z.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							z.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
+						}
+					});
 				}
 				Label l = new Label(Integer.toString(calStart.get(Calendar.DATE)));
 				StackPane.setAlignment(l, Pos.TOP_LEFT);

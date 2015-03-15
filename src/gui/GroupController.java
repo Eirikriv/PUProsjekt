@@ -19,7 +19,7 @@ public class GroupController implements Initializable {
 	@FXML private VBox leftContainer;
 	
 	GroupDatabaseHandler gdb = new GroupDatabaseHandler();
-	ObservableList<String> peopleInList = FXCollections.observableArrayList();
+	ObservableList<String> peopleInList;
 	
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<String> groups = new ArrayList<String>(core.Program.getAllGroups(SessionData.username));
@@ -31,6 +31,7 @@ public class GroupController implements Initializable {
 		fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue<? extends String> arg0,
 					String arg1, String arg2) {
+				peopleInList = FXCollections.observableArrayList();
 				ArrayList<String> people = gdb.getGroupMembers(arg0.getValue().split(":")[0]);
 				for (String s: people) {
 					peopleInList.add(s);

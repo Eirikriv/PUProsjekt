@@ -143,7 +143,7 @@ public class AdminController implements Initializable {
 				} else {
 					isAnAdmin = "0";
 				}
-				new Person(nameText.getText(), usernameText.getText(), passwordText.getText(), isAnAdmin);
+				new Person(usernameText.getText(), nameText.getText(), passwordText.getText(), isAnAdmin);
 				ViewController.getAllPeople();
 				peopleList.setItems(SessionData.allMembers);
 				userContainer.getChildren().clear();
@@ -177,6 +177,7 @@ public class AdminController implements Initializable {
 		delete.setMinSize(25, 20);
 		ccont.getChildren().addAll(add, delete);
 		final ListView<String> lw = new ListView<String>();
+		lw.setItems(SessionData.allMembers);
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		
