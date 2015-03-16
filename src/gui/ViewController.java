@@ -64,6 +64,13 @@ public class ViewController implements Initializable {
 			SessionData.nTab = false;
 			tabPane.getSelectionModel().select(3);
 		}
+		String name = "";
+		if (SessionData.allNotifications.size() > 0) {
+			name = nTab.getText() + " (" +SessionData.allNotifications.size()+ ")";
+		} else {
+			name = nTab.getText();
+		}
+		nTab.setText(name);
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
 		int rowCount = 1;

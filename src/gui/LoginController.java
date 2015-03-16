@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -27,6 +28,7 @@ public class LoginController implements Initializable {
 	@FXML private PasswordField passwordText;
 	@FXML private Button loginButton;
 	@FXML private Text loginLabel;
+	@FXML private Tab nTab;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
