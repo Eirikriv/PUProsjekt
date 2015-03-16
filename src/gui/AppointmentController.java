@@ -185,7 +185,6 @@ public class AppointmentController implements Initializable {
 		assert startTime.matches("[0-9]{2}:[0-9]{2}");
 		assert endTime.matches("[0-9]{2}:[0-9]{2}");
 		if (startTime.compareTo(endTime) == 1) {
-			System.out.println("startime compare endTime");
 			return;
 		}
 		
