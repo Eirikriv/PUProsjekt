@@ -60,6 +60,9 @@ public class ViewController implements Initializable {
 		if (SessionData.eventTab) {
 			SessionData.eventTab = false;
 			tabPane.getSelectionModel().select(2);
+		} else if (SessionData.nTab) {
+			SessionData.nTab = false;
+			tabPane.getSelectionModel().select(3);
 		}
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
@@ -124,25 +127,34 @@ public class ViewController implements Initializable {
 		}
 		
 		int x = 0;
-		for (final core.Notification n: SessionData.allNotifications) {
+		if (SessionData.allNotifications.size() == 0) {
 			StackPane sp = new StackPane();
+			Label l = new Label("You dont have any unseen notifications");
+			sp.getChildren().add(l);
+			nGrid.add(sp, 0, 0);
+		}
+		x = 1;
+		for (final core.Notification n: SessionData.allNotifications) {
+			StackPane sp1 = new StackPane();
 			Label event = new Label(n.getEvent().getName());
-			sp.getChildren().add(event);
-			sp.setAlignment(Pos.CENTER_LEFT);
-			nGrid.getChildren().add(sp);
-			sp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			sp1.getChildren().add(event);
+			sp1.setAlignment(Pos.CENTER_LEFT);
+			sp1.setPadding(new Insets(0,0,0,20));
+//			nGrid.getChildren().add(sp1);
+			sp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					SessionData.id = n.getEvent().getEventID();
 					SessionData.prevScreen = ScreenNavigator.SCREEN_NOTIFICATIONS;
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
-			StackPane sp1 = new StackPane();
+			StackPane sp0 = new StackPane();
 			Label message = new Label(n.getMessage());
-			sp1.getChildren().add(message);
-			sp1.setAlignment(Pos.CENTER_LEFT);
-			nGrid.getChildren().add(sp1);
-			nGrid.addRow(x, sp, sp1);
+			sp0.getChildren().add(message);
+			sp0.setMinSize(200, 20);
+			sp0.setAlignment(Pos.CENTER_LEFT);
+//			nGrid.getChildren().add(sp0);
+			nGrid.addRow(x, sp1, sp0);
 			x++;
 		}
 	}
@@ -362,15 +374,17 @@ public class ViewController implements Initializable {
 	public static void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
 		ArrayList<String> groupNames = SessionData.person.getAllGroups();
+		ArrayList<String> gNames = new ArrayList<String>();
 		
 		for (String g: groupNames) {
 			String sLeft = g.split(":")[0];
 			String sRight = g.split(":")[1];
 			groups.add(new GroupData(sLeft, sRight));
+			gNames.add(sRight);
 		}
 		
 		
-		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
+		ObservableList<String> people = FXCollections.observableArrayList(gNames);
 		SessionData.allGroups = people;
 	}
 	

@@ -23,9 +23,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class AdminController implements Initializable {
 	
@@ -165,18 +168,24 @@ public class AdminController implements Initializable {
 			groupIsClicked = false;
 			return;
 		}
+		groupItems.clear();
 		groupIsClicked = true;
 		groupContainer.getChildren().clear();
 		Label name = new Label("Group name:");
 		final TextField nameText = new TextField();
 		HBox cont = new HBox();
 		VBox ccont = new VBox();
+		Button members = new Button("Members");
+		Button search = new Button("Search people");
+		members.setMinSize(60, 20);
+		search.setMinSize(100, 20);
 		Button add = new Button("<");
-		add.setMinSize(25, 20);
+		add.setMinSize(27, 20);
 		Button delete = new Button(">");
-		delete.setMinSize(25, 20);
+		delete.setMinSize(27, 20);
 		ccont.getChildren().addAll(add, delete);
 		final ListView<String> lw = new ListView<String>();
+		lw.setEditable(true);
 		lw.setItems(SessionData.allMembers);
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
@@ -186,20 +195,29 @@ public class AdminController implements Initializable {
 		
 		
 		add.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent arg0) {
-				String name = peopleList.getSelectionModel().getSelectedItem();
-				if (!groupItems.contains(name)) {
-					groupItems.add(name);
-					lw.setItems(groupItems);
+			public void handle(ActionEvent arg0) {
+				try {
+					int i = lw.getSelectionModel().getSelectedIndex();
+					String name = lw.getSelectionModel().getSelectedItem();
+					if (!groupItems.contains(name)) {
+						groupItems.add(name);
+						lw.edit(i);
+						lw.setBackground(new Background(new BackgroundFill(Color.web("0xF3F3F3"), null, null), null));
+					}
+				} catch (Exception e) {
+					return;
 				}
 			}
 		});
 		
 		delete.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent arg0) {
-				String name = lw.getSelectionModel().getSelectedItem();
-				lw.getItems().remove(name);
-				lw.setItems(groupItems);
+			public void handle(ActionEvent arg0) {
+				try {
+					String name = lw.getSelectionModel().getSelectedItem();
+					groupItems.remove(name);
+				} catch (Exception e) {
+					return;
+				}
 			}
 		});
 		

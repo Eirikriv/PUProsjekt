@@ -151,12 +151,11 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> getNotifications(String username) {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			String query = "SELECT Notification FROM Event, PersonEvent, Person "
-					+ "WHERE Event.EventID = PersonEvent.EventID AND Person.Username = PersonEvent.Username AND "
-					+ "Person.Username = '" + username + "' AND Notification IS NOT NULL;";
+			String query = "SELECT EventID, Notification FROM PersonEvent "
+					+ "WHERE Username = '" + username + "' AND Notification IS NOT NULL;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
-				list.add(rs.getString(1));
+				list.add(rs.getInt(1) + " " + rs.getString(2));
 			}
 			return list;
 		} catch (Exception e) {

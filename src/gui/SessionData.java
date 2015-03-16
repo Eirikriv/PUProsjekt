@@ -25,6 +25,7 @@ public class SessionData {
 	public static String id;
 	public static String prevScreen;
 	public static boolean eventTab;
+	public static boolean nTab;
 	public static ArrayList<Notification> allNotifications;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {

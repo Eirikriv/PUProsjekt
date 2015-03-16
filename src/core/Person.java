@@ -82,11 +82,4 @@ public class Person implements CalendarOwner{
 	public void removeNotifications() {
 		pdbh.isNotified(this.username);
 	}
-	
-	public static void main(String[] args) {
-		Person p = new Person("anders", "a", "b", "0");
-		System.out.println(p.getName());
-		
-	}
-	
 }

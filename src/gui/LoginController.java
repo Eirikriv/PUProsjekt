@@ -33,9 +33,17 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
         	@Override public void handle(ActionEvent event) {
         		try {
-        			SessionData.username = "martibni";
-        			SessionData.message = "Login sucessful";
-        			SessionData.person = core.Program.login("martibni", "passord3");
+        			if (usernameText.getText().length() > 0 && passwordText.getText().length() > 0) {
+        				System.out.println(usernameText.getText());
+        				SessionData.username = usernameText.getText();
+        				SessionData.message = "Login successful";
+        				SessionData.person = core.Program.login(usernameText.getText(), passwordText.getText());
+        			}
+        			else {
+        				SessionData.username = "martibni";
+            			SessionData.message = "Login successful";
+            			SessionData.person = core.Program.login("martibni", "passord3");
+        			}
         			
         			//Notification pop-up
         			SessionData.allNotifications = SessionData.person.getNotifications();
