@@ -173,10 +173,22 @@ public class ViewController implements Initializable {
 			StackPane bAccept = new StackPane();
 			bAccept.setMinSize(100, 100);
 			Button accept = new Button("accept");
+			accept.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					//
+				}
+			});
+			
 			accept.setTextFill(Paint.valueOf("0x008920"));
 			bAccept.getChildren().add(accept);
 			StackPane bDecline = new StackPane();
 			Button decline = new Button("decline");
+			decline.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					//
+				}
+			});
+			
 			decline.setTextFill(Paint.valueOf("0x970000"));
 			bDecline.getChildren().add(decline);
 			buttons.getChildren().addAll(sp1, bAccept, bDecline);
