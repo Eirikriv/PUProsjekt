@@ -36,23 +36,23 @@ public class EventController implements Initializable {
 		Label desc = new Label(e.getDesc());
 		Label room = new Label(e.getRoom());
 		String in = "";
-		ArrayList<String> ins = e.getParticipants();
+		ArrayList<String> ins = e.getInvited();
 		for (int i = 0; i < ins.size(); i++) {
 			if (i != 0)
 				in += ", ";
 			in += ins.get(i);
 		}
 		Label invited = new Label(in);
-		invited.setAlignment(Pos.CENTER_LEFT);
 		String p = "";
-		ArrayList<String> ps = e.getInvited();
+		ArrayList<String> ps = e.getParticipants();
+		System.out.println("Participants: ");
 		for (int i = 0; i < ps.size(); i++) {
 			if (i != 0)
 				p += ", ";
 			p += ps.get(i);
+			System.out.println(ps.get(i));
 		}
 		Label participants = new Label(p);
-		participants.setAlignment(Pos.CENTER_LEFT);
 		String d = "";
 		ArrayList<String> ds = e.getDeclined();
 		for (int i = 0; i < ds.size(); i++) {
@@ -61,8 +61,7 @@ public class EventController implements Initializable {
 			d += ds.get(i);
 		}
 		Label declined = new Label(d);
-		declined.setAlignment(Pos.CENTER_LEFT);
-		Label[] list = new Label[]{start, end, desc, room, participants, declined};
+		Label[] list = new Label[]{start, end, desc, room, invited, participants, declined};
 		
 		title.setFont(new Font("Arial", 25));
 		titleBox.getChildren().add(title);
