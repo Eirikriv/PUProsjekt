@@ -49,7 +49,7 @@ public class EventController implements Initializable {
 		for (int i = 0; i < ds.size(); i++) {
 			if (i != 0)
 				d += ", ";
-			d += ps.get(i);
+			d += ds.get(i);
 		}
 		Label declined = new Label(d);
 		Label[] list = new Label[]{start, end, desc, room, participants, declined};

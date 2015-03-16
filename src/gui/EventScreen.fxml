@@ -48,17 +48,17 @@
           <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="start" text="Start:">
+            <Label text="Start:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="end" text="End:" GridPane.rowIndex="1">
+            <Label text="End:" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
             <StackPane GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="desc" alignment="TOP_LEFT" text="Description:" GridPane.rowIndex="2" StackPane.alignment="TOP_LEFT">
+                  <Label alignment="TOP_LEFT" text="Description:" GridPane.rowIndex="2" StackPane.alignment="TOP_LEFT">
                      <StackPane.margin>
                         <Insets top="5.0" />
                      </StackPane.margin>
@@ -68,15 +68,15 @@
                   </Label>
                </children>
             </StackPane>
-            <Label fx:id="room" text="Room:" GridPane.rowIndex="3">
+            <Label text="Room:" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="participants" text="Participants:" GridPane.rowIndex="4">
+            <Label text="Participants:" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label fx:id="declined" text="Declined:" GridPane.rowIndex="5">
+            <Label text="Declined:" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
