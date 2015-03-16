@@ -16,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -36,7 +35,6 @@ public class AppointmentController implements Initializable {
 	@FXML private TextField startField;
 	@FXML private TextField endField;
 	@FXML private ListView<String> listMembersField;
-	@FXML private Button searchRoomsButton;
 	
 	
 	TextField tf = new TextField();
@@ -52,7 +50,11 @@ public class AppointmentController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		listMembersField.setItems(listViewList);
-		
+		listMembersField.setFocusTraversable(false);
+		descriptionText.setFocusTraversable(false);
+		members.setFocusTraversable(true);
+		groups.setFocusTraversable(true);
+		rooms.setFocusTraversable(true);
 		startField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0,
@@ -92,7 +94,6 @@ public class AppointmentController implements Initializable {
 		groups.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
-					System.out.println(newValue);
 					ArrayList<String> members = gdb.getGroupMembers(newValue);
 					for (String name: members) {
 						addToListView(name);
@@ -122,26 +123,22 @@ public class AppointmentController implements Initializable {
 	@FXML
 	public void fillRoomBox() {
 		if (dateField.getValue() == null) {
-			System.out.println("1");
 			roomList.clear();
 			rooms.setItems(roomList);
 			return;
 		}
 		
 		if (!startField.getText().matches("[0-9]{2}:[0-9]{2}")) {
-			System.out.println("2");
 			roomList.clear();
 			rooms.setItems(roomList);
 			return;
 		}
 		if (!endField.getText().matches("[0-9]{2}:[0-9]{2}")) {
-			System.out.println("3");
 			roomList.clear();
 			rooms.setItems(roomList);
 			return;
 		}
 		if (tf.getText().length() == 0) {
-			System.out.println("4");
 			roomList.clear();
 			rooms.setItems(roomList);
 			return;
@@ -188,7 +185,6 @@ public class AppointmentController implements Initializable {
 		assert startTime.matches("[0-9]{2}:[0-9]{2}");
 		assert endTime.matches("[0-9]{2}:[0-9]{2}");
 		if (startTime.compareTo(endTime) == 1) {
-			System.out.println("startime compare endTime");
 			return;
 		}
 		
