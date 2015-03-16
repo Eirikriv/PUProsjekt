@@ -367,7 +367,7 @@ public class ViewController implements Initializable {
 			ArrayList<core.Person> personNames = core.Program.getAllPersons();
 			ArrayList<String> peoples = new ArrayList<String>();
 			for (int x=0; x<personNames.size();x++){
-				peoples.add(personNames.get(x).getName() + "<" + personNames.get(x).getPrimaryKey() + ">");
+				peoples.add(personNames.get(x).getPrimaryKey() + "<" + personNames.get(x).getName() + ">");
 			}
 			ObservableList<String> people = FXCollections.observableArrayList(peoples);
 			SessionData.allMembers = people;

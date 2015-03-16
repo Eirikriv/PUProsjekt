@@ -23,12 +23,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class AdminController implements Initializable {
 	
@@ -168,7 +165,6 @@ public class AdminController implements Initializable {
 			groupIsClicked = false;
 			return;
 		}
-		groupItems.clear();
 		groupIsClicked = true;
 		groupContainer.getChildren().clear();
 		Label name = new Label("Group name:");
@@ -185,8 +181,6 @@ public class AdminController implements Initializable {
 		delete.setMinSize(27, 20);
 		ccont.getChildren().addAll(add, delete);
 		final ListView<String> lw = new ListView<String>();
-		lw.setEditable(true);
-		lw.setItems(SessionData.allMembers);
 		cont.getChildren().addAll(lw, ccont);
 		Button createGroup = new Button("Create group");
 		
@@ -197,12 +191,11 @@ public class AdminController implements Initializable {
 		add.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 				try {
-					int i = lw.getSelectionModel().getSelectedIndex();
-					String name = lw.getSelectionModel().getSelectedItem();
+					String name = peopleList.getSelectionModel().getSelectedItem();
 					if (!groupItems.contains(name)) {
+						System.out.println("OK");
 						groupItems.add(name);
-						lw.edit(i);
-						lw.setBackground(new Background(new BackgroundFill(Color.web("0xF3F3F3"), null, null), null));
+						lw.setItems(groupItems);
 					}
 				} catch (Exception e) {
 					return;
@@ -213,8 +206,9 @@ public class AdminController implements Initializable {
 		delete.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 				try {
-					String name = lw.getSelectionModel().getSelectedItem();
+					String name = peopleList.getSelectionModel().getSelectedItem();
 					groupItems.remove(name);
+					lw.setItems(groupItems);
 				} catch (Exception e) {
 					return;
 				}
