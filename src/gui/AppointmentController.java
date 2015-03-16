@@ -13,9 +13,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -113,8 +115,17 @@ public class AppointmentController implements Initializable {
 		sp.setAlignment(Pos.CENTER);
 		appointmentContainer.add(hb, 1, 7);
 		
+		Button addEvent = new Button("Create Event");
+		addEvent.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent arg0) {
+				createEvent(arg0);
+			}
+		});
+		appointmentContainer.add(addEvent, 2, 8);
+		
 	}
 	
+	@FXML
 	public void navigateBack(MouseEvent e) {
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	}
@@ -152,7 +163,7 @@ public class AppointmentController implements Initializable {
 	}
 	
 	
-	
+	@FXML
 	public void keyStroke(KeyEvent e) {
 		System.out.println(e.getCharacter());
 	}
@@ -169,6 +180,7 @@ public class AppointmentController implements Initializable {
 		}
 	}
 	
+	@FXML
 	public void createEvent(ActionEvent e) {
 		EventDatabaseHandler edb = new EventDatabaseHandler();
 		
