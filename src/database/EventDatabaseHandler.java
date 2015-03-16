@@ -65,7 +65,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public boolean addPerson(String eventID, String username) {
 		try {
 			String stmt = "INSERT INTO PersonEvent(Username, EventID, Notification) "
-					+ "VALUES('" + username + "', '" + eventID + "', " + "'You were added to the event');";
+					+ "VALUES('" + username + "', '" + eventID + "', " + "You were added to the event);";
 			Database.makeStatement(stmt);
 			return true;
 		}

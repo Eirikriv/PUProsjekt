@@ -155,7 +155,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 					+ "WHERE Username = '" + username + "' AND Notification IS NOT NULL;";
 			ResultSet rs = Database.makeQuery(query);
 			while(rs.next()) {
-				list.add(rs.getInt(1) + " " + rs.getString(2));
+				list.add(rs.getInt(1) + ":" + rs.getString(2));
 			}
 			return list;
 		} catch (Exception e) {

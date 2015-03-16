@@ -136,24 +136,33 @@ public class ViewController implements Initializable {
 		x = 1;
 		for (final core.Notification n: SessionData.allNotifications) {
 			StackPane sp1 = new StackPane();
-			Label event = new Label(n.getEvent().getName());
-			sp1.getChildren().add(event);
-			sp1.setAlignment(Pos.CENTER_LEFT);
-			sp1.setPadding(new Insets(0,0,0,20));
-//			nGrid.getChildren().add(sp1);
-			sp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			final Label eventName = new Label(n.getEvent().getName());
+			eventName.setUnderline(true);
+			eventName.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					eventName.setTextFill(Color.web("0x949494"));
+				}
+			});
+			eventName.setOnMouseExited(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					eventName.setTextFill(Paint.valueOf("black"));
+				}
+			});
+			eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					SessionData.id = n.getEvent().getEventID();
-					SessionData.prevScreen = ScreenNavigator.SCREEN_NOTIFICATIONS;
+					SessionData.nTab = true;
+					SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
+			sp1.getChildren().add(eventName);
+			sp1.setAlignment(Pos.CENTER_LEFT);
+			sp1.setPadding(new Insets(0,0,0,20));
 			StackPane sp0 = new StackPane();
 			Label message = new Label(n.getMessage());
 			sp0.getChildren().add(message);
-			sp0.setMinSize(200, 20);
 			sp0.setAlignment(Pos.CENTER_LEFT);
-//			nGrid.getChildren().add(sp0);
 			nGrid.addRow(x, sp1, sp0);
 			x++;
 		}

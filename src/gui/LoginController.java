@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -56,13 +57,29 @@ public class LoginController implements Initializable {
 	        			dialogVbox.getChildren().add(t);
 	        			dialogVbox.setAlignment(Pos.TOP_CENTER);
 	        			VBox.setMargin(t, new Insets(50, 0, 0, 0));
-	        			
+	        			HBox hBox = new HBox(40);
+	        			hBox.setAlignment(Pos.CENTER);
 	        			StackPane sp = new StackPane();
-	        			dialogVbox.getChildren().add(sp);
+	        			dialogVbox.getChildren().add(hBox);
+	        			hBox.getChildren().add(sp);
 	        			Button ok = new Button("OK");
 	        			sp.getChildren().add(ok);
-	        			sp.setAlignment(Pos.BOTTOM_RIGHT);
-	        			StackPane.setMargin(ok, new Insets(0, 60, 0, 0));
+	        			sp.setAlignment(Pos.TOP_RIGHT);
+	        			StackPane.setMargin(ok, new Insets(0, 0, 0, 0));
+	        			sp = new StackPane();
+	        			Button see = new Button("See notification(s)");
+	        			sp.getChildren().add(see);
+	        			sp.setAlignment(Pos.TOP_LEFT);
+	        			StackPane.setMargin(see, new Insets(0, 0, 0, 0));
+	        			hBox.getChildren().add(sp);
+	        			
+	        			see.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								SessionData.nTab = true;
+								ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+								dialog.close();
+							}
+	        			});
 	        			
 	        			ok.setDefaultButton(true);
 	        			ok.setOnAction(new EventHandler<ActionEvent>() {
