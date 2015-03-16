@@ -15,9 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class EventController implements Initializable {
+	@FXML private StackPane screenHolder;
 	@FXML private GridPane grid;
 	@FXML private HBox titleBox;
 	@FXML private HBox createdBox;
@@ -68,6 +70,20 @@ public class EventController implements Initializable {
 		}
 		StackPane.setAlignment(desc, Pos.TOP_LEFT);
 		StackPane.setMargin(desc, new Insets(5,0,0,0));
+		
+		if(!SessionData.person.hasAnswered(SessionData.id)) {
+			Button accept = new Button("Accept");
+			accept.setTextFill(Paint.valueOf("0x008920"));
+			screenHolder.getChildren().add(accept);
+			StackPane.setAlignment(accept, Pos.BOTTOM_CENTER);
+			StackPane.setMargin(accept, new Insets(0,100,30,0));
+			
+			Button decline = new Button("Decline");
+			decline.setTextFill(Paint.valueOf("0x970000"));
+			screenHolder.getChildren().add(decline);
+			StackPane.setAlignment(decline, Pos.BOTTOM_CENTER);
+			StackPane.setMargin(decline, new Insets(0, 0, 30, 50));
+		}
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {

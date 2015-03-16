@@ -154,8 +154,14 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			String query = "SELECT EventID, Notification FROM PersonEvent "
 					+ "WHERE Username = '" + username + "' AND Notification IS NOT NULL;";
 			ResultSet rs = Database.makeQuery(query);
+			query = "SELECT GroupID, Notification FROM PersonInGroup "
+					+ "WHERE Username = '" + username + "' AND Notification IS NOT NULL;";
+			ResultSet rs1 = Database.makeQuery(query);
 			while(rs.next()) {
 				list.add(rs.getInt(1) + ":" + rs.getString(2));
+			}
+			while(rs1.next()) {
+				list.add(rs1.getInt(1) + ":" + rs.getString(2));
 			}
 			return list;
 		} catch (Exception e) {
@@ -168,6 +174,22 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		try {
 			String statement = "UPDATE Person SET Notification = NULL WHERE Username = '" + username + "';";
 			Database.makeStatement(statement);
+		} catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	public int accepted(String username, String eventID) {
+		try {
+			String query = "SELECT Status FROM PersonEvent "
+					+ "WHERE Username = '" + username + "' AND EventID = '" + eventID + "'";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				int b = rs.getInt(1);
+				System.out.println(b);
+				return b;
+			}
+			return 0;
 		} catch(Exception e) {
 			throw new IllegalArgumentException();
 		}

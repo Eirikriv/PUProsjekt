@@ -45,6 +45,7 @@ public class Database{
 			makeStatement("CREATE TABLE PersonInGroup"
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "GroupID INT NOT NULL,"
+					+ "Notification VARCHAR(100) DEFAULT NULL,"
 					+ "PRIMARY KEY (Username, GroupID),"
 					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
 					+ "ON UPDATE CASCADE ON DELETE CASCADE,"
@@ -77,8 +78,8 @@ public class Database{
 			makeStatement("CREATE TABLE PersonEvent"
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "EventID INT NOT NULL,"
-					+ "Status BOOL DEFAULT NULL,"
-					+ "Visibility BOOL DEFAULT NULL,"
+					+ "Status INT DEFAULT 0,"
+					+ "Visibility BOOL DEFAULT TRUE,"
 					+ "Notification VARCHAR(100), "
 					+ "PRIMARY KEY (Username, EventID),"
 					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "
@@ -100,13 +101,13 @@ public class Database{
 					+ "VALUES('Cecilie Teisberg', 'cecilite', 'passord');");
 			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
 					+ "VALUES('Anders Rønold', 'andronol', 'passord1');");
-			makeStatement("INSERT INTO Person(Name, Username, Password)\n"
-					+ "VALUES('Martin Børø Nilsen', 'martibni', 'passord3');");
+			makeStatement("INSERT INTO Person(Name, Username, Password, Admin)\n"
+					+ "VALUES('Martin Børø Nilsen', 'martibni', 'passord3', 1);");
 			makeStatement("INSERT INTO Groups(Name)\n"
 					+ "VALUES('PU');");
-			makeStatement("INSERT INTO PersonInGroup\n"
+			makeStatement("INSERT INTO PersonInGroup(Username, GroupID)\n"
 					+ "VALUES('martibni', '1');");
-			makeStatement("INSERT INTO PersonInGroup\n"
+			makeStatement("INSERT INTO PersonInGroup(Username, GroupID)\n"
 					+ "VALUES('cecilite', '1');");
 			makeStatement("INSERT INTO Room\n"
 					+ "VALUES('R1', '300', 'Forelesningssal')");

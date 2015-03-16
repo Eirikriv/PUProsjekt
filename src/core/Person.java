@@ -47,7 +47,6 @@ public class Person implements CalendarOwner{
 		return this.pdbh.getAllGroups(username);
 	}
 
-	
 	public Calendar getCalendar() {
 		return cal;
 	}
@@ -81,5 +80,11 @@ public class Person implements CalendarOwner{
 	
 	public void removeNotifications() {
 		pdbh.isNotified(this.username);
+	}
+	
+	public boolean hasAnswered(String eventID) {
+		if (pdbh.accepted(username, eventID) != 0)
+			return true;
+		return false;
 	}
 }
