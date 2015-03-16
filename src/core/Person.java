@@ -78,12 +78,8 @@ public class Person implements CalendarOwner{
 		return notifications;
 	}
 	
-	public void removeNotification(String eventID) {
-		pdbh.isNotified(this.username, eventID);
-	}
-	
-	public boolean hasAnswered(String eventID) {
-		if (pdbh.accepted(username, eventID) != 0)
+	public boolean hasDeclined(String eventID) {
+		if (pdbh.accepted(username, eventID) == -1)
 			return true;
 		return false;
 	}
@@ -96,9 +92,11 @@ public class Person implements CalendarOwner{
 	
 	public void acceptInvitation(String eventID) {
 		pdbh.answerInvitation(username, eventID, 1);
+		pdbh.isNotifiedOfEvent(username, eventID);
 	}
 	
 	public void declineInvitation(String eventID) {
 		pdbh.answerInvitation(username, eventID, -1);
+		pdbh.isNotifiedOfEvent(username, eventID);
 	}
 }
