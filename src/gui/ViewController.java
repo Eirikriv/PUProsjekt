@@ -168,9 +168,23 @@ public class ViewController implements Initializable {
 			sp1.setPadding(new Insets(0,0,0,20));
 			StackPane sp0 = new StackPane();
 			Label message = new Label(n.getMessage());
+			
+			HBox buttons = new HBox();
+			StackPane bAccept = new StackPane();
+			bAccept.setMinSize(100, 100);
+			Button accept = new Button("accept");
+			accept.setTextFill(Paint.valueOf("0x008920"));
+			bAccept.getChildren().add(accept);
+			StackPane bDecline = new StackPane();
+			Button decline = new Button("decline");
+			decline.setTextFill(Paint.valueOf("0x970000"));
+			bDecline.getChildren().add(decline);
+			buttons.getChildren().addAll(sp1, bAccept, bDecline);
+			HBox.setMargin(buttons, new Insets(20));
+			
 			sp0.getChildren().add(message);
 			sp0.setAlignment(Pos.CENTER_LEFT);
-			nGrid.addRow(x, sp1, sp0);
+			nGrid.addRow(x, buttons, sp0);
 			x++;
 		}
 	}
