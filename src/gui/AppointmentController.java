@@ -208,12 +208,7 @@ public class AppointmentController implements Initializable {
 		String eventID = edb.add(data);
 		
 		for (String username: listViewList) {
-			for (int x=0; x<username.length(); x++) {
-				if (username.charAt(x) == '<') {
-					username = username.substring(0, x);
-				}
-			}
-				
+			username = username.split("<")[0];
 			if (edb.addPerson(eventID, username)) {
 				System.out.println("added " + username + " to event:" + eventID);
 			} else {
