@@ -87,4 +87,12 @@ public class Person implements CalendarOwner{
 			return true;
 		return false;
 	}
+	
+	public void acceptInvitation(String eventID) {
+		pdbh.answerInvitation(username, eventID, 1);
+	}
+	
+	public void declineInvitation(String eventID) {
+		pdbh.answerInvitation(username, eventID, -1);
+	}
 }

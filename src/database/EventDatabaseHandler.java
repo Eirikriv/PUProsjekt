@@ -86,6 +86,22 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
+	public ArrayList<String> getAllInvited(String eventID) {
+		ArrayList<String> invited = new ArrayList<String>();
+		try {
+			String query = "SELECT Username FROM PersonEvent "
+					+ "WHERE EventID = " + eventID + " AND "
+					+ "(Status is NULL OR Status = '0');";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next())
+				invited.add(rs.getString(1));
+			return invited;
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException();
+		}
+	}
+	
 	public ArrayList<String> getAllParticipants(String eventID) {
 		ArrayList<String> participants = new ArrayList<String>();
 		try {
@@ -106,7 +122,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		ArrayList<String> declined = new ArrayList<String>();
 		try {
 			String query = "SELECT Username FROM PersonEvent "
-					+ "WHERE EventID = '" + eventID + "' AND Status = 0;";
+					+ "WHERE EventID = '" + eventID + "' AND Status = -1;";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next())
 				declined.add(rs.getString(1));

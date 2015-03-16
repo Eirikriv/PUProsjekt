@@ -44,6 +44,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="54.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -56,30 +57,24 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <StackPane GridPane.rowIndex="2">
-               <children>
-                  <Label alignment="TOP_LEFT" text="Description:" GridPane.rowIndex="2" StackPane.alignment="TOP_LEFT">
-                     <StackPane.margin>
-                        <Insets top="5.0" />
-                     </StackPane.margin>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
+            <StackPane GridPane.rowIndex="2" />
             <Label text="Room:" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label text="Participants:" GridPane.rowIndex="4">
+            <Label text="Accepted:" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label text="Declined:" GridPane.rowIndex="5">
+            <Label text="Declined:" GridPane.rowIndex="6">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
+            <Label text="Invited:" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
          <StackPane.margin>
             <Insets bottom="85.0" left="20.0" right="20.0" top="70.0" />

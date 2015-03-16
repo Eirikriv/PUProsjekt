@@ -35,8 +35,17 @@ public class EventController implements Initializable {
 		Label end = new Label(e.getEnd());
 		Label desc = new Label(e.getDesc());
 		Label room = new Label(e.getRoom());
+		String in = "";
+		ArrayList<String> ins = e.getParticipants();
+		for (int i = 0; i < ins.size(); i++) {
+			if (i != 0)
+				in += ", ";
+			in += ins.get(i);
+		}
+		Label invited = new Label(in);
+		invited.setAlignment(Pos.CENTER_LEFT);
 		String p = "";
-		ArrayList<String> ps = e.getParticipants();
+		ArrayList<String> ps = e.getInvited();
 		for (int i = 0; i < ps.size(); i++) {
 			if (i != 0)
 				p += ", ";
@@ -52,6 +61,7 @@ public class EventController implements Initializable {
 			d += ds.get(i);
 		}
 		Label declined = new Label(d);
+		declined.setAlignment(Pos.CENTER_LEFT);
 		Label[] list = new Label[]{start, end, desc, room, participants, declined};
 		
 		title.setFont(new Font("Arial", 25));
@@ -83,6 +93,20 @@ public class EventController implements Initializable {
 			screenHolder.getChildren().add(decline);
 			StackPane.setAlignment(decline, Pos.BOTTOM_CENTER);
 			StackPane.setMargin(decline, new Insets(0, 0, 30, 50));
+			
+			accept.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					SessionData.person.acceptInvitation(SessionData.id);
+					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+				}
+			});
+			
+			decline.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					SessionData.person.declineInvitation(SessionData.id);
+					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+				}
+			});
 		}
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {

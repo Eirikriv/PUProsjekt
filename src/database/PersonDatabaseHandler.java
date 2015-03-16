@@ -194,4 +194,15 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public void answerInvitation(String username, String eventID, int answer) {
+		try {
+			String stmt = "UPDATE PersonEvent SET Status = " + answer + " WHERE Username = '" + username + "' AND EventID = '" + eventID + "';";
+			Database.makeStatement(stmt);
+		}catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	
 }
