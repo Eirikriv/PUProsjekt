@@ -390,17 +390,15 @@ public class ViewController implements Initializable {
 	public static void getAllGroups() {
 		ArrayList<GroupData> groups = new ArrayList<GroupData>();
 		ArrayList<String> groupNames = SessionData.person.getAllGroups();
-		ArrayList<String> gNames = new ArrayList<String>();
 		
 		for (String g: groupNames) {
 			String sLeft = g.split(":")[0];
 			String sRight = g.split(":")[1];
 			groups.add(new GroupData(sLeft, sRight));
-			gNames.add(sRight);
 		}
 		
 		
-		ObservableList<String> people = FXCollections.observableArrayList(gNames);
+		ObservableList<String> people = FXCollections.observableArrayList(groupNames);
 		SessionData.allGroups = people;
 	}
 	
