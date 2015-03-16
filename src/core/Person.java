@@ -78,12 +78,18 @@ public class Person implements CalendarOwner{
 		return notifications;
 	}
 	
-	public void removeNotifications() {
-		pdbh.isNotified(this.username);
+	public void removeNotification(String eventID) {
+		pdbh.isNotified(this.username, eventID);
 	}
 	
 	public boolean hasAnswered(String eventID) {
 		if (pdbh.accepted(username, eventID) != 0)
+			return true;
+		return false;
+	}
+	
+	public boolean hasAccepted(String eventID) {
+		if (pdbh.accepted(username, eventID) == 1)
 			return true;
 		return false;
 	}

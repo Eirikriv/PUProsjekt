@@ -45,12 +45,10 @@ public class EventController implements Initializable {
 		Label invited = new Label(in);
 		String p = "";
 		ArrayList<String> ps = e.getParticipants();
-		System.out.println("Participants: ");
 		for (int i = 0; i < ps.size(); i++) {
 			if (i != 0)
 				p += ", ";
 			p += ps.get(i);
-			System.out.println(ps.get(i));
 		}
 		Label participants = new Label(p);
 		String d = "";
@@ -99,13 +97,14 @@ public class EventController implements Initializable {
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
-			
 			decline.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					SessionData.person.declineInvitation(SessionData.id);
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
+		} else if(!SessionData.person.hasAccepted(SessionData.id)){
+			
 		}
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {

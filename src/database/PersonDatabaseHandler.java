@@ -170,9 +170,9 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
-	public void isNotified(String username) {
+	public void isNotified(String username, String eventID) {
 		try {
-			String statement = "UPDATE Person SET Notification = NULL WHERE Username = '" + username + "';";
+			String statement = "UPDATE Person SET Notification = NULL WHERE Username = '" + username + "' AND EventID = " + eventID + ";";
 			Database.makeStatement(statement);
 		} catch(Exception e) {
 			throw new IllegalArgumentException();
