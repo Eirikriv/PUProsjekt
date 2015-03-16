@@ -92,7 +92,6 @@ public class ViewController implements Initializable {
 			tabPane.getTabs().add(tab);
 		}
 		for (final Event event: SessionData.allEvents) {
-			System.out.println(event.getName());
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
 			for (int x = 0; x<4; x++) {
 				StackPane itemContainer = new StackPane();
@@ -101,7 +100,6 @@ public class ViewController implements Initializable {
 					boolean isVisible = false;
 					for (Event e: SessionData.allVisibleEvents) {
 						if (e.getEventID().equals(event.getEventID())){
-							System.out.println("OK");
 							isVisible = true;
 						}
 					}
