@@ -99,4 +99,16 @@ public class Person implements CalendarOwner{
 		pdbh.answerInvitation(username, eventID, -1);
 		pdbh.isNotifiedOfEvent(username, eventID);
 	}
+	
+	public void changeVisibility(String eventID, int visibility) {
+		pdbh.changeVisibility(username, eventID, visibility);
+	}
+	
+	public boolean isVisible(String eventID) {
+		int visibility = pdbh.isVisible(username, eventID);
+		if (visibility == 1) {
+			return true;
+		}
+		return false;
+	}
 }

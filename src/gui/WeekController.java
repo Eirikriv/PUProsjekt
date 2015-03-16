@@ -42,7 +42,7 @@ public class WeekController implements Initializable {
 		s.getChildren().add(lb);
 		s.setAlignment(Pos.CENTER);
 		outerWeekGrid.add(s, 0, 0);
-		for (final Event event: SessionData.allEvents) {
+		for (final Event event: SessionData.allVisibleEvents) {
 			String title = event.getName();
 			LocalDate startDate = LocalDate.parse(event.getStart().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			LocalTime startHour = LocalTime.parse(event.getStart().split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));

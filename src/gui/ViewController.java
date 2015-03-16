@@ -73,6 +73,7 @@ public class ViewController implements Initializable {
 		nTab.setText(name);
 		message.setText(SessionData.message);
 		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
+		SessionData.allVisibleEvents = SessionData.person.getCalendar().updateCalendarToVisible();
 		int rowCount = 1;
 		int columnCount = 0;
 		SessionData.cal = this.cal;
@@ -90,13 +91,23 @@ public class ViewController implements Initializable {
 			tab.setText("Admin");
 			tabPane.getTabs().add(tab);
 		}
-		
 		for (final Event event: SessionData.allEvents) {
+			System.out.println(event.getName());
 			String[] eventInfo = {event.getName(), event.getDesc(), event.getStart(), event.getEnd()};
 			for (int x = 0; x<4; x++) {
 				StackPane itemContainer = new StackPane();
 				final Label itemText = new Label(eventInfo[x]);
 				if (x == 0) {
+					boolean isVisible = false;
+					for (Event e: SessionData.allVisibleEvents) {
+						if (e.getEventID().equals(event.getEventID())){
+							System.out.println("OK");
+							isVisible = true;
+						}
+					}
+					if (!isVisible) {
+						itemText.setText(eventInfo[x] + " [Hidden]");
+					}
 					itemText.setUnderline(true);
 					itemText.setOnMouseEntered(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
@@ -429,5 +440,21 @@ public class ViewController implements Initializable {
 		SessionData.allGroups = people;
 	}
 	
-	
+	public void logout() {
+		SessionData.username = null;
+		SessionData.person = null;
+		SessionData.allEvents = null;
+		SessionData.allGroups = null;
+		SessionData.allMembers = null;
+		SessionData.allNotifications = null;
+		SessionData.allRooms = null;
+		SessionData.currentWeek = null;
+		SessionData.cal = null;
+		SessionData.eventTab = false;
+		SessionData.nTab = false;
+		SessionData.id = null;
+		SessionData.message = null;
+		SessionData.prevScreen = null;
+		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_LOGIN);
+	}
 }

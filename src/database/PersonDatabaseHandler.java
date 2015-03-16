@@ -72,7 +72,25 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 						+  "WHERE Person.Username = PersonEvent.Username "
 						+  "AND Event.EventID = PersonEvent.EventID "
 						+  "AND Person.Username = '" + username + "' "
-						+  "ORDER BY Event.Start";
+						+  "ORDER BY Event.Start;";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+			return list;
+		}
+		catch(Exception e) {
+			throw new IllegalArgumentException("User " + username + " does not exist.");
+		}
+	}
+	
+	public ArrayList<String> getVisiblePersonEvents(String username) {
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			String query = "SELECT EventID "
+						+  "FROM PersonEvent "
+						+  "WHERE Username = '" + username + "' "
+						+  "AND Visibility = 1;";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
 				list.add(rs.getString(1));
@@ -197,12 +215,32 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 	
 	public void answerInvitation(String username, String eventID, int answer) {
 		try {
-			String stmt = "UPDATE PersonEvent SET Status = " + answer + " WHERE Username = '" + username + "' AND EventID = '" + eventID + "';";
+			String stmt = "UPDATE PersonEvent SET Status = " + answer + " WHERE Username = '" + username + "' AND EventID = " + eventID + ";";
 			Database.makeStatement(stmt);
 		}catch(Exception e) {
 			throw new IllegalArgumentException();
 		}
 	}
 	
+	public void changeVisibility(String username, String eventID, int visibility) {
+		try{
+			String stmt = "UPDATE PersonEvent SET Visibility = " + visibility + " WHERE Username = '" + username + "' AND EventID = " + eventID + ";";
+			Database.makeStatement(stmt);
+		} catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
 	
+	public int isVisible(String username, String eventID) {
+		try {
+			String query = "SELECT Visibility FROM PersonEvent WHERE Username = '" + username + "' AND EventID = " + eventID + ";";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+			return -1;
+		}catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
 }

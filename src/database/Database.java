@@ -79,7 +79,7 @@ public class Database{
 					+ "(Username VARCHAR(20) NOT NULL,"
 					+ "EventID INT NOT NULL,"
 					+ "Status INT DEFAULT 0,"
-					+ "Visibility BOOL DEFAULT TRUE,"
+					+ "Visibility INT DEFAULT 1,"
 					+ "Notification VARCHAR(100), "
 					+ "PRIMARY KEY (Username, EventID),"
 					+ "FOREIGN KEY (Username) REFERENCES Person(Username) "

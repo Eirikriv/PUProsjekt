@@ -87,10 +87,13 @@ public class EventController implements Initializable {
 			decline.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					SessionData.person.declineInvitation(SessionData.id);
+					SessionData.allNotifications = SessionData.person.getNotifications();
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
-		} if(!SessionData.person.hasAccepted(SessionData.id)){
+			
+			
+		} else if(!SessionData.person.hasAccepted(SessionData.id)){
 			Button accept = new Button("Accept");
 			accept.setTextFill(Paint.valueOf("0x008920"));
 			screenHolder.getChildren().add(accept);
@@ -99,9 +102,34 @@ public class EventController implements Initializable {
 			accept.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					SessionData.person.acceptInvitation(SessionData.id);
+					SessionData.allNotifications = SessionData.person.getNotifications();
 					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
+			if (SessionData.person.isVisible(SessionData.id)) {
+				Button hide = new Button("Hide event");
+				screenHolder.getChildren().add(hide);
+				StackPane.setAlignment(hide, Pos.BOTTOM_CENTER);
+				StackPane.setMargin(hide, new Insets(0, 0, 30, 50));
+				hide.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						SessionData.person.changeVisibility(SessionData.id, 0);
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+					}
+				});
+			} else {
+				Button unhide = new Button("Unhide event");
+				screenHolder.getChildren().add(unhide);
+				StackPane.setAlignment(unhide, Pos.BOTTOM_CENTER);
+				StackPane.setMargin(unhide, new Insets(0, 0, 30, 50));
+				unhide.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						SessionData.person.changeVisibility(SessionData.id, 1);
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+						
+					}
+				});
+			}
 		}
 		
 		backButton.setOnAction(new EventHandler<ActionEvent>() {

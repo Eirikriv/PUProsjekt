@@ -20,6 +20,7 @@ public class SessionData {
 	public static String currentWeek;
 	public static String message;
 	public static ArrayList<Event> allEvents;
+	public static ArrayList<Event> allVisibleEvents;
 	public static Person person;
 	public static Calendar cal;
 	public static String id;

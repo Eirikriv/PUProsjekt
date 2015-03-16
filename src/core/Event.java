@@ -22,7 +22,7 @@ public class Event {
    		this.start= start;
 		this.end = end;
 		this.desc = desc;
-		this.roomID = roomid;	
+		this.roomID = roomid;
 	}
 	public Event(String eventID) {
 		this.eventID = eventID;

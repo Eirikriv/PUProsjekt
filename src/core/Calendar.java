@@ -53,5 +53,19 @@ public class Calendar {
 		this.calendar = result;
 		return calendar;
 	}
+	
+	public ArrayList<Event> updateCalendarToVisible() {
+		ArrayList<String> list = null;
+		if (Person.class.isInstance(calOwner))
+			list = pdbh.getVisiblePersonEvents(calOwner.getPrimaryKey());
+		else
+			throw new IllegalArgumentException("Invalid CalendarOwner object");
+		ArrayList<Event> result = new ArrayList<Event>();
+		for (int i=0; i<list.size() ; i++) {
+			Event e = new Event(list.get(i));
+			result.add(e);
+		}
+		return result;
+	}
 		
 }
