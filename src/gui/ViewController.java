@@ -168,31 +168,32 @@ public class ViewController implements Initializable {
 			sp1.setPadding(new Insets(0,0,0,20));
 			StackPane sp0 = new StackPane();
 			Label message = new Label(n.getMessage());
-			
 			HBox buttons = new HBox();
-			StackPane bAccept = new StackPane();
-			bAccept.setMinSize(100, 100);
-			Button accept = new Button("accept");
-			accept.setOnAction(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent e) {
-					//
-				}
-			});
 			
-			accept.setTextFill(Paint.valueOf("0x008920"));
-			bAccept.getChildren().add(accept);
-			StackPane bDecline = new StackPane();
-			Button decline = new Button("decline");
-			decline.setOnAction(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent e) {
-					//
-				}
-			});
-			
-			decline.setTextFill(Paint.valueOf("0x970000"));
-			bDecline.getChildren().add(decline);
-			buttons.getChildren().addAll(sp1, bAccept, bDecline);
-			HBox.setMargin(buttons, new Insets(20));
+			if (n.getMessage().compareTo("You were added to the event") == 0) {
+				StackPane bAccept = new StackPane();
+				bAccept.setMinSize(100, 100);
+				Button accept = new Button("accept");
+				accept.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent e) {
+						SessionData.person.acceptInvitation(SessionData.id);
+					}
+				});
+				accept.setTextFill(Paint.valueOf("0x008920"));
+				bAccept.getChildren().add(accept);
+				StackPane bDecline = new StackPane();
+				Button decline = new Button("decline");
+				decline.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent e) {
+						SessionData.person.declineInvitation(SessionData.id);
+					}
+				});
+				
+				decline.setTextFill(Paint.valueOf("0x970000"));
+				bDecline.getChildren().add(decline);
+				buttons.getChildren().addAll(sp1, bAccept, bDecline);
+				HBox.setMargin(buttons, new Insets(20));
+			}
 			
 			sp0.getChildren().add(message);
 			sp0.setAlignment(Pos.CENTER_LEFT);
