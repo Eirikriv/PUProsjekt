@@ -186,6 +186,9 @@ public class ViewController implements Initializable {
 				accept.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						SessionData.person.acceptInvitation(SessionData.id);
+						SessionData.nTab = true;
+						SessionData.allNotifications = SessionData.person.getNotifications(); 
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 					}
 				});
 				accept.setTextFill(Paint.valueOf("0x008920"));
