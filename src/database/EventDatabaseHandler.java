@@ -44,6 +44,9 @@ public class EventDatabaseHandler implements DatabaseHandler {
 			Database.makeStatement("UPDATE Event\n"
 								 + "SET title = '"+ eventInfo[1]+", start = '"+ eventInfo[2] + "', end = '"+eventInfo[3] +"', desc = '"+ eventInfo[4]+ "', roomID = '"+eventInfo[5]+"\n"
 								 + "WHERE EventID = '"+eventInfo[0]+"';");
+			Database.makeStatement("UPDATE PersonEvent "
+									+"SET PersonEvent.Notification = 'This event has been updated' "
+									+"WHERE PersonEvent.EventID = '"+eventInfo[0]+"';");
 		return true;
 		}
 		catch (Exception e){
