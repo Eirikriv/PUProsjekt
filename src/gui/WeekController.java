@@ -50,6 +50,7 @@ public class WeekController implements Initializable {
 			Calendar calstart = Calendar.getInstance();
 			calstart.setTime(SessionData.cal.getTime());
 			calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek)+1);
+			System.out.println(calstart.getTime());
 			while (calstart.get(Calendar.DAY_OF_WEEK) != 2) {
 				calstart.add(Calendar.DAY_OF_YEAR, -1);
 			}
@@ -58,48 +59,47 @@ public class WeekController implements Initializable {
 			calend.setTime(calstart.getTime());
 			calend.add(Calendar.DAY_OF_YEAR, 6);
 			calend.set(Calendar.HOUR, 18);
-			
 			if (calstart.get(Calendar.DAY_OF_YEAR) <= startDate.getDayOfYear() && calend.get(Calendar.DAY_OF_YEAR) >= startDate.getDayOfYear()) {
 				int day = startDate.getDayOfWeek().getValue();
 				final StackPane sp = new StackPane();
 				Label l = new Label(title);
 				sp.getChildren().add(l);
 				if (SessionData.person.hasAccepted(event.getEventID())) {
-					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xC6FFD7"), null, null), null));
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xDFFFEB"), null, null), null));
 					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xDFFFE9"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xF2FFF7"), null, null), null));
 						}
 					});
 					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xC6FFD7"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xDFFFEB"), null, null), null));
 						}
 					});
 				}
 				else if(SessionData.person.hasDeclined(event.getEventID())) {
-					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xFFC9C9"), null, null), null));
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xFFE6E6"), null, null), null));
 					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFD5D5"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFEFEF"), null, null), null));
 						}
 					});
 					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFC9C9"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFE6E6"), null, null), null));
 						}
 					});
 				}
 				else {
-					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xF8FFC3"), null, null), null));
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xFCFFE6"), null, null), null));
 					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFCFFDF"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFEFFF2"), null, null), null));
 						}
 					});
 					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
 						public void handle(MouseEvent event) {
-							sp.setBackground(new Background(new BackgroundFill(Color.web("0xF8FFC3"), null, null), null));
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFCFFE6"), null, null), null));
 						}
 					});
 				}
