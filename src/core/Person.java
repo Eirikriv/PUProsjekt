@@ -86,6 +86,7 @@ public class Person implements CalendarOwner{
 		return notifications;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void makeAlarm() {
 		ArrayList<String> eventID = this.pdbh.getPersonEvents(this.username);
 		EventDatabaseHandler e = new EventDatabaseHandler();
