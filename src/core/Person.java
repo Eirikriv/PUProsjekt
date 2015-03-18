@@ -1,9 +1,13 @@
 package core;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import database.PersonDatabaseHandler;
-import database.String;
+
 
 public class Person implements CalendarOwner{
 	PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
@@ -83,10 +87,17 @@ public class Person implements CalendarOwner{
 	public String makeAlarm() {
 		ArrayList<String> events = this.pdbh.getPersonEvents(this.username);
 		Date d = new Date();
-		d.setDate
+		ArrayList<String> alarms = new ArrayList<String>();
 		for(String s : events) {
-			n
+			LocalDate startDate = LocalDate.parse(s.split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			LocalTime startHour = LocalTime.parse(s.split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+			LocalTime endHour = LocalTime.parse(s.split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours()<2) ) {
+				
+			}
 		}
+		
+		return "hei";
 	}
 	
 	public boolean hasDeclined(String eventID) {
@@ -121,5 +132,10 @@ public class Person implements CalendarOwner{
 			return true;
 		}
 		return false;
+	}
+	
+	public static void main(String[] args) {
+		Person p = new Person("martibni");
+		p.makeAlarm();
 	}
 }
