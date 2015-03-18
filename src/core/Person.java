@@ -1,7 +1,9 @@
 package core;
 
 import java.util.ArrayList;
+
 import database.PersonDatabaseHandler;
+import database.String;
 
 public class Person implements CalendarOwner{
 	PersonDatabaseHandler pdbh = new PersonDatabaseHandler();
@@ -76,6 +78,15 @@ public class Person implements CalendarOwner{
 			notifications.add(new Notification(new Event(temp[0]), temp[1]));
 		}
 		return notifications;
+	}
+	
+	public String makeAlarm() {
+		ArrayList<String> events = this.pdbh.getPersonEvents(this.username);
+		Date d = new Date();
+		d.setDate
+		for(String s : events) {
+			n
+		}
 	}
 	
 	public boolean hasDeclined(String eventID) {
