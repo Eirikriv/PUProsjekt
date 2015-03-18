@@ -65,7 +65,7 @@
                   </StackPane>
                </children>
             </VBox>
-            <TabPane prefHeight="421.0" prefWidth="265.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="421.0" prefWidth="265.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="People">
                      <content>

@@ -22,6 +22,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -29,6 +30,7 @@ import javafx.scene.layout.VBox;
 
 public class AdminController implements Initializable {
 	
+	@FXML private TabPane tabPane;
 	@FXML private ListView<String> peopleList;
 	@FXML private ListView<String> groupList;
 	@FXML private ListView<String> roomList;
