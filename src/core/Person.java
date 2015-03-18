@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import database.Database;
+import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
 
 
@@ -84,20 +86,32 @@ public class Person implements CalendarOwner{
 		return notifications;
 	}
 	
-	public String makeAlarm() {
-		ArrayList<String> events = this.pdbh.getPersonEvents(this.username);
+	public void makeAlarm() {
+		ArrayList<String> eventID = this.pdbh.getPersonEvents(this.username);
+		EventDatabaseHandler e = new EventDatabaseHandler();
+		ArrayList<String> events = new ArrayList<String>(); 
+		for (String id : eventID) {
+			String time ="";
+			time += e.get(id).get(2);
+			System.out.println(time);
+			events.add(time);
+		}
+		
 		Date d = new Date();
-		ArrayList<String> alarms = new ArrayList<String>();
-		for(String s : events) {
-			LocalDate startDate = LocalDate.parse(s.split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			LocalTime startHour = LocalTime.parse(s.split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
-			LocalTime endHour = LocalTime.parse(s.split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+		for(int i=0; i<events.size(); i++) {
+			LocalDate startDate = LocalDate.parse(events.get(i).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			LocalTime startHour = LocalTime.parse(events.get(i).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+			
 			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours()<2) ) {
-				
+				try {
+					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + this.username + "' AND EventID = " + eventID.get(i) + ";";
+					Database.makeStatement(statement);
+				} catch(Exception ex) {
+					throw new IllegalArgumentException();
+				}
 			}
 		}
 		
-		return "hei";
 	}
 	
 	public boolean hasDeclined(String eventID) {
