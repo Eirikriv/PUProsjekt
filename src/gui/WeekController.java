@@ -64,17 +64,45 @@ public class WeekController implements Initializable {
 				final StackPane sp = new StackPane();
 				Label l = new Label(title);
 				sp.getChildren().add(l);
-				sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xD1EFFF"), null, null), null));
-				sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						sp.setBackground(new Background(new BackgroundFill(Color.web("0xDEF3FF"), null, null), null));
-					}
-				});
-				sp.setOnMouseExited(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						sp.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
-					}
-				});
+				if (SessionData.person.hasAccepted(event.getEventID())) {
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xC6FFD7"), null, null), null));
+					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xDFFFE9"), null, null), null));
+						}
+					});
+					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xC6FFD7"), null, null), null));
+						}
+					});
+				}
+				else if(SessionData.person.hasDeclined(event.getEventID())) {
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xFFC9C9"), null, null), null));
+					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFD5D5"), null, null), null));
+						}
+					});
+					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFFC9C9"), null, null), null));
+						}
+					});
+				}
+				else {
+					sp.setBackground(new Background(new BackgroundFill(Paint.valueOf("0xF8FFC3"), null, null), null));
+					sp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xFCFFDF"), null, null), null));
+						}
+					});
+					sp.setOnMouseExited(new EventHandler<MouseEvent>() {
+						public void handle(MouseEvent event) {
+							sp.setBackground(new Background(new BackgroundFill(Color.web("0xF8FFC3"), null, null), null));
+						}
+					});
+				}
 				sp.setBorder(new Border(new BorderStroke(Paint.valueOf("0x000000"), BorderStrokeStyle.SOLID, null, null)));
 				StackPane.setAlignment(l, Pos.TOP_CENTER);
 				int hours = endHour.getHour() - startHour.getHour();
