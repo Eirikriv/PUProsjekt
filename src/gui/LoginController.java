@@ -47,6 +47,7 @@ public class LoginController implements Initializable {
             			SessionData.message = "Login successful";
             			SessionData.person = core.Program.login("martibni", "passord3");
         			}
+        			SessionData.person.makeAlarm();
         			
         			//Notification pop-up
         			SessionData.allNotifications = SessionData.person.getNotifications();
