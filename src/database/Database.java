@@ -136,6 +136,9 @@ public class Database{
 	public static ResultSet makeQuery(String query) {
 		ResultSet res = null;
 		try {
+			if (conn == null) {
+				conn = getConnection();
+			}
 			Statement st = conn.createStatement();
 			res = st.executeQuery(query);
 			//conn.close(); // M� kommenteres ut for at getIdNameMap skal fungere...
@@ -154,6 +157,9 @@ public class Database{
 	 */
 	public static int makeStatement(String statement) {
 		try {
+			if (conn == null) {
+				conn = getConnection();
+			}
 			Statement st = conn.createStatement();
 			return st.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
 		} catch (Exception e) {

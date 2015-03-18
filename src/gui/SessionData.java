@@ -30,7 +30,13 @@ public class SessionData {
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		RoomDatabaseHandler rdb = new RoomDatabaseHandler();
 		ArrayList<String> rooms = rdb.getAvailableRooms(start, end, capacity);
-		ObservableList<String> room = FXCollections.observableArrayList(rooms);
-		return room;
+		if (rooms == null) {
+			ObservableList<String> room = FXCollections.observableArrayList(new ArrayList<String>());
+			return room;
+		} else {
+			ObservableList<String> room = FXCollections.observableArrayList(rooms);
+			return room;
+		}
+		
 	}
 }

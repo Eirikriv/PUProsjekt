@@ -185,8 +185,7 @@ public class ViewController implements Initializable {
 				Button accept = new Button("accept");
 				accept.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
-						System.out.println(n.getEvent().getEventID());
-						SessionData.person.acceptInvitation(SessionData.id);
+						SessionData.person.acceptInvitation(n.getEvent().getEventID());
 						SessionData.nTab = true;
 						SessionData.allNotifications = SessionData.person.getNotifications(); 
 						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
