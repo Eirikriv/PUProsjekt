@@ -59,7 +59,10 @@ public class AdminController implements Initializable {
 				Button delete = new Button("delete");
 				StackPane sp = wrap(delete);
 				userContainer.getChildren().clear();
-				groupContainer.getChildren().clear();
+				if (!groupIsClicked) {
+					groupContainer.getChildren().clear();
+				}
+				
 				roomContainer.getChildren().clear();
 				userContainer.getChildren().add(sp);
 				delete.setOnAction(new EventHandler<ActionEvent>(){
@@ -226,8 +229,7 @@ public class AdminController implements Initializable {
 				if (nameText.getText().length() != 0 && lw.getItems().size() != 0) {
 					Group grp = new Group(null, nameText.getText());
 					for (String s: lw.getItems()) {
-						String name = s.split("<")[1];
-						name = name.split(">")[0];
+						String name = s.split("<")[0];
 						grp.addMember(name);
 						groupContainer.getChildren().clear();
 						ViewController.getAllGroups();
