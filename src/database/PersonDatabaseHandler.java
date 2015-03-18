@@ -148,6 +148,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
+	
 	public ArrayList<String> getAllPersons() {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
