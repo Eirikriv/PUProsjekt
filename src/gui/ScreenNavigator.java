@@ -15,6 +15,7 @@ public class ScreenNavigator {
     public static final String SCREEN_ADMIN = "AdminScreen.fxml";
     public static final String SCREEN_GROUP = "GroupTab.fxml";
     public static final String SCREEN_NOTIFICATIONS = "NotificationScreen.fxml";
+    public static final String SCREEN_EDIT = "EditEventScreen.fxml";
     
     public static final double SCREEN_CALENDAR_HEIGHT = 600;
     public static final double SCREEN_CALENDAR_WIDTH = 750;
