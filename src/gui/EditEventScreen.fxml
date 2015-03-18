@@ -28,12 +28,12 @@
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="200.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="95.0" minHeight="0.0" prefHeight="29.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="128.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="0.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="95.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Start:" GridPane.rowIndex="1">
@@ -61,41 +61,43 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="startTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="endTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="startTF" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="endTF" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </TextField>
             <StackPane prefHeight="84.0" prefWidth="334.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <TextField fx:id="descTF" GridPane.columnIndex="1" GridPane.rowIndex="2" StackPane.alignment="TOP_LEFT" />
                </children>
             </StackPane>
-            <ComboBox fx:id="invitedCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ListView fx:id="invitedLW" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <StackPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="roomHbox" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_LEFT">
                      <children>
                         <TextField fx:id="roomTF" prefHeight="26.0" prefWidth="59.0" />
-                        <ComboBox fx:id="roomCB" prefWidth="150.0">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ComboBox>
                      </children>
                   </HBox>
                </children>
             </StackPane>
-            <Label fx:id="dateDP" text="Date:">
+            <Label text="Date:">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <DatePicker GridPane.columnIndex="1" />
+            <DatePicker fx:id="dateDP" GridPane.columnIndex="1" />
          </children>
          <StackPane.margin>
-            <Insets bottom="85.0" left="20.0" right="20.0" top="70.0" />
+            <Insets bottom="70.0" left="20.0" right="20.0" top="70.0" />
          </StackPane.margin>
       </GridPane>
-      <Button mnemonicParsing="false" text="Update event" StackPane.alignment="BOTTOM_RIGHT">
+      <Button fx:id="update" mnemonicParsing="false" text="Update event" StackPane.alignment="BOTTOM_RIGHT">
          <StackPane.margin>
             <Insets bottom="30.0" right="50.0" />
          </StackPane.margin>

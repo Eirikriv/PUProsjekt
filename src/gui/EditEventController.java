@@ -12,13 +12,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 public class EditEventController implements Initializable{
 	@FXML HBox titleBox;
@@ -28,6 +35,10 @@ public class EditEventController implements Initializable{
 	@FXML TextField descTF;
 	@FXML TextField roomTF;
 	@FXML ListView<String> invitedLW;
+	@FXML HBox roomHbox;
+	@FXML GridPane grid;
+	@FXML Button backButton;
+	@FXML Button update;
 	
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
 	private ObservableList<String> roomList = FXCollections.observableArrayList();
@@ -43,7 +54,9 @@ public class EditEventController implements Initializable{
 		members.setFocusTraversable(true);
 		rooms.setFocusTraversable(true);
 		Label title = new Label(e.getName());
+		title.setFont(new Font("Arial", 25));
 		titleBox.getChildren().add(title);
+		titleBox.setAlignment(Pos.CENTER);
 		ArrayList<Object> eInfo = SessionData.eventInfo;
 		dateDP.setValue((LocalDate)eInfo.get(0));
 		startTF.setText((String) eInfo.get(1));
@@ -54,6 +67,10 @@ public class EditEventController implements Initializable{
 		listViewList.addAll(e.getParticipants());
 		listViewList.addAll(e.getDeclined());
 		invitedLW.setItems(listViewList);
+		roomHbox.getChildren().add(rooms);
+		StackPane sp = new StackPane();
+		sp.getChildren().add(members);
+		grid.add(sp, 1, 5);
 		
 		startTF.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -82,6 +99,12 @@ public class EditEventController implements Initializable{
 				fillRoomBox();
 			}
 			
+		});
+		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				ScreenNavigator.loadVista(SessionData.prevScreen);
+			}
 		});
 	}
 	

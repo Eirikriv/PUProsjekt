@@ -51,7 +51,7 @@ public class ScreenNavigator {
         	} else if (fxml.compareTo(SCREEN_WEEK) == 0) {
         		height = SCREEN_WEEK_HEIGHT;
         		width = SCREEN_WEEK_WIDTH;
-        	} else if (fxml.compareTo(SCREEN_EVENT) == 0) {
+        	} else if (fxml.compareTo(SCREEN_EVENT) == 0 || fxml.compareTo(SCREEN_EDIT) == 0) {
         		height = SCREEN_EVENT_HEIGHT;
         		width = SCREEN_EVENT_WIDTH;
         	} else if (fxml.compareTo(SCREEN_GROUP) == 0) {

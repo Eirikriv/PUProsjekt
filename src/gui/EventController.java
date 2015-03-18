@@ -1,6 +1,8 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -24,11 +26,12 @@ public class EventController implements Initializable {
 	@FXML private HBox titleBox;
 	@FXML private HBox createdBox;
 	@FXML private Button backButton;
+	@FXML private Button edit;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String eventID = SessionData.id;
-		core.Event e = new core.Event(eventID);
+		final core.Event e = new core.Event(eventID);
 		Label title = new Label(e.getName());
 		Label createdBy = new Label(e.getOwner());
 		Label start = new Label(e.getStart());
@@ -138,6 +141,22 @@ public class EventController implements Initializable {
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				ScreenNavigator.loadVista(SessionData.prevScreen);
+			}
+		});
+		edit.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String date = e.getStart().split(" ")[0];
+				DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate lDate = LocalDate.parse(date, f);
+				ArrayList<Object> eInfo = new ArrayList<Object>();
+				eInfo.add(lDate);
+				eInfo.add(e.getStart());
+				eInfo.add(e.getEnd());
+				eInfo.add(e.getDesc());
+				eInfo.add(e.getRoom());
+				SessionData.eventInfo = eInfo;
+				SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
+				ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EDIT);
 			}
 		});
 	}
