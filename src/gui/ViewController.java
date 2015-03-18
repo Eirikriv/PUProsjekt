@@ -181,10 +181,11 @@ public class ViewController implements Initializable {
 			
 			if (n.getMessage().compareTo("You were added to the event") == 0) {
 				StackPane bAccept = new StackPane();
-				bAccept.setMinSize(100, 100);
+				bAccept.setMinSize(100, 30);
 				Button accept = new Button("accept");
 				accept.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
+						System.out.println(n.getEvent().getEventID());
 						SessionData.person.acceptInvitation(SessionData.id);
 						SessionData.nTab = true;
 						SessionData.allNotifications = SessionData.person.getNotifications(); 
@@ -197,7 +198,10 @@ public class ViewController implements Initializable {
 				Button decline = new Button("decline");
 				decline.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
-						SessionData.person.declineInvitation(SessionData.id);
+						SessionData.person.declineInvitation(n.getEvent().getEventID());
+						SessionData.nTab = true;
+						SessionData.allNotifications = SessionData.person.getNotifications(); 
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 					}
 				});
 				
