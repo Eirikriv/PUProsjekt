@@ -204,7 +204,7 @@ public class AppointmentController implements Initializable {
 		String end = sDate + " " + endTime;
 		String description = descriptionText.getText();
 		if (description.length() == 0) {
-			description = null;
+			description = "";
 		}
 		
 		String roomId = rooms.getValue();
