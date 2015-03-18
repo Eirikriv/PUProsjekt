@@ -61,6 +61,7 @@ public class AdminController implements Initializable {
 				Button delete = new Button("delete");
 				StackPane sp = wrap(delete);
 				userContainer.getChildren().clear();
+				
 				if (!groupIsClicked) {
 					groupContainer.getChildren().clear();
 				}
@@ -85,10 +86,13 @@ public class AdminController implements Initializable {
 					String arg1, String arg2) {
 				Button delete = new Button("delete");
 				StackPane sp = wrap(delete);
+				
+				Button edit = new Button("edit");
+				StackPane spEdit = wrap(edit);
 				userContainer.getChildren().clear();
 				groupContainer.getChildren().clear();
 				roomContainer.getChildren().clear();
-				groupContainer.getChildren().add(sp);
+				groupContainer.getChildren().addAll(sp, spEdit);
 				delete.setOnAction(new EventHandler<ActionEvent>(){
 					@Override public void handle(ActionEvent argx0) {
 						String group = arg0.getValue();

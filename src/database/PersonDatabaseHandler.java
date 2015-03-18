@@ -180,7 +180,7 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 				list.add(rs.getInt(1) + ":" + rs.getString(2));
 			}
 			while(rs1.next()) {
-				list.add(rs1.getInt(1) + ":" + rs.getString(2));
+				list.add(rs1.getInt(1) + ":" + rs1.getString(2));
 			}
 			return list;
 		} catch (Exception e) {
