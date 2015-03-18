@@ -49,8 +49,11 @@ public class WeekController implements Initializable {
 			LocalTime endHour = LocalTime.parse(event.getEnd().split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
 			Calendar calstart = Calendar.getInstance();
 			calstart.setTime(SessionData.cal.getTime());
-			calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek)+1);
-			System.out.println(calstart.getTime());
+			if (System.getProperty("os.name").equals("Windows 7")) { 
+				calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek)); 
+			} else {
+				calstart.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(SessionData.currentWeek)+1);
+			}
 			while (calstart.get(Calendar.DAY_OF_WEEK) != 2) {
 				calstart.add(Calendar.DAY_OF_YEAR, -1);
 			}
