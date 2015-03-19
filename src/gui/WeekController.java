@@ -26,6 +26,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -69,11 +70,11 @@ public class WeekController implements Initializable {
 		for(int i = 0; i<10; i++) {
 			for (int j = 0; j<7; j++) {
 				StackPane sp = new StackPane();
-				sp.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
-				innerWeekGrid.add(sp, i, j);
+				sp.setBackground(new Background(new BackgroundFill(Color.web("0xFCFCFC"), null, null), null));
+				innerWeekGrid.add(sp, j, i);
 			}
 		}
-		innerWeekGrid.setHgap(12);
+		innerWeekGrid.setHgap(3);
 		StackPane s  = new StackPane();
 		Label lb = new Label("Week: " + SessionData.currentWeek);
 		s.getChildren().add(lb);
@@ -82,7 +83,7 @@ public class WeekController implements Initializable {
 		
 		if (!username.equals(filled)) {
 			//change SessionData.allVisibleEvents to the new user
-			innerWeekGrid.getChildren().clear();
+			//innerWeekGrid.getChildren().clear();
 			SessionData.person = new core.Person(username);
 			SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
 			SessionData.allVisibleEvents = SessionData.person.getCalendar().updateCalendarToVisible();
@@ -152,7 +153,7 @@ public class WeekController implements Initializable {
 						}
 					});
 				}
-				sp.setBorder(new Border(new BorderStroke(Paint.valueOf("0x000000"), BorderStrokeStyle.SOLID, null, null)));
+				sp.setBorder(new Border(new BorderStroke(Paint.valueOf("0xFCFCFC"), BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
 				StackPane.setAlignment(l, Pos.TOP_CENTER);
 				int hours = endHour.getHour() - startHour.getHour();
 				GridPane.setRowSpan(sp, hours);
