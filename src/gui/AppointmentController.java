@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class AppointmentController implements Initializable {
 	
@@ -37,6 +38,7 @@ public class AppointmentController implements Initializable {
 	@FXML private TextField startField;
 	@FXML private TextField endField;
 	@FXML private ListView<String> listMembersField;
+	@FXML private VBox vBox;
 	
 	
 	TextField tf = new TextField();
@@ -57,6 +59,26 @@ public class AppointmentController implements Initializable {
 		members.setFocusTraversable(true);
 		groups.setFocusTraversable(true);
 		rooms.setFocusTraversable(true);
+		listMembersField.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0,
+					String arg1,final String arg2) {
+				if (vBox.getChildren().size() > 1) {
+					vBox.getChildren().remove(1);
+				}
+				StackPane sp = new StackPane();
+				Button remove = new Button("remove");
+				remove.setMinWidth(70);
+				sp.getChildren().add(remove);
+				vBox.getChildren().add(1, sp);
+				remove.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent arg0) {
+						listViewList.remove(arg2);
+						vBox.getChildren().remove(1);
+					}
+				});
+			}
+		});
 		startField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0,

@@ -68,11 +68,6 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <StackPane prefHeight="28.0" prefWidth="146.0">
-                           <children>
-                              <Label text="End time" />
-                           </children>
-                        </StackPane>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="endField" onAction="#fillRoomBox" onContextMenuRequested="#fillRoomBox" onKeyTyped="#fillRoomBox">
@@ -104,15 +99,24 @@
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <StackPane prefHeight="132.0" prefWidth="184.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="5">
+            <VBox fx:id="vBox" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="6">
                <children>
-                  <ListView fx:id="listMembersField" prefHeight="400.0" prefWidth="170.0">
-                     <StackPane.margin>
-                        <Insets left="20.0" right="15.0" top="15.0" />
-                     </StackPane.margin>
-                  </ListView>
+                  <StackPane prefHeight="240.0" prefWidth="184.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="5">
+                     <children>
+                        <ListView fx:id="listMembersField" prefHeight="239.0" prefWidth="149.0">
+                           <StackPane.margin>
+                              <Insets left="20.0" right="15.0" top="15.0" />
+                           </StackPane.margin>
+                        </ListView>
+                        <StackPane prefHeight="28.0" prefWidth="146.0">
+                           <children>
+                              <Label text="End time" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
+            </VBox>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="8">
                <children>
                   <Label onMouseClicked="#navigateBack" text="&lt;- Back" StackPane.alignment="BOTTOM_LEFT">

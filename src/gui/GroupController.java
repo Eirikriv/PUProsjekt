@@ -29,6 +29,12 @@ public class GroupController implements Initializable {
 		if (SessionData.gTab){
 			core.Group g = SessionData.group;
 			fcb.setValue(g.getPrimaryKey()+":"+g.getName());
+			peopleInList = FXCollections.observableArrayList();
+			ArrayList<String> people = gdb.getGroupMembers(g.getPrimaryKey());
+			for (String s: people) {
+				peopleInList.add(s);
+			}
+			listPeople.setItems(peopleInList);
 		}
 		
 		fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
