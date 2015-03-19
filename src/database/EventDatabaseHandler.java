@@ -172,7 +172,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 			LocalDate startDate = LocalDate.parse(events.get(i).get(0).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			LocalTime startHour = LocalTime.parse(events.get(i).get(0).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
 			
-			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours()<2) ) {
+			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (Math.abs(startHour.getHour()-d.getHours())<2) ) {
 				try {
 					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
 					Database.makeStatement(statement);
