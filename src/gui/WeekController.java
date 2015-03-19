@@ -4,15 +4,21 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import core.Event;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -32,16 +38,49 @@ public class WeekController implements Initializable {
 	@FXML private GridPane outerWeekGrid;
 	@FXML private Button backButton;
 	@FXML private Button eventButton;
+	@FXML private StackPane showForContainer;
+	
+	ObservableList<String> items = FXCollections.observableArrayList();
+	String filled;
 	
 	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		fillWeek(SessionData.username);
+		filled = SessionData.username;
+		FilterComboBox fcb = new FilterComboBox(items);
+		fcb.setValue(SessionData.username);
+		ArrayList<core.Person> people = core.Program.getAllPersons();
+		for (core.Person person: people) {
+			items.add(person.getPrimaryKey());
+		}
+		showForContainer.getChildren().add(fcb);
+		fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				fillWeek(arg2);
+				filled = arg2;
+			}
+			
+		});
+	}
+	
+	public void fillWeek(String username) {
 		StackPane s  = new StackPane();
 		Label lb = new Label("Week: " + SessionData.currentWeek);
 		s.getChildren().add(lb);
 		s.setAlignment(Pos.CENTER);
 		outerWeekGrid.add(s, 0, 0);
+		
+		if (!username.equals(filled)) {
+			//change SessionData.allVisibleEvents to the new user
+			innerWeekGrid.getChildren().clear();
+			SessionData.person = new core.Person(username);
+			SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
+			SessionData.allVisibleEvents = SessionData.person.getCalendar().updateCalendarToVisible();
+		}
+		
 		for (final Event event: SessionData.allVisibleEvents) {
 			String title = event.getName();
 			LocalDate startDate = LocalDate.parse(event.getStart().split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -125,15 +164,17 @@ public class WeekController implements Initializable {
 					}
 				});
 				
+				innerWeekGrid.setGridLinesVisible(true);
+				
 			}
-			
-			
-			
 		}
 	}
 	
 	@FXML
 	public void back(ActionEvent e) {
+		SessionData.person = new core.Person(SessionData.username);
+		SessionData.allEvents = SessionData.person.getCalendar().updateCalendar();
+		SessionData.allVisibleEvents = SessionData.person.getCalendar().updateCalendarToVisible();
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	}
 	

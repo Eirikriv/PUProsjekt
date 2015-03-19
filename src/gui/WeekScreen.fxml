@@ -155,8 +155,7 @@
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="82.0" text="Back" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" />
+            <StackPane fx:id="showForContainer" prefHeight="100.0" prefWidth="390.0" />
             <StackPane prefHeight="100.0" prefWidth="244.0">
                <children>
                   <Button fx:id="eventButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#newEvent" text="New Event" />
