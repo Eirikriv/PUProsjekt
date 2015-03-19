@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import database.EventDatabaseHandler;
 import database.GroupDatabaseHandler;
 import javafx.beans.value.ChangeListener;
@@ -16,19 +15,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 
 public class EditEventController implements Initializable{
-	@FXML HBox titleBox;
 	@FXML DatePicker dateDP;
 	@FXML TextField startTF;
 	@FXML TextField endTF;
@@ -39,6 +34,7 @@ public class EditEventController implements Initializable{
 	@FXML GridPane grid;
 	@FXML Button backButton;
 	@FXML Button update;
+	@FXML TextField titleTF;
 	
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
 	private ObservableList<String> roomList = FXCollections.observableArrayList();
@@ -53,11 +49,8 @@ public class EditEventController implements Initializable{
 		descTF.setFocusTraversable(false);
 		members.setFocusTraversable(true);
 		rooms.setFocusTraversable(true);
-		Label title = new Label(e.getName());
-		title.setFont(new Font("Arial", 25));
-		titleBox.getChildren().add(title);
-		titleBox.setAlignment(Pos.CENTER);
 		ArrayList<Object> eInfo = SessionData.eventInfo;
+		titleTF.setText(e.getName());
 		dateDP.setValue((LocalDate)eInfo.get(0));
 		startTF.setText((String) eInfo.get(1));
 		endTF.setText((String)eInfo.get(2));
