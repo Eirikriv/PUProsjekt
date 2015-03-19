@@ -140,6 +140,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void eventStartsSoon(String username) {
 //		PersonDatabaseHandler p = new PersonDatabaseHandler();
 //		ArrayList<String> eventID = p.getPersonEvents(username);

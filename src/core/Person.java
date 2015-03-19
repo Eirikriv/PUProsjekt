@@ -1,12 +1,5 @@
 package core;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-
-import database.Database;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
 
@@ -86,7 +79,7 @@ public class Person implements CalendarOwner{
 		return notifications;
 	}
 	
-	@SuppressWarnings("deprecation")
+
 	public void makeAlarm() {
 		EventDatabaseHandler d = new EventDatabaseHandler();
 		d.eventStartsSoon(this.username);
@@ -129,5 +122,13 @@ public class Person implements CalendarOwner{
 	public static void main(String[] args) {
 		Person p = new Person("martibni");
 		p.makeAlarm();
+	}
+	
+	public void isNotifiedOfEvent(String eventID) {
+		pdbh.isNotifiedOfEvent(username, eventID);
+	}
+	
+	public void isNotifiedofGroup(String groupID) {
+		pdbh.isNotifiedOfGroup(username, groupID);
 	}
 }

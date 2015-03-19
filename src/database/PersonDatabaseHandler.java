@@ -244,4 +244,13 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public void isNotifiedOfGroup(String username, String groupID) {
+		try {
+			String statement = "UPDATE PersonInGroup SET Notification = NULL WHERE Username = '" + username + "' AND GroupID = " + groupID + ";";
+			Database.makeStatement(statement);
+		} catch(Exception e) {
+			throw new IllegalArgumentException();
+		}
+	}
 }
