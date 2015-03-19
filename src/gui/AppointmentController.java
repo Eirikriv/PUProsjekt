@@ -240,7 +240,7 @@ public class AppointmentController implements Initializable {
 		boolean accept = false;
 		for (String username: listViewList) {
 			if (username.equals(SessionData.username))
-				
+				accept = true;
 			username = username.split("<")[0];
 			if (edb.addPerson(eventID, username)) {
 				System.out.println("added " + username + " to event:" + eventID);
