@@ -5,29 +5,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import database.EventDatabaseHandler;
 import database.GroupDatabaseHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 public class EditEventController implements Initializable{
-	@FXML HBox titleBox;
 	@FXML DatePicker dateDP;
 	@FXML TextField startTF;
 	@FXML TextField endTF;
 	@FXML TextField descTF;
 	@FXML TextField roomTF;
 	@FXML ListView<String> invitedLW;
+	@FXML HBox roomHbox;
+	@FXML GridPane grid;
+	@FXML Button backButton;
+	@FXML Button update;
+	@FXML TextField titleTF;
 	
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
 	private ObservableList<String> roomList = FXCollections.observableArrayList();
@@ -42,9 +49,8 @@ public class EditEventController implements Initializable{
 		descTF.setFocusTraversable(false);
 		members.setFocusTraversable(true);
 		rooms.setFocusTraversable(true);
-		Label title = new Label(e.getName());
-		titleBox.getChildren().add(title);
 		ArrayList<Object> eInfo = SessionData.eventInfo;
+		titleTF.setText(e.getName());
 		dateDP.setValue((LocalDate)eInfo.get(0));
 		startTF.setText((String) eInfo.get(1));
 		endTF.setText((String)eInfo.get(2));
@@ -54,6 +60,10 @@ public class EditEventController implements Initializable{
 		listViewList.addAll(e.getParticipants());
 		listViewList.addAll(e.getDeclined());
 		invitedLW.setItems(listViewList);
+		roomHbox.getChildren().add(rooms);
+		StackPane sp = new StackPane();
+		sp.getChildren().add(members);
+		grid.add(sp, 1, 5);
 		
 		startTF.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -82,6 +92,12 @@ public class EditEventController implements Initializable{
 				fillRoomBox();
 			}
 			
+		});
+		
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				ScreenNavigator.loadVista(SessionData.prevScreen);
+			}
 		});
 	}
 	

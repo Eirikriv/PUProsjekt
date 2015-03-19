@@ -1,7 +1,11 @@
 package database;
 
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EventDatabaseHandler implements DatabaseHandler {
 
@@ -134,5 +138,53 @@ public class EventDatabaseHandler implements DatabaseHandler {
 			e.printStackTrace();
 			throw new IllegalStateException();
 		}
+	}
+	
+	public void eventStartsSoon(String username) {
+//		PersonDatabaseHandler p = new PersonDatabaseHandler();
+//		ArrayList<String> eventID = p.getPersonEvents(username);
+//		EventDatabaseHandler e = new EventDatabaseHandler();
+		ArrayList<ArrayList<String>> events = new ArrayList<ArrayList<String>>(); 
+//		for (String id : eventID) {
+//			String time ="";
+//			time += e.get(id).get(2);
+//			System.out.println(time);
+//			events.add(time);
+//		}
+//		
+		try {
+			String query = "SELECT Start, Event.EventID FROM Event, Person, PersonEvent "
+					+ "WHERE Event.EventID = PersonEvent.EventID AND PersonEvent.Username = '"+username+"';";
+			ResultSet rs = Database.makeQuery(query);
+			while (rs.next()) {				
+				ArrayList<String> list = new ArrayList<String>();
+				list.add(rs.getString(1));
+				list.add(rs.getString(2));
+				events.add(list);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new IllegalStateException();
+		}
+		
+		Date d = new Date();
+		for(int i=0; i<events.size(); i++) {
+			LocalDate startDate = LocalDate.parse(events.get(i).get(0).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			LocalTime startHour = LocalTime.parse(events.get(i).get(0).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
+			
+			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (Math.abs(startHour.getHour()-d.getHours())<2) ) {
+				try {
+					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
+					Database.makeStatement(statement);
+				} catch(Exception ex) {
+					throw new IllegalArgumentException();
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		EventDatabaseHandler e = new EventDatabaseHandler();
+		e.eventStartsSoon("cecilite");
 	}
 }
