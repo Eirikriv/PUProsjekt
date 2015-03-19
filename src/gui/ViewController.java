@@ -401,6 +401,7 @@ public class ViewController implements Initializable {
 	        			nGrid.addRow(x, buttons, sp0);
 	        			x++;
 	        		}
+	        		nTab.setText("Notifications (" + SessionData.allNotifications.size() + ")");
 	            });
 	        }
 	    }, 0, 1000*60);
