@@ -71,7 +71,11 @@
                   <TextField fx:id="descTF" GridPane.columnIndex="1" GridPane.rowIndex="2" StackPane.alignment="TOP_LEFT" />
                </children>
             </StackPane>
-            <ListView fx:id="invitedLW" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <HBox fx:id="lwContainer" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <children>
+                  <ListView fx:id="invitedLW" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+               </children>
+            </HBox>
             <StackPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
                   <HBox fx:id="roomHbox" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="CENTER_LEFT">

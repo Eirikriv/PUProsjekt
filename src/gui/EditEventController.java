@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -36,6 +37,7 @@ public class EditEventController implements Initializable{
 	@FXML Button backButton;
 	@FXML Button update;
 	@FXML TextField titleTF;
+	@FXML HBox lwContainer;
 	
 	private ObservableList<String> listViewList = FXCollections.observableArrayList();
 	private ObservableList<String> roomList = FXCollections.observableArrayList();
@@ -67,6 +69,27 @@ public class EditEventController implements Initializable{
 		StackPane sp = new StackPane();
 		sp.getChildren().add(members);
 		grid.add(sp, 1, 5);
+		
+		invitedLW.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0,
+					String arg1,final String arg2) {
+				if (lwContainer.getChildren().size() > 1) {
+					lwContainer.getChildren().remove(0);
+				}
+				StackPane sp = new StackPane();
+				Button remove = new Button("remove");
+				remove.setMinWidth(70);
+				sp.getChildren().add(remove);
+				lwContainer.getChildren().add(0, sp);
+				remove.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent arg0) {
+						listViewList.remove(arg2);
+						lwContainer.getChildren().remove(0);
+					}
+				});
+			}
+		});
 		
 		members.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue<? extends String> arg0,
