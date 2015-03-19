@@ -191,7 +191,6 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		for(int i=0; i<events.size(); i++) {
 			LocalDate startDate = LocalDate.parse(events.get(i).get(0).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			LocalTime startHour = LocalTime.parse(events.get(i).get(0).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
-			System.out.println("OK");
 			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours())<=2) {
 				try {
 					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
@@ -200,7 +199,6 @@ public class EventDatabaseHandler implements DatabaseHandler {
 					throw new IllegalArgumentException();
 				}
 			}
-			System.out.println(startDate.getMonthValue() <= (1+d.getMonth()));
 			if (startDate.getMonthValue() <= (1+d.getMonth()) && startDate.getYear() <= (1900+d.getYear()) && startDate.getDayOfMonth() <= d.getDate() && (Math.abs(startHour.getHour())-Math.abs(d.getHours()))<0){
 				try {
 					String statement = "UPDATE PersonEvent SET Notification = NULL WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
