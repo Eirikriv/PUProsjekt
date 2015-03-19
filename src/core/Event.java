@@ -60,31 +60,25 @@ public class Event {
 		return desc;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-		edbh.update(new String[]{this.name, this.start, this.end, desc,this.roomID});
-	}
-
 	public String getStart() {
 		return start;
-	}
-
-	public void setStart(String start) {
-		this.start = start;
-		edbh.update(new String[]{this.name, start, this.end, desc,this.roomID});
 	}
 
 	public String getEnd() {
 		return end;
 	}
-
-	public void setEnd(String end) {
-		this.end = end;
-		edbh.update(new String[]{this.name, this.start, end, this.desc,this.roomID});
-	}
 	
 	public String getRoom() {
 		return roomID;
+	}
+	
+	public void editEvent(String title, String start, String end, String desc, String roomID) {
+		this.name = title;
+		this.start = start;
+		this.end = end;
+		this.desc = desc;
+		this.roomID = roomID;
+		edbh.update(new String[] {title, start, end, desc, roomID});
 	}
 	
 	public ArrayList<String> getInvited() {

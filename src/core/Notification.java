@@ -2,9 +2,11 @@ package core;
 
 public class Notification {
 	private Event event;
+	private Group group;
 	private String message;
 	
-	public Notification(Event event, String message) {
+	public Notification(Event event, Group group, String message) {
+		this.group = group;
 		this.event = event;
 		this.message = message;
 	}
@@ -15,5 +17,9 @@ public class Notification {
 	
 	public String getMessage() {
 		return message;
+	}
+	
+	public Group getGroup() {
+		return group;
 	}
 }

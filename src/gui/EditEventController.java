@@ -99,6 +99,11 @@ public class EditEventController implements Initializable{
 				ScreenNavigator.loadVista(SessionData.prevScreen);
 			}
 		});
+		update.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
 	}
 	
 	public void fillRoomBox() {
