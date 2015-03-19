@@ -237,7 +237,10 @@ public class AppointmentController implements Initializable {
 		String[] data = {title, owner, start, end, description, roomId};
 		String eventID = edb.add(data);
 		
+		boolean accept = false;
 		for (String username: listViewList) {
+			if (username.equals(SessionData.username))
+				
 			username = username.split("<")[0];
 			if (edb.addPerson(eventID, username)) {
 				System.out.println("added " + username + " to event:" + eventID);
@@ -247,7 +250,8 @@ public class AppointmentController implements Initializable {
 			
 			
 		}
-		
+		if (accept)
+			SessionData.person.acceptInvitation(eventID);
 		SessionData.message = "New appointment created!";
 		ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 	}
