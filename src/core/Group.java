@@ -61,8 +61,9 @@ public class Group implements CalendarOwner {
 		ArrayList<String> members = gdbh.getGroupMembers(groupID);
 		ArrayList<Person> pMembers = new ArrayList<Person>();
 		for (int i = 0; i < members.size(); i++) {
-			pMembers = new Personmembers.get(i)
+			pMembers.add(new Person(members.get(i)));
 		}
+		return pMembers;
 	}
 	
 //	public ArrayList<Event> getGroupEvents() {
