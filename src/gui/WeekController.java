@@ -157,7 +157,7 @@ public class WeekController implements Initializable {
 				sp.setBorder(new Border(new BorderStroke(Paint.valueOf("0xFCFCFC"), BorderStrokeStyle.SOLID, null, new BorderWidths(3))));
 				StackPane.setAlignment(l, Pos.TOP_CENTER);
 				int hours = endHour.getHour() - startHour.getHour();
-				GridPane.setRowSpan(sp, hours);
+				GridPane.setRowSpan(sp, Math.max(hours, 1));
 				innerWeekGrid.add(sp, day-1, startHour.getHour()-8);
 				sp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override

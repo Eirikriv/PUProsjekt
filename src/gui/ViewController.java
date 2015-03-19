@@ -269,13 +269,14 @@ public class ViewController implements Initializable {
 	}
 	
 	public void updateNotifications() {
-		nGrid.getChildren().clear();
 		Timer timer = new Timer();
 	    timer.scheduleAtFixedRate(new TimerTask() {
 	        @Override
 	        public void run() {
 	            Platform.runLater(() -> {
 	            	System.out.println("I'm here");
+	            	SessionData.allNotifications = SessionData.person.getNotifications();
+	            	nGrid.getChildren().clear();
 	        		int x = 0;
 	        		if (SessionData.allNotifications.size() == 0) {
 	        			StackPane sp = new StackPane();
