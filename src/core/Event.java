@@ -81,6 +81,10 @@ public class Event {
 		edbh.update(new String[] {title, start, end, desc, roomID});
 	}
 	
+	public void removeAllPersons() {
+		edbh.removeAllPersons(eventID);
+	}
+	
 	public ArrayList<String> getInvited() {
 		return edbh.getAllInvited(eventID);
 	}

@@ -133,4 +133,23 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 			return false;
 		}
 	}
+	
+	public ArrayList<String> getAllGroups() {
+		ArrayList<String> info = new ArrayList<String>();
+		try {
+			String query = "SELECT Groups.Name, Groups.GroupID "
+					+ "FROM Groups;";
+			ResultSet rs = Database.makeQuery(query);
+			while(rs.next()) {
+				info.add(rs.getString(2)+":"+rs.getString(1));
+
+			}
+			return info;
+		}
+			
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException("Something went wrong");
+		}
+	}
 }

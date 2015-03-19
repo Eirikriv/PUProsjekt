@@ -28,8 +28,8 @@ public class Program {
 		return rooms;
 	}
 	
-	public static ArrayList<String> getAllGroups(String username) {
-		ArrayList<String> list = pdbh.getAllGroups(username);
+	public static ArrayList<String> getAllGroups() {
+		ArrayList<String> list = gdbh.getAllGroups();
 		return list;
 		}
 	

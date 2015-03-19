@@ -22,7 +22,7 @@ public class GroupController implements Initializable {
 	ObservableList<String> peopleInList;
 	
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<String> groups = new ArrayList<String>(core.Program.getAllGroups(SessionData.username));
+		ArrayList<String> groups = new ArrayList<String>(core.Program.getAllGroups());
 		ObservableList<String> observableGroups = FXCollections.observableArrayList(groups);
 		FilterComboBox fcb = new FilterComboBox(observableGroups);
 		

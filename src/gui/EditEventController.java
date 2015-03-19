@@ -102,8 +102,6 @@ public class EditEventController implements Initializable{
 		});
 		update.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				EventDatabaseHandler edb = new EventDatabaseHandler();
-				
 				String title = titleTF.getText();
 				if (title.length() < 1) {
 					return;
@@ -133,18 +131,15 @@ public class EditEventController implements Initializable{
 					return;
 				}
 				
-				
+				e.removeAllPersons();
 				for (String username: listViewList) {
 					username = username.split("<")[0];
-					if (edb.addPerson(e, username)) {
+					if (edb.addPerson(e.getEventID(), username)) {
 						System.out.println("added " + username + " to event:" + e);
 					} else {
 						System.out.println(username + "could not be added to event:" + e);
-					}
-					
-					
+					}	
 				}
-				
 				e.editEvent(title, start, end, description, roomId);
 				SessionData.allEvents = SessionData.person.getCalendar().getEvents();
 				SessionData.allNotifications = SessionData.person.getNotifications();
