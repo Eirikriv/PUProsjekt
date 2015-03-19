@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -97,12 +98,18 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		ArrayList<String> list = new ArrayList<String>();
 		String query = "SELECT Person.Username FROM Person, Event, PersonEvent WHERE Person.Username = PersonEvent.Username AND PersonEvent.EventID = "+eventID+";";
 		ResultSet rs = Database.makeQuery(query);
-		while(rs.next()) {
-			list.add(rs.getString(1));
+		try {
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		for(String s : list) {
-			removePerson(s);
+			removePerson(eventID,s);
 		}
+		return true;
 	}
 	
 	public ArrayList<String> getAllInvited(String eventID) {
