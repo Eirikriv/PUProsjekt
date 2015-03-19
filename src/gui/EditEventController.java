@@ -165,8 +165,11 @@ public class EditEventController implements Initializable{
 				}
 				
 				e.removeAllPersons();
+				boolean noNotification = false;
 				for (String username: listViewList) {
 					username = username.split("<")[0];
+					if (username.equals(SessionData.username))
+						noNotification = true;
 					if (edb.addPerson(e.getEventID(), username)) {
 						System.out.println("added " + username + " to event:" + e);
 					} else {
@@ -174,6 +177,8 @@ public class EditEventController implements Initializable{
 					}	
 				}
 				e.editEvent(title, start, end, description, roomId);
+				if (noNotification)
+					SessionData.person.isNotifiedOfEvent(e.getEventID());
 				SessionData.allEvents = SessionData.person.getCalendar().getEvents();
 				SessionData.allNotifications = SessionData.person.getNotifications();
 				ScreenNavigator.loadVista(SessionData.prevScreen);

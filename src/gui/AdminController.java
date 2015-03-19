@@ -329,6 +329,8 @@ public class AdminController implements Initializable {
 					for (String s: lw.getItems()) {
 						String name = s.split("<")[0];
 						grp.addMember(name);
+						if (name.equals(SessionData.username))
+							SessionData.person.isNotifiedofGroup(grp.getPrimaryKey());
 					}
 					groupContainer.getChildren().clear();
 					ViewController.getAllGroups();
