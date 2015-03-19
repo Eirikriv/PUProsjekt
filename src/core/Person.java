@@ -77,7 +77,7 @@ public class Person implements CalendarOwner{
 			notifications.add(new Notification(new Event(temp[0]), null, temp[1]));
 		}
 		for (int j = 0; j < n.get(1).size(); j++) {
-			String[] temp = n.get(0).get(j).split(":");
+			String[] temp = n.get(1).get(j).split(":");
 			notifications.add(new Notification(null, new Group(temp[0], null), temp[1]));
 		}
 		return notifications;

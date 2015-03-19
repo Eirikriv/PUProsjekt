@@ -9,11 +9,10 @@ public class GroupDatabaseHandler implements DatabaseHandler {
 	public ArrayList<String> get(String GroupID) {
 		ArrayList<String> groupList = new ArrayList<String>();
 		try {
-			String query = "SELECT Name FROM Groups WHERE Groups.GroupID = '" + GroupID + "';";
+			String query = "SELECT Name FROM Groups WHERE Groups.GroupID = " + GroupID + ";";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {
-				for (int i = 1; i <= 2; i++)
-					groupList.add(rs.getString(i));
+				groupList.add(rs.getString(1));
 			}
 			return groupList;
 		}
