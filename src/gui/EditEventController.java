@@ -53,8 +53,10 @@ public class EditEventController implements Initializable{
 		ArrayList<Object> eInfo = SessionData.eventInfo;
 		titleTF.setText(e.getName());
 		dateDP.setValue((LocalDate)eInfo.get(0));
-		startTF.setText((String) eInfo.get(1));
-		endTF.setText((String)eInfo.get(2));
+		String text = (String) eInfo.get(1);
+		startTF.setText(text.split(" ")[1]);
+		String text1 = (String) eInfo.get(2);
+		endTF.setText(text1.split(" ")[1]);
 		descTF.setText((String)eInfo.get(3));
 		rooms.setValue((String) eInfo.get(4));
 		listViewList.addAll(e.getInvited());
@@ -122,7 +124,7 @@ public class EditEventController implements Initializable{
 				String end = sDate + " " + endTime;
 				
 				String description = descTF.getText();
-				if (description.length() == 0) {
+				if (description == null) {
 					description = "";
 				}
 

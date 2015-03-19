@@ -55,6 +55,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		return true;
 		}
 		catch (Exception e){
+			System.out.println("yolo");
 		return false;
 		}
 	}

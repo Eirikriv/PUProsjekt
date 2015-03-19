@@ -78,7 +78,7 @@ public class Event {
 		this.end = end;
 		this.desc = desc;
 		this.roomID = roomID;
-		edbh.update(new String[] {title, start, end, desc, roomID});
+		edbh.update(new String[] {eventID, title, start, end, desc, roomID});
 	}
 	
 	public void removeAllPersons() {
