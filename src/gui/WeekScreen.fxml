@@ -96,7 +96,7 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sunday" GridPane.columnIndex="7" />
                </children>
             </StackPane>
-            <GridPane fx:id="innerWeekGrid" gridLinesVisible="true" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="1" GridPane.rowSpan="10">
+            <GridPane fx:id="innerWeekGrid" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="1" GridPane.rowSpan="10">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -18,7 +18,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +66,14 @@ public class WeekController implements Initializable {
 	}
 	
 	public void fillWeek(String username) {
+		for(int i = 0; i<10; i++) {
+			for (int j = 0; j<7; j++) {
+				StackPane sp = new StackPane();
+				sp.setBackground(new Background(new BackgroundFill(Color.web("0xD1EFFF"), null, null), null));
+				innerWeekGrid.add(sp, i, j);
+			}
+		}
+		innerWeekGrid.setHgap(12);
 		StackPane s  = new StackPane();
 		Label lb = new Label("Week: " + SessionData.currentWeek);
 		s.getChildren().add(lb);
@@ -163,9 +170,6 @@ public class WeekController implements Initializable {
 						}
 					}
 				});
-				
-				innerWeekGrid.setGridLinesVisible(true);
-				
 			}
 		}
 	}
