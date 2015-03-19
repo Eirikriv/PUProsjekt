@@ -46,12 +46,12 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	//Tar inn en liste på formen [eventID, title, start, end, desc, roomID]
 	public boolean update(String[] eventInfo) {
 		try {
-			Database.makeStatement("UPDATE Event\n"
-								 + "SET title = '"+ eventInfo[1]+", start = '"+ eventInfo[2] + "', end = '"+eventInfo[3] +"', desc = '"+ eventInfo[4]+ "', roomID = '"+eventInfo[5]+"\n"
-								 + "WHERE EventID = '"+eventInfo[0]+"';");
+			Database.makeStatement("UPDATE Event "
+								 + "SET Title = '"+ eventInfo[1]+", Start = '"+ eventInfo[2] + "', End = '"+eventInfo[3] +"', Desc = '"+ eventInfo[4]+ "', RoomID = '"+eventInfo[5]+"' "
+								 + "WHERE EventID = "+eventInfo[0]+";");
 			Database.makeStatement("UPDATE PersonEvent "
 									+"SET PersonEvent.Notification = 'This event has been updated' "
-									+"WHERE PersonEvent.EventID = '"+eventInfo[0]+"';");
+									+"WHERE PersonEvent.EventID = "+eventInfo[0]+";");
 		return true;
 		}
 		catch (Exception e){
