@@ -152,7 +152,13 @@ public class ViewController implements Initializable {
 		x = 1;
 		for (final core.Notification n: SessionData.allNotifications) {
 			StackPane sp1 = new StackPane();
-			final Label eventName = new Label(n.getEvent().getName());
+			final Label eventName;
+			if (n.getEvent() == null) {
+				eventName = new Label(n.getGroup().getName());
+			} else {
+				eventName = new Label(n.getEvent().getName());
+			}
+			
 			eventName.setUnderline(true);
 			eventName.setOnMouseEntered(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
