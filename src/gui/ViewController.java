@@ -274,7 +274,6 @@ public class ViewController implements Initializable {
 	        @Override
 	        public void run() {
 	            Platform.runLater(() -> {
-	            	System.out.println("I'm here");
 	            	SessionData.allNotifications = SessionData.person.getNotifications();
 	            	nGrid.getChildren().clear();
 	        		int x = 0;
