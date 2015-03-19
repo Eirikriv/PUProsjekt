@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -44,6 +45,7 @@ public class AdminController implements Initializable {
 	private boolean userIsClicked = false;
 	private boolean groupIsClicked = false;
 	private boolean roomIsClicked = false;
+	private boolean editGroupIsClicked = false;
 	
 	ArrayList<String> groupPeople = new ArrayList<String>();
 	ObservableList<String> groupItems = FXCollections.observableArrayList(groupPeople);
@@ -84,15 +86,16 @@ public class AdminController implements Initializable {
 		groupList.getFocusModel().focusedItemProperty().addListener(new ChangeListener<String>(){
 			@Override public void changed(final ObservableValue<? extends String> arg0,
 					String arg1, String arg2) {
+				HBox items = new HBox();
 				Button delete = new Button("delete");
-				StackPane sp = wrap(delete);
-				
 				Button edit = new Button("edit");
-				StackPane spEdit = wrap(edit);
+				items.getChildren().addAll(delete, edit);
+				items.setAlignment(Pos.CENTER);
+				
 				userContainer.getChildren().clear();
 				groupContainer.getChildren().clear();
 				roomContainer.getChildren().clear();
-				groupContainer.getChildren().addAll(sp, spEdit);
+				groupContainer.getChildren().add(items);
 				delete.setOnAction(new EventHandler<ActionEvent>(){
 					@Override public void handle(ActionEvent argx0) {
 						String group = arg0.getValue();
@@ -100,6 +103,41 @@ public class AdminController implements Initializable {
 						groupContainer.getChildren().clear();
 						ViewController.getAllGroups();
 						groupList.setItems(SessionData.allGroups);
+					}
+				});
+				
+				edit.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent arg0) {
+						if (editGroupIsClicked) {
+							groupContainer.getChildren().clear();
+							groupContainer.setMinSize(0, 0);
+							editGroupIsClicked = false;
+							return;
+						}
+						String grpId = groupList.getSelectionModel().selectedItemProperty().getValue().split(":")[0];
+						Group grp = new Group(grpId, null);
+						groupIsClicked = true;
+						groupContainer.getChildren().clear();
+						Label name = new Label("Group name:");
+						final TextField nameText = new TextField();
+						nameText.setText(groupList.getSelectionModel().selectedItemProperty().getValue().split(":")[1]);
+						HBox cont = new HBox();
+						VBox ccont = new VBox();
+						Button members = new Button("Members");
+						Button search = new Button("Search people");
+						members.setMinSize(60, 20);
+						search.setMinSize(100, 20);
+						Button add = new Button("<");
+						add.setMinSize(27, 20);
+						Button delete = new Button(">");
+						delete.setMinSize(27, 20);
+						ccont.getChildren().addAll(add, delete);
+						final ListView<String> lw = new ListView<String>();
+						cont.getChildren().addAll(lw, ccont);
+						Button createGroup = new Button("Update group");
+						
+						groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
+						groupContainer.setMinSize(100, 200);
 					}
 				});
 			}
