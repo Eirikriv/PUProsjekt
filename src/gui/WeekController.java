@@ -108,8 +108,9 @@ public class WeekController implements Initializable {
 			Calendar calend = Calendar.getInstance();
 			calend.setTime(calstart.getTime());
 			calend.add(Calendar.DAY_OF_YEAR, 6);
-			calend.set(Calendar.HOUR, 18);
-			if (calstart.get(Calendar.DAY_OF_YEAR) <= startDate.getDayOfYear() && calend.get(Calendar.DAY_OF_YEAR) >= startDate.getDayOfYear()) {
+			calend.set(Calendar.HOUR, 17);
+			if (calstart.get(Calendar.DAY_OF_YEAR) <= startDate.getDayOfYear() && calend.get(Calendar.DAY_OF_YEAR) >= startDate.getDayOfYear()
+					&& startHour.getHour() <= 17 && startHour.getHour() >= 8) {
 				int day = startDate.getDayOfWeek().getValue();
 				final StackPane sp = new StackPane();
 				Label l = new Label(title);
