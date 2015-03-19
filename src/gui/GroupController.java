@@ -25,8 +25,11 @@ public class GroupController implements Initializable {
 		ArrayList<String> groups = new ArrayList<String>(core.Program.getAllGroups());
 		ObservableList<String> observableGroups = FXCollections.observableArrayList(groups);
 		FilterComboBox fcb = new FilterComboBox(observableGroups);
-		
 		leftContainer.getChildren().add(fcb);
+		if (SessionData.gTab){
+			core.Group g = SessionData.group;
+			fcb.setValue(g.getPrimaryKey()+":"+g.getName());
+		}
 		
 		fcb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue<? extends String> arg0,
