@@ -115,8 +115,8 @@ public class AdminController implements Initializable {
 							return;
 						}
 						String grpId = groupList.getSelectionModel().selectedItemProperty().getValue().split(":")[0];
-						Group grp = new Group(grpId, null);
-						groupIsClicked = true;
+						final Group grp = new Group(grpId, null);
+						editGroupIsClicked = true;
 						groupContainer.getChildren().clear();
 						Label name = new Label("Group name:");
 						final TextField nameText = new TextField();
@@ -138,6 +138,53 @@ public class AdminController implements Initializable {
 						
 						groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 						groupContainer.setMinSize(100, 200);
+						
+						createGroup.setOnAction(new EventHandler<ActionEvent>() {
+							@Override public void handle(ActionEvent e) {
+								grp.setName(nameText.getText());
+								ArrayList<core.Person> grpMembers = grp.getGroupMembers();
+								for (core.Person person: grpMembers) {
+									grp.removeMember(person.getPrimaryKey());
+								}
+								for (String username: lw.getItems()) {
+									grp.addMember(username);
+								}
+								groupContainer.getChildren().clear();
+								ViewController.getAllGroups();
+								groupList.setItems(SessionData.allGroups);
+								VBox.setMargin(userContainer, new Insets(20));
+								
+							}
+						});
+						
+						add.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent arg0) {
+								try {
+									String name = peopleList.getSelectionModel().getSelectedItem();
+									if (!groupItems.contains(name)) {
+										System.out.println("OK");
+										groupItems.add(name);
+										lw.setItems(groupItems);
+									}
+								} catch (Exception e) {
+									return;
+								}
+							}
+						});
+						
+						delete.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent arg0) {
+								try {
+									String name = peopleList.getSelectionModel().getSelectedItem();
+									groupItems.remove(name);
+									lw.setItems(groupItems);
+								} catch (Exception e) {
+									return;
+								}
+							}
+						});
+						
+						
 					}
 				});
 			}
@@ -275,11 +322,11 @@ public class AdminController implements Initializable {
 					for (String s: lw.getItems()) {
 						String name = s.split("<")[0];
 						grp.addMember(name);
-						groupContainer.getChildren().clear();
-						ViewController.getAllGroups();
-						groupList.setItems(SessionData.allGroups);
-						VBox.setMargin(userContainer, new Insets(20));
 					}
+					groupContainer.getChildren().clear();
+					ViewController.getAllGroups();
+					groupList.setItems(SessionData.allGroups);
+					VBox.setMargin(userContainer, new Insets(20));
 				}
 			}
 		});

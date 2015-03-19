@@ -211,6 +211,21 @@ public class ViewController implements Initializable {
 				bDecline.getChildren().add(decline);
 				buttons.getChildren().addAll(bAccept, bDecline);
 				
+			} else  if (n.getMessage().compareTo("You have been added to the group") == 0){
+				StackPane hideCont = new StackPane();
+				Button hide = new Button("hide");
+				hideCont.setMinSize(100, 30);
+				hideCont.getChildren().add(hide);
+				buttons.getChildren().add(hideCont);
+				
+				hide.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent arg0) {
+						SessionData.person.isNotifiedofGroup(n.getGroup().getPrimaryKey());
+						SessionData.nTab = true;
+						SessionData.allNotifications = SessionData.person.getNotifications(); 
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+					}
+				});
 			}
 			HBox.setMargin(buttons, new Insets(20));
 			nGrid.addRow(x, buttons, sp0);
