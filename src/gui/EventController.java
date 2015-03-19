@@ -33,7 +33,10 @@ public class EventController implements Initializable {
 		String eventID = SessionData.id;
 		final core.Event e = new core.Event(eventID);
 		Label title = new Label(e.getName());
-		Label createdBy = new Label(e.getOwner());
+		final Label createdBy = new Label(e.getOwner());
+		if (!createdBy.getText().equals(SessionData.username)) {
+			edit.setVisible(false);
+		}
 		Label start = new Label(e.getStart());
 		Label end = new Label(e.getEnd());
 		Label desc = new Label(e.getDesc());
@@ -156,7 +159,8 @@ public class EventController implements Initializable {
 				eInfo.add(e.getRoom());
 				SessionData.eventInfo = eInfo;
 				SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
-				ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EDIT);
+				ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EDIT);	
+
 			}
 		});
 	}

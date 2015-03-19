@@ -47,7 +47,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public boolean update(String[] eventInfo) {
 		try {
 			Database.makeStatement("UPDATE Event "
-								 + "SET Title = '"+ eventInfo[1]+", Start = '"+ eventInfo[2] + "', End = '"+eventInfo[3] +"', Desc = '"+ eventInfo[4]+ "', RoomID = '"+eventInfo[5]+"' "
+								 + "SET Title = '"+ eventInfo[1]+"', Start = '"+ eventInfo[2] + "', End = '"+eventInfo[3] +"', Description = '"+ eventInfo[4]+ "', RoomID = '"+eventInfo[5]+"' "
 								 + "WHERE EventID = "+eventInfo[0]+";");
 			Database.makeStatement("UPDATE PersonEvent "
 									+"SET PersonEvent.Notification = 'This event has been updated' "
