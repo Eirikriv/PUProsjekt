@@ -104,7 +104,6 @@ public class EventDatabaseHandler implements DatabaseHandler {
 				list.add(rs.getString(1));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for(String s : list) {
@@ -175,7 +174,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 //		
 		try {
 			String query = "SELECT Start, Event.EventID FROM Event, Person, PersonEvent "
-					+ "WHERE Event.EventID = PersonEvent.EventID AND PersonEvent.Username = '"+username+"';";
+					+ "WHERE Event.EventID = PersonEvent.EventID AND Person.Username = PersonEvent.Username AND PersonEvent.Username = '"+username+"' AND (Status = 0 OR Status = 1);";
 			ResultSet rs = Database.makeQuery(query);
 			while (rs.next()) {				
 				ArrayList<String> list = new ArrayList<String>();
@@ -192,10 +191,19 @@ public class EventDatabaseHandler implements DatabaseHandler {
 		for(int i=0; i<events.size(); i++) {
 			LocalDate startDate = LocalDate.parse(events.get(i).get(0).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			LocalTime startHour = LocalTime.parse(events.get(i).get(0).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
-			
-			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (Math.abs(startHour.getHour()-d.getHours())<2) ) {
+			System.out.println("OK");
+			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours())<=2) {
 				try {
 					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
+					Database.makeStatement(statement);
+				} catch(Exception ex) {
+					throw new IllegalArgumentException();
+				}
+			}
+			System.out.println(startDate.getMonthValue() <= (1+d.getMonth()));
+			if (startDate.getMonthValue() <= (1+d.getMonth()) && startDate.getYear() <= (1900+d.getYear()) && startDate.getDayOfMonth() <= d.getDate() && (Math.abs(startHour.getHour())-Math.abs(d.getHours()))<0){
+				try {
+					String statement = "UPDATE PersonEvent SET Notification = NULL WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
 					Database.makeStatement(statement);
 				} catch(Exception ex) {
 					throw new IllegalArgumentException();
