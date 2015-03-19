@@ -245,6 +245,22 @@ public class ViewController implements Initializable {
 						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
 					}
 				});
+			} else if (n.getMessage().compareTo("This event has been updated") == 0 ||
+						n.getMessage().compareTo("Event starts in less than 2 hours") == 0) {
+				StackPane hideCont = new StackPane();
+				Button hide = new Button("hide");
+				hideCont.setMinSize(100, 30);
+				hideCont.getChildren().add(hide);
+				buttons.getChildren().add(hideCont);
+				
+				hide.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent arg0) {
+						SessionData.person.isNotifiedOfEvent(n.getEvent().getEventID());
+						SessionData.nTab = true;
+						SessionData.allNotifications = SessionData.person.getNotifications(); 
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+					}
+				});
 			}
 			HBox.setMargin(buttons, new Insets(20));
 			nGrid.addRow(x, buttons, sp0);
