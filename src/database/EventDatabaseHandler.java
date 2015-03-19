@@ -84,12 +84,24 @@ public class EventDatabaseHandler implements DatabaseHandler {
 	public boolean removePerson(String eventID, String username) {
 		try {
 			String stmt = "DELETE FROM PersonEvent "
-					+ "WHERE GroupID = " + eventID + " AND Username = '" + username + "';";
+					+ "WHERE EventID = " + eventID + " AND Username = '" + username + "';";
 			Database.makeStatement(stmt);
 			return true;
 		}
 		catch (Exception e) {
 			return false;
+		}
+	}
+	
+	public boolean removeAllPersons(String eventID){
+		ArrayList<String> list = new ArrayList<String>();
+		String query = "SELECT Person.Username FROM Person, Event, PersonEvent WHERE Person.Username = PersonEvent.Username AND PersonEvent.EventID = "+eventID+";";
+		ResultSet rs = Database.makeQuery(query);
+		while(rs.next()) {
+			list.add(rs.getString(1));
+		}
+		for(String s : list) {
+			removePerson(s);
 		}
 	}
 	
