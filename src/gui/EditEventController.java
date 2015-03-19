@@ -68,6 +68,15 @@ public class EditEventController implements Initializable{
 		sp.getChildren().add(members);
 		grid.add(sp, 1, 5);
 		
+		members.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				if (!listViewList.contains(arg2)) {
+					listViewList.add(arg2.split("<")[0]);
+				}
+			}
+		});
+		
 		startTF.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0,
