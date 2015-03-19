@@ -138,6 +138,7 @@ public class ViewController implements Initializable {
 		fillCalendar(calBox);
 		try {
 			groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,8 +156,28 @@ public class ViewController implements Initializable {
 			final Label eventName;
 			if (n.getEvent() == null) {
 				eventName = new Label(n.getGroup().getName());
+				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						SessionData.group = n.getGroup();
+						SessionData.gTab = true;
+						tabPane.getSelectionModel().select(1);
+						try {
+							groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			} else {
 				eventName = new Label(n.getEvent().getName());
+				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						SessionData.id = n.getEvent().getEventID();
+						SessionData.nTab = true;
+						SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
+						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+					}
+				});
 			}
 			
 			eventName.setUnderline(true);
@@ -168,14 +189,6 @@ public class ViewController implements Initializable {
 			eventName.setOnMouseExited(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					eventName.setTextFill(Paint.valueOf("black"));
-				}
-			});
-			eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					SessionData.id = n.getEvent().getEventID();
-					SessionData.nTab = true;
-					SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
-					ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
 				}
 			});
 			sp1.getChildren().add(eventName);

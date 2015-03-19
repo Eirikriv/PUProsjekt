@@ -27,6 +27,8 @@ public class SessionData {
 	public static boolean nTab;
 	public static ArrayList<Notification> allNotifications;
 	public static ArrayList<Object> eventInfo;
+	public static core.Group group;
+	public static boolean gTab;
 	
 	public static ObservableList<String> availableRooms(String start, String end, String capacity) {
 		RoomDatabaseHandler rdb = new RoomDatabaseHandler();
