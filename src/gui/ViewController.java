@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import core.Event;
 import database.EventDatabaseHandler;
 import database.PersonDatabaseHandler;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -134,6 +137,8 @@ public class ViewController implements Initializable {
 			rowCount += 1;
 		}
 		
+		updateNotifications();
+		
 		this.username = SessionData.username;
 		fillCalendar(calBox);
 		try {
@@ -141,131 +146,6 @@ public class ViewController implements Initializable {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		int x = 0;
-		if (SessionData.allNotifications.size() == 0) {
-			StackPane sp = new StackPane();
-			Label l = new Label("You dont have any unseen notifications");
-			sp.getChildren().add(l);
-			nGrid.add(sp, 0, 0);
-		}
-		x = 1;
-		for (final core.Notification n: SessionData.allNotifications) {
-			StackPane sp1 = new StackPane();
-			final Label eventName;
-			if (n.getEvent() == null) {
-				eventName = new Label(n.getGroup().getName());
-				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						SessionData.group = n.getGroup();
-						SessionData.gTab = true;
-						tabPane.getSelectionModel().select(1);
-						try {
-							groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			} else {
-				eventName = new Label(n.getEvent().getName());
-				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						SessionData.id = n.getEvent().getEventID();
-						SessionData.nTab = true;
-						SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
-						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
-					}
-				});
-			}
-			
-			eventName.setUnderline(true);
-			eventName.setOnMouseEntered(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					eventName.setTextFill(Color.web("0x949494"));
-				}
-			});
-			eventName.setOnMouseExited(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					eventName.setTextFill(Paint.valueOf("black"));
-				}
-			});
-			sp1.getChildren().add(eventName);
-			sp1.setAlignment(Pos.CENTER_LEFT);
-			sp1.setPadding(new Insets(0,0,0,20));
-			StackPane sp0 = new StackPane();
-			Label message = new Label(n.getMessage());
-			HBox buttons = new HBox();
-			sp0.getChildren().add(message);
-			sp0.setAlignment(Pos.CENTER_LEFT);
-			buttons.getChildren().add(sp1);
-			
-			if (n.getMessage().compareTo("You were added to the event") == 0) {
-				StackPane bAccept = new StackPane();
-				bAccept.setMinSize(100, 30);
-				Button accept = new Button("accept");
-				accept.setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent e) {
-						SessionData.person.acceptInvitation(n.getEvent().getEventID());
-						SessionData.nTab = true;
-						SessionData.allNotifications = SessionData.person.getNotifications(); 
-						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-					}
-				});
-				accept.setTextFill(Paint.valueOf("0x008920"));
-				bAccept.getChildren().add(accept);
-				StackPane bDecline = new StackPane();
-				Button decline = new Button("decline");
-				decline.setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent e) {
-						SessionData.person.declineInvitation(n.getEvent().getEventID());
-						SessionData.nTab = true;
-						SessionData.allNotifications = SessionData.person.getNotifications(); 
-						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-					}
-				});
-				
-				decline.setTextFill(Paint.valueOf("0x970000"));
-				bDecline.getChildren().add(decline);
-				buttons.getChildren().addAll(bAccept, bDecline);
-				
-			} else  if (n.getMessage().compareTo("You have been added to the group") == 0){
-				StackPane hideCont = new StackPane();
-				Button hide = new Button("hide");
-				hideCont.setMinSize(100, 30);
-				hideCont.getChildren().add(hide);
-				buttons.getChildren().add(hideCont);
-				
-				hide.setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent arg0) {
-						SessionData.person.isNotifiedofGroup(n.getGroup().getPrimaryKey());
-						SessionData.nTab = true;
-						SessionData.allNotifications = SessionData.person.getNotifications(); 
-						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-					}
-				});
-			} else if (n.getMessage().compareTo("This event has been updated") == 0 ||
-					n.getMessage().compareTo("Event starts in less than 2 hours") == 0) {
-				StackPane hideCont = new StackPane();
-				Button hide = new Button("hide");
-				hideCont.setMinSize(100, 30);
-				hideCont.getChildren().add(hide);
-				buttons.getChildren().add(hideCont);
-				
-				hide.setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent arg0) {
-						SessionData.person.isNotifiedOfEvent(n.getEvent().getEventID());
-						SessionData.nTab = true;
-						SessionData.allNotifications = SessionData.person.getNotifications(); 
-						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
-					}
-				});
-			}
-			
-			HBox.setMargin(buttons, new Insets(20));
-			nGrid.addRow(x, buttons, sp0);
-			x++;
 		}
 	}
 	
@@ -386,6 +266,144 @@ public class ViewController implements Initializable {
 	
 	public void navigateback(ActionEvent e) {
 		System.out.println("clicked");
+	}
+	
+	public void updateNotifications() {
+		nGrid.getChildren().clear();
+		Timer timer = new Timer();
+	    timer.scheduleAtFixedRate(new TimerTask() {
+	        @Override
+	        public void run() {
+	            Platform.runLater(() -> {
+	            	System.out.println("I'm here");
+	        		int x = 0;
+	        		if (SessionData.allNotifications.size() == 0) {
+	        			StackPane sp = new StackPane();
+	        			Label l = new Label("You dont have any unseen notifications");
+	        			sp.getChildren().add(l);
+	        			nGrid.add(sp, 0, 0);
+	        		}
+	        		x = 1;
+	        		for (final core.Notification n: SessionData.allNotifications) {
+	        			StackPane sp1 = new StackPane();
+	        			final Label eventName;
+	        			if (n.getEvent() == null) {
+	        				eventName = new Label(n.getGroup().getName());
+	        				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        					public void handle(MouseEvent event) {
+	        						SessionData.group = n.getGroup();
+	        						SessionData.gTab = true;
+	        						tabPane.getSelectionModel().select(1);
+	        						try {
+	        							groupTab.setContent((Node) FXMLLoader.load(getClass().getResource(ScreenNavigator.SCREEN_GROUP)));
+	        						} catch (IOException e) {
+	        							e.printStackTrace();
+	        						}
+	        					}
+	        				});
+	        			} else {
+	        				eventName = new Label(n.getEvent().getName());
+	        				eventName.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	        					public void handle(MouseEvent event) {
+	        						SessionData.id = n.getEvent().getEventID();
+	        						SessionData.nTab = true;
+	        						SessionData.prevScreen = ScreenNavigator.SCREEN_CALENDAR;
+	        						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_EVENT);
+	        					}
+	        				});
+	        			}
+	        			
+	        			eventName.setUnderline(true);
+	        			eventName.setOnMouseEntered(new EventHandler<MouseEvent>() {
+	        				public void handle(MouseEvent event) {
+	        					eventName.setTextFill(Color.web("0x949494"));
+	        				}
+	        			});
+	        			eventName.setOnMouseExited(new EventHandler<MouseEvent>() {
+	        				public void handle(MouseEvent event) {
+	        					eventName.setTextFill(Paint.valueOf("black"));
+	        				}
+	        			});
+	        			sp1.getChildren().add(eventName);
+	        			sp1.setAlignment(Pos.CENTER_LEFT);
+	        			sp1.setPadding(new Insets(0,0,0,20));
+	        			StackPane sp0 = new StackPane();
+	        			Label message = new Label(n.getMessage());
+	        			HBox buttons = new HBox();
+	        			sp0.getChildren().add(message);
+	        			sp0.setAlignment(Pos.CENTER_LEFT);
+	        			buttons.getChildren().add(sp1);
+	        			
+	        			if (n.getMessage().compareTo("You were added to the event") == 0) {
+	        				StackPane bAccept = new StackPane();
+	        				bAccept.setMinSize(100, 30);
+	        				Button accept = new Button("accept");
+	        				accept.setOnAction(new EventHandler<ActionEvent>() {
+	        					@Override public void handle(ActionEvent e) {
+	        						SessionData.person.acceptInvitation(n.getEvent().getEventID());
+	        						SessionData.nTab = true;
+	        						SessionData.allNotifications = SessionData.person.getNotifications(); 
+	        						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        					}
+	        				});
+	        				accept.setTextFill(Paint.valueOf("0x008920"));
+	        				bAccept.getChildren().add(accept);
+	        				StackPane bDecline = new StackPane();
+	        				Button decline = new Button("decline");
+	        				decline.setOnAction(new EventHandler<ActionEvent>() {
+	        					@Override public void handle(ActionEvent e) {
+	        						SessionData.person.declineInvitation(n.getEvent().getEventID());
+	        						SessionData.nTab = true;
+	        						SessionData.allNotifications = SessionData.person.getNotifications(); 
+	        						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        					}
+	        				});
+	        				
+	        				decline.setTextFill(Paint.valueOf("0x970000"));
+	        				bDecline.getChildren().add(decline);
+	        				buttons.getChildren().addAll(bAccept, bDecline);
+	        				
+	        			} else  if (n.getMessage().compareTo("You have been added to the group") == 0){
+	        				StackPane hideCont = new StackPane();
+	        				Button hide = new Button("hide");
+	        				hideCont.setMinSize(100, 30);
+	        				hideCont.getChildren().add(hide);
+	        				buttons.getChildren().add(hideCont);
+	        				
+	        				hide.setOnAction(new EventHandler<ActionEvent>() {
+	        					@Override public void handle(ActionEvent arg0) {
+	        						SessionData.person.isNotifiedofGroup(n.getGroup().getPrimaryKey());
+	        						SessionData.nTab = true;
+	        						SessionData.allNotifications = SessionData.person.getNotifications(); 
+	        						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        					}
+	        				});
+	        			} else if (n.getMessage().compareTo("This event has been updated") == 0 ||
+	        					n.getMessage().compareTo("Event starts in less than 2 hours") == 0) {
+	        				StackPane hideCont = new StackPane();
+	        				Button hide = new Button("hide");
+	        				hideCont.setMinSize(100, 30);
+	        				hideCont.getChildren().add(hide);
+	        				buttons.getChildren().add(hideCont);
+	        				
+	        				hide.setOnAction(new EventHandler<ActionEvent>() {
+	        					@Override public void handle(ActionEvent arg0) {
+	        						SessionData.person.isNotifiedOfEvent(n.getEvent().getEventID());
+	        						SessionData.nTab = true;
+	        						SessionData.allNotifications = SessionData.person.getNotifications(); 
+	        						ScreenNavigator.loadVista(ScreenNavigator.SCREEN_CALENDAR);
+	        					}
+	        				});
+	        			}
+	        			
+	        			HBox.setMargin(buttons, new Insets(20));
+	        			nGrid.addRow(x, buttons, sp0);
+	        			x++;
+	        		}
+	            });
+	        }
+	    }, 0, 1000*60);
+
 	}
 
 	public void fillCalendar(VBox box) {
