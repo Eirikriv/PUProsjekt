@@ -167,8 +167,9 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 		}
 	}
 
-	public ArrayList<String> getNotifications(String username) {
+	public ArrayList<ArrayList<String>> getNotifications(String username) {
 		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list1 = new ArrayList<String>();
 		try {
 			String query = "SELECT EventID, Notification FROM PersonEvent "
 					+ "WHERE Username = '" + username + "' AND Notification IS NOT NULL;";
@@ -180,9 +181,13 @@ public class PersonDatabaseHandler implements DatabaseHandler {
 				list.add(rs.getInt(1) + ":" + rs.getString(2));
 			}
 			while(rs1.next()) {
-				list.add(rs1.getInt(1) + ":" + rs1.getString(2));
+				list1.add(rs1.getInt(1) + ":" + rs1.getString(2));
 			}
-			return list;
+			ArrayList<ArrayList<String>> s = new ArrayList<ArrayList<String>>();
+			s.add(list);
+			s.add(list1);
+			return s;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException();

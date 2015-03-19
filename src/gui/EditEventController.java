@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import database.EventDatabaseHandler;
 import database.GroupDatabaseHandler;
 import javafx.beans.value.ChangeListener;
@@ -44,7 +45,7 @@ public class EditEventController implements Initializable{
 	GroupDatabaseHandler gdb = new GroupDatabaseHandler();
 
 	public void initialize(URL location, ResourceBundle resources) {
-		core.Event e = new core.Event(SessionData.id);
+		final core.Event e = new core.Event(SessionData.id);
 		invitedLW.setFocusTraversable(false);
 		descTF.setFocusTraversable(false);
 		members.setFocusTraversable(true);
@@ -101,7 +102,53 @@ public class EditEventController implements Initializable{
 		});
 		update.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				EventDatabaseHandler edb = new EventDatabaseHandler();
 				
+				String title = titleTF.getText();
+				if (title.length() < 1) {
+					return;
+				}
+				
+				LocalDate date = dateDP.getValue();
+				String sDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				
+				String startTime = startTF.getText();
+				String endTime = endTF.getText();
+				assert startTime.matches("[0-9]{2}:[0-9]{2}");
+				assert endTime.matches("[0-9]{2}:[0-9]{2}");
+				if (startTime.compareTo(endTime) == 1) {
+					return;
+				}
+				
+				String start = sDate + " " +  startTime;
+				String end = sDate + " " + endTime;
+				
+				String description = descTF.getText();
+				if (description.length() == 0) {
+					description = "";
+				}
+
+				String roomId = rooms.getValue();
+				if (roomId.length() == 0) {
+					return;
+				}
+				
+				
+				for (String username: listViewList) {
+					username = username.split("<")[0];
+					if (edb.addPerson(e, username)) {
+						System.out.println("added " + username + " to event:" + e);
+					} else {
+						System.out.println(username + "could not be added to event:" + e);
+					}
+					
+					
+				}
+				
+				e.editEvent(title, start, end, description, roomId);
+				SessionData.allEvents = SessionData.person.getCalendar().getEvents();
+				SessionData.allNotifications = SessionData.person.getNotifications();
+				ScreenNavigator.loadVista(SessionData.prevScreen);
 			}
 		});
 	}

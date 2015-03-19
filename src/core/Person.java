@@ -70,11 +70,15 @@ public class Person implements CalendarOwner{
 	}
 	
 	public ArrayList<Notification> getNotifications() {
-		ArrayList<String> n = pdbh.getNotifications(this.username);
+		ArrayList<ArrayList<String>> n = pdbh.getNotifications(this.username);
 		ArrayList<Notification> notifications = new ArrayList<Notification>();
-		for (int i = 0; i < n.size(); i++) {
-			String[] temp = n.get(i).split(":");
+		for (int i = 0; i < n.get(0).size(); i++) {
+			String[] temp = n.get(0).get(i).split(":");
 			notifications.add(new Notification(new Event(temp[0]), null, temp[1]));
+		}
+		for (int j = 0; j < n.get(1).size(); j++) {
+			String[] temp = n.get(0).get(j).split(":");
+			notifications.add(new Notification(null, new Group(temp[0], null), temp[1]));
 		}
 		return notifications;
 	}
