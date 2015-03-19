@@ -136,6 +136,14 @@ public class AdminController implements Initializable {
 						cont.getChildren().addAll(lw, ccont);
 						Button createGroup = new Button("Update group");
 						
+						ArrayList<core.Person> oldGrpMembers = grp.getGroupMembers();
+						ArrayList<String> p = new ArrayList<String>();
+						for (core.Person person: oldGrpMembers) {
+							p.add(person.getPrimaryKey());
+						}
+						ObservableList<String> per = FXCollections.observableArrayList(p);
+						lw.setItems(per);
+						
 						groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 						groupContainer.setMinSize(100, 200);
 						
