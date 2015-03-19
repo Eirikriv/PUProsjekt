@@ -88,31 +88,8 @@ public class Person implements CalendarOwner{
 	
 	@SuppressWarnings("deprecation")
 	public void makeAlarm() {
-		ArrayList<String> eventID = this.pdbh.getPersonEvents(this.username);
-		EventDatabaseHandler e = new EventDatabaseHandler();
-		ArrayList<String> events = new ArrayList<String>(); 
-		for (String id : eventID) {
-			String time ="";
-			time += e.get(id).get(2);
-			System.out.println(time);
-			events.add(time);
-		}
-		
-		Date d = new Date();
-		for(int i=0; i<events.size(); i++) {
-			LocalDate startDate = LocalDate.parse(events.get(i).split(" ")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			LocalTime startHour = LocalTime.parse(events.get(i).split(" ")[1], DateTimeFormatter.ofPattern("HH:mm"));
-			
-			if (startDate.getMonthValue()==(1+d.getMonth()) && startDate.getYear() == (1900+d.getYear()) && startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours()<2) ) {
-				try {
-					String statement = "UPDATE PersonEvent SET Notification = 'Event starts in less than 2 hours' WHERE Username = '" + this.username + "' AND EventID = " + eventID.get(i) + ";";
-					Database.makeStatement(statement);
-				} catch(Exception ex) {
-					throw new IllegalArgumentException();
-				}
-			}
-		}
-		
+		EventDatabaseHandler d = new EventDatabaseHandler();
+		d.eventStartsSoon(this.username);
 	}
 	
 	public boolean hasDeclined(String eventID) {
