@@ -64,7 +64,7 @@ public class AdminController implements Initializable {
 				StackPane sp = wrap(delete);
 				userContainer.getChildren().clear();
 				
-				if (!groupIsClicked) {
+				if (!groupIsClicked && !editGroupIsClicked) {
 					groupContainer.getChildren().clear();
 				}
 				
@@ -137,12 +137,10 @@ public class AdminController implements Initializable {
 						Button createGroup = new Button("Update group");
 						
 						ArrayList<core.Person> oldGrpMembers = grp.getGroupMembers();
-						ArrayList<String> p = new ArrayList<String>();
 						for (core.Person person: oldGrpMembers) {
-							p.add(person.getPrimaryKey());
+							groupItems.add(person.getPrimaryKey());
 						}
-						ObservableList<String> per = FXCollections.observableArrayList(p);
-						lw.setItems(per);
+						lw.setItems(groupItems);
 						
 						groupContainer.getChildren().addAll(name, nameText, cont, createGroup);
 						groupContainer.setMinSize(100, 200);
@@ -169,6 +167,7 @@ public class AdminController implements Initializable {
 							public void handle(ActionEvent arg0) {
 								try {
 									String name = peopleList.getSelectionModel().getSelectedItem();
+									name = name.split("<")[0];
 									if (!groupItems.contains(name)) {
 										System.out.println("OK");
 										groupItems.add(name);
