@@ -180,6 +180,7 @@ public class ViewController implements Initializable {
 			HBox buttons = new HBox();
 			sp0.getChildren().add(message);
 			sp0.setAlignment(Pos.CENTER_LEFT);
+			buttons.getChildren().add(sp1);
 			
 			if (n.getMessage().compareTo("You were added to the event") == 0) {
 				StackPane bAccept = new StackPane();
@@ -208,10 +209,10 @@ public class ViewController implements Initializable {
 				
 				decline.setTextFill(Paint.valueOf("0x970000"));
 				bDecline.getChildren().add(decline);
-				buttons.getChildren().addAll(sp1, bAccept, bDecline);
-				HBox.setMargin(buttons, new Insets(20));
+				buttons.getChildren().addAll(bAccept, bDecline);
+				
 			}
-			
+			HBox.setMargin(buttons, new Insets(20));
 			nGrid.addRow(x, buttons, sp0);
 			x++;
 		}
