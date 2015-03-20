@@ -396,7 +396,6 @@ public class ViewController implements Initializable {
 	        					}
 	        				});
 	        			}
-	        			
 	        			HBox.setMargin(buttons, new Insets(20));
 	        			nGrid.addRow(x, buttons, sp0);
 	        			x++;
