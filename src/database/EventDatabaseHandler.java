@@ -199,7 +199,7 @@ public class EventDatabaseHandler implements DatabaseHandler {
 					throw new IllegalArgumentException();
 				}
 			}
-			if (startDate.getMonthValue() <= (1+d.getMonth()) && startDate.getYear() <= (1900+d.getYear()) && startDate.getDayOfMonth() <= d.getDate() && (Math.abs(startHour.getHour())-Math.abs(d.getHours()))<0){
+			if (startDate.getMonthValue() <= (1+d.getMonth()) && startDate.getYear() <= (1900+d.getYear()) && (startDate.getDayOfMonth() < d.getDate() || (startDate.getDayOfMonth() == d.getDate() && (startHour.getHour()-d.getHours())<0))){
 				try {
 					String statement = "UPDATE PersonEvent SET Notification = NULL WHERE Username = '" + username + "' AND EventID = " + events.get(i).get(1) + ";";
 					Database.makeStatement(statement);

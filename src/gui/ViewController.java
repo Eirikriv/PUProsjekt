@@ -275,6 +275,7 @@ public class ViewController implements Initializable {
 	        public void run() {
 	            Platform.runLater(() -> {
 	            	SessionData.allNotifications = SessionData.person.getNotifications();
+	            	SessionData.person.makeAlarm();
 	            	nGrid.getChildren().clear();
 	        		int x = 0;
 	        		if (SessionData.allNotifications.size() == 0) {
