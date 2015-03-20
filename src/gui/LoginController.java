@@ -37,7 +37,6 @@ public class LoginController implements Initializable {
         	@Override public void handle(ActionEvent event) {
         		try {
         			if (usernameText.getText().length() > 0 && passwordText.getText().length() > 0) {
-        				System.out.println(usernameText.getText());
         				SessionData.username = usernameText.getText();
         				SessionData.message = "Login successful";
         				SessionData.person = core.Program.login(usernameText.getText(), passwordText.getText());
