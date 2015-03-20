@@ -428,10 +428,9 @@ public class ViewController implements Initializable {
 			}
 		});
 		Label username = new Label("user: " + this.username);
-		Label showCal = new Label("show calendar\nfor : ");
 		StackPane sp = new StackPane();
 		StackPane calsp = new StackPane();
-		sp.getChildren().addAll(username, showCal, message);
+		sp.getChildren().addAll(username, message);
 		HBox titleBox = new HBox();
 		titleBox.getChildren().addAll(bLeft, monthText, bRight);
 		calsp.getChildren().add(titleBox);
@@ -439,9 +438,7 @@ public class ViewController implements Initializable {
 		StackPane.setAlignment(message, Pos.CENTER);
 		StackPane.setAlignment(titleBox, Pos.CENTER);
 		StackPane.setAlignment(username, Pos.TOP_LEFT);
-		StackPane.setAlignment(showCal, Pos.TOP_RIGHT);
 		StackPane.setMargin(username, new Insets((double)5));
-		StackPane.setMargin(showCal, new Insets((double)5));
 		
 		box.getChildren().addAll(sp, calsp);
 
